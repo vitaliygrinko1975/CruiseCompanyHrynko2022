@@ -2,7 +2,7 @@
 
 <Context>
 
-    <Resource name="jdbc/provider"
+    <Resource name="jdbc/cruises"
               auth="Container"
               type="javax.sql.DataSource"
               maxActive="100" maxIdle="30" maxWait="10000"
@@ -11,5 +11,5 @@
               defaultAutoCommit="false"
               defaultTransactionIsolation="READ_COMMITTED"
               connectionProperties="useUnicode=yes;characterEncoding=utf8;"
-              url="jdbc:mysql://localhost:3306/cruise?serverTimezone=UTC"/>
+              url="jdbc:mysql://localhost:3306/cruises?serverTimezone=UTC"/>
 </Context>
