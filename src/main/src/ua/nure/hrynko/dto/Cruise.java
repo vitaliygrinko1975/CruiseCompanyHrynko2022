@@ -20,7 +20,7 @@ public class Cruise extends Entity {
 
     private Date startOfCruise;
 
-    private Date endOfCruise;
+    private int duration;
 
     public String getName() {
         return name;
@@ -70,25 +70,23 @@ public class Cruise extends Entity {
         this.startOfCruise = startOfCruise;
     }
 
-    public Date getEndOfCruise() {
-        return endOfCruise;
-    }
+    public int getDuration() { return duration;}
 
-    public void setEndOfCruise(Date endOfCruise) {
-        this.endOfCruise = endOfCruise;
-    }
+    public void setDuration(int duration) {this.duration = duration;}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cruise)) return false;
         Cruise cruise = (Cruise) o;
-        return Double.compare(cruise.price, price) == 0 && shipId == cruise.shipId && capacity == cruise.capacity && name.equals(cruise.name) && description.equals(cruise.description) && startOfCruise.equals(cruise.startOfCruise) && endOfCruise.equals(cruise.endOfCruise);
+        return Double.compare(cruise.price, price) == 0 && shipId == cruise.shipId && capacity == cruise.capacity
+                && duration == cruise.duration && name.equals(cruise.name) && description.equals(cruise.description)
+                && startOfCruise.equals(cruise.startOfCruise);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, price, shipId, capacity, startOfCruise, endOfCruise);
+        return Objects.hash(name, description, price, shipId, capacity, startOfCruise, duration);
     }
 
     @Override
@@ -100,7 +98,7 @@ public class Cruise extends Entity {
                 ", shipId=" + shipId +
                 ", capacity=" + capacity +
                 ", startOfCruise=" + startOfCruise +
-                ", endOfCruise=" + endOfCruise +
+                ", duration=" + duration +
                 '}';
     }
 }

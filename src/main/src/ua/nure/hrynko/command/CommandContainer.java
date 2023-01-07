@@ -32,9 +32,12 @@ public class CommandContainer {
 		commands.put("goToBasket", new ClientPageGoToBasketCommand());
 		commands.put("RemoveOneUnitFromBasket", new ClientBasketRemoveOneUnitCommand(MySqlCruiseDAO.getInstance()));
 		commands.put("AddOneUnitInBasket", new ClientBasketAddOneUnitCommand(MySqlCruiseDAO.getInstance()));
-		commands.put("RemoveOnePositionFromBasket", new ClientBasketRemoveOnePositionCommand(MySqlCruiseDAO.getInstance()));
+		commands.put("RemoveOnePositionFromBasket",
+				new ClientBasketRemoveOnePositionCommand(MySqlCruiseDAO.getInstance()));
 		commands.put("clientBasketConfirmOrderOfSelectedUnits",
 				new ClientBasketConfirmOrderOfSelectedUnitsCommand(new AllMethodsWithTransactions()));
+		commands.put("cruiseFindByStartDate", new ClientPageCruiseFindByStartDateCommand(MySqlCruiseDAO.getInstance()));
+		commands.put("cruiseFindByDuration", new ClientPageCruiseFindByDurationCommand(MySqlCruiseDAO.getInstance()));
 //		commands.put("signUpPage", new SignUpPageCommand());
 //		commands.put("signUpUser", new SignUpCommand(MySqlUsersDAO.getInstance(), MySqlAccountsDAO.getInstance()));
 //		commands.put("clientPageSortedDownByName", new ClientPageSortedDownByNameCommand(MySqlTariffsDAO.getInstance(),
@@ -58,8 +61,10 @@ public class CommandContainer {
 //				MySqlUsersHasTariffsDAO.getInstance()));
 
 		// admin commands
-//		commands.put("adminPage", new AdminPageCommand(MySqlUsersDAO.getInstance()));
-//		commands.put("pageAdminTariffs", new AdminPageTariffsCommand(MySqlTariffsDAO.getInstance()));
+		commands.put("adminPage", new AdminPageCommand(MySqlUserDAO.getInstance()));
+
+		commands.put("pageAdminCruises", new AdminPageCruisesCommand(MySqlCruiseDAO.getInstance()));
+		commands.put("pageAdminOrders", new AdminPageOrderCommand(MySqlUsersHasCruiseDAO.getInstance()));
 //		commands.put("adminPageRemoveUser", new AdminPageRemoveUserCommand(MySqlUsersDAO.getInstance(),
 //				MySqlAccountsDAO.getInstance()));
 //		commands.put("adminGoToUpdatingPage", new AdminGoToUpdatingPageCommand(MySqlUsersDAO.getInstance()));

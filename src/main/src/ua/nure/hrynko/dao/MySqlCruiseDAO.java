@@ -94,13 +94,65 @@ public class MySqlCruiseDAO implements CruiseDAO {
     }
 
     @Override
+    public List<Cruise> findCruiseByStartOfCruise(String date) throws DBException {
+        List<Cruise> allCruisesList = new ArrayList<>();
+        Cruise cruise = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_FIND_CRUISE_BY_START_OF_CRUISE);
+            pstmt.setString(1,date);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                allCruisesList.add(extractCruises(rs));
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_CRUISE_BY_START_OF_CRUISE, ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return allCruisesList;
+    }
+
+    @Override
+    public List<Cruise> findCruiseByDuration(int duration) throws DBException {
+        List<Cruise> allCruisesList = new ArrayList<>();
+        Cruise cruise = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_FIND_CRUISE_BY_DURATION);
+            pstmt.setInt(1,duration);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                allCruisesList.add(extractCruises(rs));
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_CRUISE_BY_START_OF_CRUISE, ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return allCruisesList;
+    }
+
+
+
+
+    @Override
     public void addCruiseToCruisesDb(Connection con, Cruise cruise) throws SQLException {
         PreparedStatement pstmt;
         ResultSet rs = null;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 
         String stringStartOfCruise = formatter.format(cruise.getStartOfCruise());
-        String stringEndOfCruise = formatter.format(cruise.getEndOfCruise());
 
         pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID);
         pstmt.setString(1, cruise.getName());
@@ -109,7 +161,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
         pstmt.setInt(4, cruise.getShipId());
         pstmt.setInt(5, cruise.getCapacity());
         pstmt.setString(6, stringStartOfCruise);
-        pstmt.setString(7, stringEndOfCruise);
+        pstmt.setInt(7, cruise.getDuration());
         pstmt.setInt(8, cruise.getId());
 
         pstmt.executeUpdate();
@@ -129,7 +181,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
         cruise.setShipId(rs.getInt(Fields.CRUISE_SHIPS_ID));
         cruise.setCapacity(rs.getInt(Fields.CRUISE_CAPACITY));
         cruise.setStartOfCruise(rs.getTimestamp(Fields.CRUISE_START_OF_CRUISE));
-        cruise.setEndOfCruise(rs.getTimestamp(Fields.CRUISE_END_OF_CRUISE));
+        cruise.setDuration(rs.getInt(Fields.CRUISE_DURATION));
 
         return cruise;
     }

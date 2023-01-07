@@ -19,6 +19,8 @@ public class Messages {
 
 	public static final String ERR_CANNOT_OBTAIN_CRUISE_BY_ID = "Cannot obtain a cruise by its id";
 
+	public static final String ERR_CANNOT_OBTAIN_CRUISE_BY_START_OF_CRUISE = "Cannot obtain a cruise by its start of cruise";
+
 	public static final String ERR_CANNOT_OBTAIN_ACCOUNT_BY_ID = "Cannot obtain a account by its id";
 
 	public static final String ERR_CANNOT_OBTAIN_USER_BY_LOGIN = "Cannot obtain a user by its login";

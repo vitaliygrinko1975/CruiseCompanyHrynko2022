@@ -1,0 +1,28 @@
+<job-scheduling-data
+        xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData
+    http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
+        version="1.8">
+
+    <schedule>
+        <job>
+            <name>HelloJob</name>
+            <group>group1</group>
+            <description>hello</description>
+            <job-class>ua.nure.hrynko.services.MyJobByProduceMonthlySubscriptionFee</job-class>
+        </job>
+
+        <trigger>
+            <cron>
+                <name>myTrigger</name>
+                <job-name>HelloJob</job-name>
+                <job-group>group1</job-group>
+                <!-- It will run every 2 minutes -->
+<!--                <cron-expression>0 0/2 * * * ?</cron-expression>-->
+<!--                It will run every day at 23 o'clock-->
+                <cron-expression>0 0 23 * * ?</cron-expression>
+            </cron>
+        </trigger>
+    </schedule>
+</job-scheduling-data>

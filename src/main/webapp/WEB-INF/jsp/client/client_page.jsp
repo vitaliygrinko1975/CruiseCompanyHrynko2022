@@ -21,7 +21,9 @@
 <fmt:message bundle="${loc}" key="local.ships_id" var="ships_id"/>
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
 <fmt:message bundle="${loc}" key="local.start_of_cruise" var="start_of_cruise"/>
-<fmt:message bundle="${loc}" key="local.end_of_cruise" var="end_of_cruise"/>
+<fmt:message bundle="${loc}" key="local.find_cruise" var="find_cruise"/>
+<fmt:message bundle="${loc}" key="local.start_date" var="start_date"/>
+<fmt:message bundle="${loc}" key="local.cruise_duration" var="cruise_duration"/>
 
 <body>
 <div align='center'>
@@ -45,17 +47,17 @@
 </div>
 
 
-<div align='right'>
+<%--<div align='right'>--%>
     <%--@elvariable id="mapForBasket" type="java.util.Map"--%>
-    <c:out value="${basket} - ${mapForBasket.size()} ${positions}"/></div>
->
+<%--    <c:out value="${basket} - ${mapForBasket.size()} ${positions}"/></div>--%>
+
 <div align='right'>
     <c:set var="count" value="0"/>
     <c:forEach var="cruise" items="${mapForBasket}">
             <c:set var="count" value="${count + cruise.value}"/>
     </c:forEach>
     <c:out value="Всего количество - ${count} штук"/>
-    <%--</div>--%>
+
     <div align='right'>
         <div style="display: inline-block; padding-right: 50px;">
             <a href="controller?command=goToBasket">
@@ -84,7 +86,7 @@
                 <td>${ships_id}</td>
                 <td>${availability}</td>
                 <td>${start_of_cruise}</td>
-                <td>${end_of_cruise}</td>
+                <td>${cruise_duration}</td>
             </tr>
             <c:set var="k" value="0"/>
             <%--@elvariable id="allCruises" type="java.util.List"--%>
@@ -98,7 +100,7 @@
                     <td>${cruise.shipId}</td>
                     <td>${cruise.capacity}</td>
                     <td>${cruise.startOfCruise}</td>
-                    <td>${cruise.endOfCruise}</td>
+                    <td>${cruise.duration}</td>
                     <td>
                         <form method="get" action="controller">
                             <input type="hidden" name="command" value="AddToBasket"/>
@@ -111,5 +113,27 @@
             </c:forEach>
         </table>
     </div>
+        <form class="form-inline" action="controller" method="get">
+            <input type="hidden" name="command" value="cruiseFindByStartDate">
+        <div class="form-group" style="display: inline-block; margin-right: 25px;">
+            <legend>${start_date}:</legend>
+            <input type="date" name="startDate" required>
+        </div>
+        <div class="form-group" style="display: inline-block; margin-right: 25px;">
+            <input type="submit" name="selectOption" value="${find_cruise}">
+        </div>
+        </form>
+        <form class="form-inline" action="controller" method="get">
+            <input type="hidden" name="command" value="cruiseFindByDuration">
+            <div class="form-group" style="display: inline-block; margin-right: 25px;">
+                <legend>${cruise_duration}:</legend>
+                <input type="number" min="1" max="60" name="duration" required>
+            </div>
+            <div class="form-group" style="display: inline-block; margin-right: 25px;">
+                <input type="submit" name="selectOption" value="${find_cruise}">
+            </div>
+
+        </form>
+
 </body>
 </html>

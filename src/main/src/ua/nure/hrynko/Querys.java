@@ -15,16 +15,15 @@ public class Querys {
 
     public static final String SQL_FIND_CRUISE_BY_ID = "SELECT * FROM cruises WHERE id=?";
 
-    public static final String SQL_FIND_ALL_TARIFF_BY_SERVICES_ID = "SELECT * FROM tariffs WHERE services_id=?";
+    public static final String SQL_FIND_CRUISE_BY_START_OF_CRUISE = "SELECT * FROM cruises WHERE DATE (start_of_cruise)=?";
 
-    public static final String SQL_FIND_ITEM_ON_USER_HAS_TARIFFS_BY_USER_ID = "SELECT * FROM users_has_tariffs " +
-            "WHERE users_id=?";
+    public static final String SQL_FIND_CRUISE_BY_DURATION = "SELECT * FROM cruises WHERE duration=?";
 
     public static final String SQL_UPDATE_USERS_BY_ID = "UPDATE users SET login=?, password=?, first_name=?, last_name=?," +
             "email=?,phone=?,roles_id=?, accounts_id=? WHERE id=?";
 
     public static final String SQL_UPDATE_CRUISE_BY_ID = "UPDATE cruises SET name=?, description=?, price=?, ships_id=?," +
-            "capacity=?,start_of_cruise=?,end_of_cruise=? WHERE id=?";
+            "capacity=?,start_of_cruise=?,duration=? WHERE id=?";
 
     public static final String SQL_UPDATE_USERS_HAS_TARIFFS_BY_USERS_ID_AND_TARIFFS_ID = "UPDATE users_has_tariffs" +
             " SET users_id=?, tariffs_id=?, end_of_contract=? WHERE users_id=? AND tariffs_id=?";
@@ -50,7 +49,9 @@ public class Querys {
 
     public static final String SQL_FIND_ALL_USER = "SELECT * FROM users ";
 
-    public static final String SQL_FIND_ALL_ITEM_ON_USERS_HAS_TARIFFS = "SELECT * FROM users_has_tariffs";
+    public static final String SQL_FIND_ALL_ITEM_ON_USERS_HAS_CRUISES = "SELECT * FROM users_has_cruises";
+
+    public static final String SQL_FIND_ALL_ITEM_ON_USERS_HAS_CRUISES_WITH_LIMIT = "SELECT * FROM users_has_cruises LIMIT ?,?";
 
     public static final String SQL_FIND_ALL_ROLE = "SELECT * FROM roles";
 

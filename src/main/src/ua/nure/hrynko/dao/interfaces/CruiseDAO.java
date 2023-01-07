@@ -15,7 +15,8 @@ public interface CruiseDAO {
     Cruise findCruiseById(int id) throws DBException;
     Cruise findCruiseById(Connection con, int id) throws DBException, SQLException;
     void addCruiseToCruisesDb(Connection con, Cruise cruise) throws SQLException;
+    List<Cruise> findCruiseByStartOfCruise(String date) throws DBException;
+    List<Cruise> findCruiseByDuration(int duration) throws DBException;
     Cruise extractCruises(ResultSet rs) throws SQLException;
-
 
 }

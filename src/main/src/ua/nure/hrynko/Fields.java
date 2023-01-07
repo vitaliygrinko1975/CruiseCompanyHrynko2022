@@ -29,14 +29,14 @@ public final class Fields {
     public static final String CRUISE_SHIPS_ID = "ships_id";
     public static final String CRUISE_CAPACITY = "capacity";
     public static final String CRUISE_START_OF_CRUISE = "start_of_cruise";
-    public static final String CRUISE_END_OF_CRUISE = "end_of_cruise";
+    public static final String CRUISE_DURATION = "duration";
 
     //accounts
     public static final String ACCOUNTS_BALANCE = "balance";
-    // usersHasTariffs
-    public static final String USERS_ID = "users_id";
-    public static final String TARIFFS_ID = "tariffs_id";
-    public static final String END_OF_CONTRACT = "end_of_contract";
 
+    // usersHasCruises
+    public static final String USERS_ID = "users_id";
+    public static final String CRUISES_ID = "cruises_id";
+    public static final String STATUS = "status";
 
 }

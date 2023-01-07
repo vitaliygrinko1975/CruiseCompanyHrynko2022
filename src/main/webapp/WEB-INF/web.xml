@@ -61,7 +61,7 @@
     <filter-class>ua.nure.hrynko.filter.CommandAccessFilter</filter-class>
     <init-param>
       <param-name>admin</param-name>
-      <param-value>listAdmin adminPage pageAdminTariffs adminPageRemoveUser adminGoToUpdatingPage
+      <param-value> adminPage listAdmin pageAdminCruises pageAdminOrders adminPageRemoveUser adminGoToUpdatingPage
         adminUpdatingPageUpdateUser adminGoToPageAddingUser adminAddingPageAddUser
         adminPageBlockingUser adminPageUnBlockingUser adminPageTariffsRemoveTariff adminGoToPageForAddingTariff
         adminAddingPageAddTariff adminGoToPageForUpdatingTariff adminUpdatingPageUpdateTariff
@@ -70,9 +70,9 @@
     <init-param>
       <param-name>client</param-name>
       <param-value>listClient clientPage AddToBasket goToBasket RemoveOneUnitFromBasket AddOneUnitInBasket
-        RemoveOnePositionFromBasket clientBasketConfirmOrderOfSelectedUnits  ClientPageGoToTopUpYourAccount
-        clientPageGoToUpdatingAccountPage clientUpdatingPageUpdateAccount clientPageToPay
-        clientPageToGoPageTariffsForChooseTariffs
+        RemoveOnePositionFromBasket clientBasketConfirmOrderOfSelectedUnits cruiseFindByStartDate
+        cruiseFindByDuration ClientPageGoToTopUpYourAccount clientPageGoToUpdatingAccountPage
+        clientUpdatingPageUpdateAccount clientPageToPay clientPageToGoPageTariffsForChooseTariffs
       </param-value>
     </init-param>
     <init-param>

@@ -105,3 +105,28 @@ h3 {
   margin-right: 0;
   font-weight: bold;
 }
+.center {
+	text-align: center;
+}
+
+.pagination {
+	display: inline-block;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+	border: 1px solid #4f1cab;
+	margin: 0 4px;
+}
+
+.pagination a.active {
+	background-color: #4c9daf;
+	color: white;
+	border: 1px solid #4c6baf;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

@@ -69,7 +69,7 @@ CREATE TABLE cruises
     ships_id        INTEGER      NOT NULL,
     capacity        INTEGER      NOT NULL,
     start_of_cruise DATETIME,
-    end_of_cruise   DATETIME,
+    duration INT NOT NULL,
     FOREIGN KEY (ships_id) REFERENCES ships (Id)
 );
 
@@ -115,12 +115,16 @@ VALUES ('Минерва', 'Океанический пассажирский');
 
 
 
-INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, end_of_cruise )
+INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, duration)
 VALUES ('«Малое путишествие»', 'Одесса-Стамбул-Одесса', '2000', '1',1600,
-        20220916014624,20220926014624);
-INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, end_of_cruise)
+        20221223120000, 5);
+INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, duration)
+VALUES ('«Среднее путишествие»', 'Одесса-Стамбул-Лисабон-Одесса', '5000', '1',1600,
+        20221228120000, 10);
+INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, duration)
 VALUES ('«Большое путишествие»', 'Одесса-Стамбул-Палермо-Барселона-Лиссабон-Одесса', '10000',
-        '2',2000,20220916014624,20220926014624);
+        '2',2000,20221224120000, 15);
+
 
 
 
