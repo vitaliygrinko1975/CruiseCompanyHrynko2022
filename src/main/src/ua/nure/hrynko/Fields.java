@@ -34,7 +34,7 @@ public final class Fields {
     //accounts
     public static final String ACCOUNTS_BALANCE = "balance";
 
-    // usersHasCruises
+    // orders
     public static final String USERS_ID = "users_id";
     public static final String CRUISES_ID = "cruises_id";
     public static final String STATUS = "status";

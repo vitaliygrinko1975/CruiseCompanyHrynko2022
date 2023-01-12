@@ -22,10 +22,12 @@ public class CommandContainer {
 	static {
 		commands.put("login", new LoginCommand(MySqlUserDAO.getInstance()));
 		commands.put("loginPage", new LoginPageCommand());
+		commands.put("signUpPage", new SignUpPageCommand());
 		commands.put("logout", new LogoutCommand());
 		commands.put("viewSettings", new ViewSettingsCommand());
 		commands.put("noCommand", new NoCommand());
-		
+		commands.put("signUpUser", new SignUpCommand(MySqlUserDAO.getInstance(), MySqlAccountDAO.getInstance()));
+
 		// client commands
 		commands.put("clientPage", new ClientPageCommand(MySqlCruiseDAO.getInstance()));
 		commands.put("AddToBasket", new ClientPageAddToBasketCommand(MySqlCruiseDAO.getInstance()));
@@ -38,8 +40,9 @@ public class CommandContainer {
 				new ClientBasketConfirmOrderOfSelectedUnitsCommand(new AllMethodsWithTransactions()));
 		commands.put("cruiseFindByStartDate", new ClientPageCruiseFindByStartDateCommand(MySqlCruiseDAO.getInstance()));
 		commands.put("cruiseFindByDuration", new ClientPageCruiseFindByDurationCommand(MySqlCruiseDAO.getInstance()));
-//		commands.put("signUpPage", new SignUpPageCommand());
-//		commands.put("signUpUser", new SignUpCommand(MySqlUsersDAO.getInstance(), MySqlAccountsDAO.getInstance()));
+		commands.put("ClientPageGoToMyProfile", new ClientPageGoToMyProfileCommand());
+
+
 //		commands.put("clientPageSortedDownByName", new ClientPageSortedDownByNameCommand(MySqlTariffsDAO.getInstance(),
 //				MySqlUsersHasTariffsDAO.getInstance()));
 //		commands.put("clientPageSortedUpByName", new ClientPageSortedUpByNameCommand(MySqlTariffsDAO.getInstance(),
@@ -48,23 +51,23 @@ public class CommandContainer {
 //				MySqlUsersHasTariffsDAO.getInstance()));
 //		commands.put("clientPageSortedDownByPrice", new ClientPageSortedDownByPriceCommand(MySqlTariffsDAO.getInstance(),
 //				MySqlUsersHasTariffsDAO.getInstance()));
-//		commands.put("ClientPageGoToTopUpYourAccount",
-//				new ClientPageGoToTopUpYourAccountCommand(MySqlUsersDAO.getInstance(),MySqlAccountsDAO.getInstance()));
-//		commands.put("clientPageGoToUpdatingAccountPage", new ClientPageGoToUpdatingAccountPageCommand());
-//		commands.put("clientUpdatingPageUpdateAccount",
-//				new ClientUpdatingPageUpdateAccountCommand(MySqlAccountsDAO.getInstance()));
+		commands.put("ClientPageGoToTopUpYourAccount",
+				new ClientPageGoToTopUpYourAccountCommand(MySqlUserDAO.getInstance(),MySqlAccountDAO.getInstance()));
+		commands.put("clientPageGoToUpdatingAccountPage", new ClientPageGoToUpdatingAccountPageCommand());
+		commands.put("clientUpdatingPageUpdateAccount",
+				new ClientUpdatingPageUpdateAccountCommand(MySqlAccountDAO.getInstance()));
 //		commands.put("clientPageToPay",
 //				new ClientPageToPayCommand(MySqlUsersDAO.getInstance(),MySqlAccountsDAO.getInstance(),
 //						MySqlTariffsDAO.getInstance(), MySqlUsersHasTariffsDAO.getInstance()));
-//		commands.put("clientPageToGoPageTariffsForChooseTariffs",
-//				new ClientPageGoToPageTariffsForChooseTariffCommand(MySqlTariffsDAO.getInstance(),
-//				MySqlUsersHasTariffsDAO.getInstance()));
 
 		// admin commands
 		commands.put("adminPage", new AdminPageCommand(MySqlUserDAO.getInstance()));
 
 		commands.put("pageAdminCruises", new AdminPageCruisesCommand(MySqlCruiseDAO.getInstance()));
-		commands.put("pageAdminOrders", new AdminPageOrderCommand(MySqlUsersHasCruiseDAO.getInstance()));
+		commands.put("pageAdminOrders", new AdminPageOrderCommand(MySqlOrderViewDAO.getInstance()));
+		commands.put("pageAdminChangeStatusWithWithdrawalFromDeposit",
+				new AdminPageChangeStatusWithWithdrawalFromDepositCommand(new AllMethodsWithTransactions(),
+						MySqlOrderDAO.getInstance(), MySqlOrderViewDAO.getInstance()));
 //		commands.put("adminPageRemoveUser", new AdminPageRemoveUserCommand(MySqlUsersDAO.getInstance(),
 //				MySqlAccountsDAO.getInstance()));
 //		commands.put("adminGoToUpdatingPage", new AdminGoToUpdatingPageCommand(MySqlUsersDAO.getInstance()));

@@ -63,7 +63,6 @@ public class LoginCommand extends Command {
 
         String forward = Path.PAGE_ERROR_PAGE;
 
-
         if (userRole == RoleEnum.ADMIN || userRole == RoleEnum.CLIENT) {
             forward = Path.PAGE_WELCOME_REGISTERED_USER;
         }

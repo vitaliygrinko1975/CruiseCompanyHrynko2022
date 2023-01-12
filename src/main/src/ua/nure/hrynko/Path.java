@@ -18,15 +18,15 @@ public final class Path {
 	// client pages
 	public static final String PAGE_CLIENT = "/WEB-INF/jsp/client/client_page.jsp";
 	public static final String BASKET = "basket.jsp";
-	public static final String PAGE_CLIENT_TARIFF = "/WEB-INF/jsp/client/client_page_tariff.jsp";
+	public static final String PAGE_CLIENT_MY_PROFILE = "/WEB-INF/jsp/client/client_page_my_profile.jsp";
 	public static final String PAGE_CLIENT_TOP_UP_YOUR_ACCOUNT = "/WEB-INF/jsp/client/client_page_top_up_your_account.jsp";
-	public static final String CLIENT_PAGE_UPDATE_ACCOUNT = "/WEB-INF/jsp/client/client_page_update_account.jsp";
+	public static final String CLIENT_PAGE_UPDATE_ACCOUNT = "client_page_update_account.jsp";
 
 
 	// admin pages
 	public static final String PAGE_ADMIN = "/WEB-INF/jsp/admin/admin_page.jsp";
 	public static final String PAGE_ADMIN_CRUISES = "/WEB-INF/jsp/admin/admin_page_cruises.jsp";
-	public static final String PAGE_ADMIN_ORDERS = "/WEB-INF/jsp/admin/admin_page_orders.jsp";
+	public static final String PAGE_ADMIN_ORDERS = "admin_page_orders.jsp";
 	public static final String ADMIN_PAGE_UPDATE_USER = "/WEB-INF/jsp/admin/admin_page_update_user.jsp";
 	public static final String ADMIN_PAGE_ADD_USER = "/WEB-INF/jsp/admin/admin_page_add_user.jsp";
 	public static final String ADMIN_PAGE_ADD_TARIFF = "/WEB-INF/jsp/admin/admin_page_add_tariff.jsp";

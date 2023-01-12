@@ -2,7 +2,7 @@ package ua.nure.hrynko.dto;
 
 import java.util.Objects;
 
-public class UserHasCruise extends Entity {
+public class Order extends Entity {
 
     private static final long serialVersionUID = -6889036256149495388L;
 
@@ -39,8 +39,8 @@ public class UserHasCruise extends Entity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserHasCruise)) return false;
-        UserHasCruise that = (UserHasCruise) o;
+        if (!(o instanceof Order)) return false;
+        Order that = (Order) o;
         return userId == that.userId && cruiseId == that.cruiseId && status.equals(that.status);
     }
 
@@ -51,7 +51,7 @@ public class UserHasCruise extends Entity {
 
     @Override
     public String toString() {
-        return "UsersHasCruises{" +
+        return "Order{" +
                 "userId=" + userId +
                 ", cruiseId=" + cruiseId +
                 ", status='" + status + '\'' +

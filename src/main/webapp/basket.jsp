@@ -22,14 +22,22 @@
 <fmt:message bundle="${loc}" key="local.cruise_name" var="cruise_name"/>
 <fmt:message bundle="${loc}" key="local.description" var="description"/>
 <fmt:message bundle="${loc}" key="local.total" var="total"/>
-<fmt:message bundle="${loc}" key="local.ships_id" var="ships_id"/>
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
 <fmt:message bundle="${loc}" key="local.start_of_cruise" var="start_of_cruise"/>
 <fmt:message bundle="${loc}" key="local.order_quantity" var="order_quantity"/>
 <fmt:message bundle="${loc}" key="local.cruise_duration" var="cruise_duration"/>
-
+<fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
+<fmt:message bundle="${loc}" key="local.balance_recharge" var="balance_recharge"/>
 
 <body>
+<ul>
+    <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+    <li><a href="controller?command=ClientPageGoToTopUpYourAccount&userIdForTopUpYourAccount=${user.id}">
+        ${balance_recharge}</a></li>
+    <li><a href="controller?command=clientPage">${cruises}</a></li>
+
+    <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+</ul>
 <div align='center'>
     <%--===========================================================================
     Type user name if the user object is presented in the current session.
@@ -42,32 +50,6 @@
         <c:out value="(${userRole.name})"/>
     </c:if>
 </div>
-<div align='right'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <a href="controller?command=logout">
-            <button class="btn btn-primary btn-block btn-large">${logout}</button>
-        </a>
-    </div>
-</div>
-
-<c:if test="${userRole.name eq 'client'}">
-<div align='right'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <a href="controller?command=clientPage">
-            <button class="btn btn-primary btn-block btn-large">${back_to_cruise_selection}</button>
-        </a>
-    </div>
-    </c:if>
-    <c:if test="${userRole.name eq 'admin'}">
-    <div align='right'>
-        <div style="display: inline-block; padding-right: 50px;">
-            <a href="controller?command=adminPage">
-                <button class="btn btn-primary btn-block btn-large">${entrance}</button>
-            </a>
-        </div>
-    </div>
-    </c:if>
-
     <h1 align='center'>${basket}</h1>
     <div align='center'>
         <table border='1'>

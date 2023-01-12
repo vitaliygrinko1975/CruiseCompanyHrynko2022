@@ -4,7 +4,7 @@
 <%@ page import="java.util.*" %>
 <html>
 <head>
-    <link href='./style/style2.css' rel='stylesheet' type='text/css'>
+    <link href='style/style2.css' rel='stylesheet' type='text/css'>
 </head>
 <fmt:setLocale value="${local}"/>
 <fmt:setBundle basename="localization.local" var="loc"/>
@@ -18,7 +18,7 @@
 <fmt:message bundle="${loc}" key="local.status" var="status"/>
 <fmt:message bundle="${loc}" key="local.cruises" var="cruises"/>
 <fmt:message bundle="${loc}" key="local.orders" var="orders"/>
-<fmt:message bundle="${loc}" key="local.ships_id" var="ships_id"/>
+<fmt:message bundle="${loc}" key="local.description" var="description"/>
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
 <fmt:message bundle="${loc}" key="local.start_of_cruise" var="start_of_cruise"/>
 <fmt:message bundle="${loc}" key="local.cruise_duration" var="cruise_duration"/>
@@ -27,23 +27,18 @@
 <fmt:message bundle="${loc}" key="local.price" var="price"/>
 <fmt:message bundle="${loc}" key="local.services_id" var="services_id"/>
 <fmt:message bundle="${loc}" key="local.remove" var="remove"/>
-<fmt:message bundle="${loc}" key="local.change_status" var="change_status"/>
-
+<fmt:message bundle="${loc}" key="local.pay_from_balance" var="pay_from_balance"/>
+<fmt:message bundle="${loc}" key="local.first_name" var="first_name"/>
+<fmt:message bundle="${loc}" key="local.last_name" var="last_name"/>
+<fmt:message bundle="${loc}" key="local.email" var="email"/>
 
 <body>
-<div align='right'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <a href="controller?command=logout">
-            <button class="btn btn-primary btn-block btn-large">${logout}</button>
-        </a>
-    </div>
-</div>
-<div align='left'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <a href="controller?command=adminPage">
-            <button class="btn btn-primary btn-block btn-large">${back}</button>
-        </a>
-    </div>
+<ul>
+    <li><a href="controller?command=adminPage">${users}</a></li>
+    <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
+
+    <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+</ul>
     <h1 align='center'>${admin_page}</h1>
 
     <div align='center'>
@@ -52,43 +47,42 @@
             <caption><h2>${orders}</h2></caption>
             <tr>
                 <td>№</td>
-                <td>${users}</td>
-                <td>${cruises}</td>
+                <td>${first_name}</td>
+                <td>${last_name}</td>
+                <td>${email}</td>
+                <td>${description}</td>
                 <td>${status}</td>
             </tr>
-            <c:set var="k" value="0"/>
-            <%--@elvariable id="allUsersHasCruises" type="java.util.List"--%>
-            <c:forEach var="usersHasCruises" items="${allUsersHasCruises}">
-                <c:set var="k" value="${k+1}"/>
+            <%--@elvariable id="allItemOfOrdersViewWithLimit" type="java.util.List"--%>
+            <c:forEach var="ordersView" items="${allItemOfOrdersViewWithLimit}">
+                <%--                <c:set var="k" value="${k+1}"/>--%>
                 <tr>
-                    <td><c:out value="${k}"/></td>
-                    <td>${usersHasCruises.userId}</td>
-                    <td>${usersHasCruises.cruiseId}</td>
-                    <td>${usersHasCruises.status}</td>
+                        <%--                    <td><c:out value="${k}"/></td>--%>
+                            <td>${ordersView.id}</td>
+                            <td>${ordersView.usersFirstName}</td>
+                            <td>${ordersView.usersLastName}</td>
+                            <td>${ordersView.usersEmail}</td>
+                            <td>${ordersView.cruisesDescription}</td>
+                            <td>${ordersView.status}</td>
                     <td>
+                        <c:if test="${ordersView.status  ne 'Оплачено'}">
                         <form method="post" action="controller">
-                            <input type="hidden" name="command" value="adminPageTariffsRemoveTariff"/>
-                            <button type="submit" name="removeTariffButt" value="${tariff.id}"
-                                    class="btn btn-primary btn-block btn-large">${remove}</button>
+                            <input type="hidden" name="command" value="pageAdminChangeStatusWithWithdrawalFromDeposit"/>
+                            <input type="hidden" name="status" value="${ordersView.status}"/>
+                            <button type="submit" name="ordersViewIdForUpdateButt" value="${ordersView.id}"
+                                    class="btn btn-primary btn-block btn-large">${pay_from_balance}</button>
                         </form>
-                    </td>
-                    <td>
-                        <form method="get" action="controller">
-                            <input type="hidden" name="command" value="adminGoToPageForUpdatingTariff"/>
-                            <button type="submit" name="tariffIdForUpdateButt" value="${tariff.id}"
-                                    class="btn btn-primary btn-block btn-large">${change_status}</button>
-                        </form>
+                        </c:if>
                     </td>
                 </tr>
             </c:forEach>
         </table>
         <div class="pagination">
-            <%--@elvariable id="Math" type="java"--%>
-            <%--@elvariable id="countAllCruises" type="java"--%>
             <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
                 <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>
             </c:forEach>
         </div>
     </div>
+
 </body>
 </html>

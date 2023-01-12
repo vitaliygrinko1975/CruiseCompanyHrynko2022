@@ -76,8 +76,9 @@ CREATE TABLE cruises
 --
 -- Table structure for table `users_has_cruises`
 --
-CREATE TABLE users_has_cruises
+CREATE TABLE orders
 (
+    id         INTEGER     NOT NULL AUTO_INCREMENT PRIMARY KEY,
     users_id   INTEGER     NOT NULL,
     cruises_id INTEGER     NOT NULL,
     status     VARCHAR(45) NOT NULL,
@@ -85,6 +86,17 @@ CREATE TABLE users_has_cruises
     FOREIGN KEY (cruises_id) REFERENCES cruises (Id)
 
 );
+
+CREATE VIEW orders_view AS SELECT o.id AS id,
+                                  u.first_name AS first_name,
+                                  u.last_name AS last_name,
+                                  u.email AS email,
+                                  c.description AS description,
+                                  o.status AS status
+                                  FROM orders AS o
+                                  JOIN users AS u ON o.users_id = u.id
+                                  JOIN cruises AS c ON o.cruises_id = c.id;
+
 
 
 INSERT INTO roles (name)
@@ -128,7 +140,7 @@ VALUES ('«Большое путишествие»', 'Одесса-Стамбу�
 
 
 
-INSERT INTO users_has_cruises (users_id, cruises_id,status)
+INSERT INTO orders (users_id, cruises_id,status)
 VALUES (2, 1, 'не оплачено');
 
 
@@ -144,6 +156,6 @@ FROM ships;
 SELECT *
 FROM cruises;
 SELECT *
-FROM users_has_cruises;
+FROM orders;
 
 

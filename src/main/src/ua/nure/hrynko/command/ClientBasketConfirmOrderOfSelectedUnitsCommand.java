@@ -34,17 +34,19 @@ public class ClientBasketConfirmOrderOfSelectedUnitsCommand extends Command {
         int userId = Integer.parseInt(request.getParameter("userIdForBasketUsersHasCruisesButt"));
         LOG.trace("Request parameter: userId --> " + userId);
 
+
         HashMap<Cruise, Integer> mapForBasket = (HashMap<Cruise, Integer>) session.getAttribute("mapForBasket");
 
-        allMethodsWithTransactions.addBasketToUsersHasCruisesDb(userId, mapForBasket);
+        int depositAmount = allMethodsWithTransactions.addBasketToUsersHasCruisesDbReturnDepositAmount(userId, mapForBasket);
 
+        session.setAttribute("depositAmount", depositAmount);
+        LOG.trace("Set the session attribute: depositAmount --> " + depositAmount);
         mapForBasket.clear();
 
-        session.setAttribute("mapForBasket", mapForBasket);
-        LOG.trace("Set the session attribute: mapForBasket --> " + mapForBasket);
         LOG.debug("ClientBasketConfirmOrderOfSelectedUnitsCommand finished");
 
-        return Path.BASKET;
+
+        return Path.CLIENT_PAGE_UPDATE_ACCOUNT;
     }
 }
 

@@ -13,15 +13,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySqlAccountsDAO implements AccountDAO {
+public class MySqlAccountDAO implements AccountDAO {
 
-    private static final Logger LOG = Logger.getLogger(MySqlAccountsDAO.class);
+    private static final Logger LOG = Logger.getLogger(MySqlAccountDAO.class);
 
-    private static MySqlAccountsDAO instance;
+    private static MySqlAccountDAO instance;
 
-    public static synchronized MySqlAccountsDAO getInstance() {
+    public static synchronized MySqlAccountDAO getInstance() {
         if (instance == null) {
-            instance = new MySqlAccountsDAO();
+            instance = new MySqlAccountDAO();
         }
         return instance;
 
@@ -134,10 +134,9 @@ public class MySqlAccountsDAO implements AccountDAO {
         Connection con = null;
         try {
             con = DBManager.getInstance().getConnection();
-            stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_BY_NUMBER_AND_BALANCE);
-            stmt.setInt(1, account.getNumber());
-            stmt.setDouble(2, account.getBalance());
-            stmt.setInt(3, account.getId());
+            stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_BY_ID);
+            stmt.setDouble(1, account.getBalance());
+            stmt.setInt(2, account.getId());
             stmt.executeUpdate();
             con.commit();
             LOG.trace("update Account to SQL seccesful--> ");
@@ -154,10 +153,9 @@ public class MySqlAccountsDAO implements AccountDAO {
     public void updateAccountToDb(Connection con, Account account) throws SQLException {
         PreparedStatement stmt;
         ResultSet rs = null;
-        stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_BY_NUMBER_AND_BALANCE);
-        stmt.setInt(1, account.getNumber());
-        stmt.setDouble(2, account.getBalance());
-        stmt.setInt(3, account.getId());
+        stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_BY_ID);
+        stmt.setDouble(1, account.getBalance());
+        stmt.setInt(2, account.getId());
         stmt.executeUpdate();
         con.commit();
         LOG.trace("update Account to SQL seccesful--> ");
@@ -165,9 +163,22 @@ public class MySqlAccountsDAO implements AccountDAO {
         DBManager.close(stmt);
     }
 
+    @Override
+    public void updateAccountToDb(Connection con, int accountId, double balance) throws SQLException {
+        PreparedStatement stmt;
+        ResultSet rs = null;
+        stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_BY_ID);
+        stmt.setDouble(1, balance);
+        stmt.setInt(2, accountId);
+        stmt.executeUpdate();
+        con.commit();
+        LOG.trace("update Account to SQL seccesful--> ");
+        DBManager.close(rs);
+        DBManager.close(stmt);
+    }
 
     @Override
-    public void addAccountsDb(int number, double balance) throws DBException {
+    public void addAccountsDb(double balance) throws DBException {
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -175,8 +186,7 @@ public class MySqlAccountsDAO implements AccountDAO {
         try {
             con = DBManager.getInstance().getConnection();
             stmt = con.prepareStatement(Querys.SQL_INSERT_ACCOUNT);
-            stmt.setInt(1, number);
-            stmt.setDouble(2, balance);
+            stmt.setDouble(1, balance);
 
             stmt.executeUpdate();
 
@@ -195,12 +205,12 @@ public class MySqlAccountsDAO implements AccountDAO {
 
     }
 
+
     @Override
-    public void addAccountsDb(Connection con, int number, double balance) throws SQLException {
+    public void addAccountsDb(Connection con, double balance) throws SQLException {
         PreparedStatement pstmt;
         pstmt = con.prepareStatement(Querys.SQL_INSERT_ACCOUNT);
-        pstmt.setInt(1, number);
-        pstmt.setDouble(2, balance);
+        pstmt.setDouble(1, balance);
         pstmt.executeUpdate();
         DBManager.close(pstmt);
     }

@@ -25,43 +25,30 @@
 <fmt:message bundle="${loc}" key="local.role_id" var="role_id"/>
 <fmt:message bundle="${loc}" key="local.accounts_id" var="accounts_id"/>
 <body>
-<div id="rightHeader">
+<ul>
+    <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
+    <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
+
+    <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+</ul>
+<div align='left'>
+    <%--===========================================================================
+    Type user name if the user object is presented in the current session.
+    ===========================================================================--%>
     <c:out value="${user.firstName} ${user.lastName}"/>
+    <%--===========================================================================
+    Type user role name if the user object is presented in the current session.
+    ===========================================================================--%>
     <c:if test="${not empty userRole}">
         <c:out value="(${userRole.name})"/>
     </c:if>
 </div>
-<div align='right'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <a href="controller?command=logout">
-            <button class="btn btn-primary btn-block btn-large">${logout}</button>
-        </a>
-    </div>
-</div>
 <h1 align='center'>${admin_page}</h1>
-<div align='center'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <a href="controller?command=pageAdminCruises">
-            <button class="btn btn-primary btn-block btn-large">${cruises}</button>
-        </a>
-    </div>
-</div>
-<div align='center'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <form method="get" action="controller">
-            <input type="hidden" name="command" value="pageAdminOrders"/>
-            <button type="submit" name="page" value="1"
-                    class="btn btn-primary btn-block btn-large">${orders}</button>
-        </form>
-    </div>
-</div>
 <div align='center'>
     <table border='1'>
         <caption><h2>${users}</h2></caption>
         <tr>
             <td>№</td>
-            <td>${login}</td>
-            <td>${password}</td>
             <td>${first_name}</td>
             <td>${last_name}</td>
             <td>${email}</td>
@@ -71,9 +58,6 @@
         <c:set var="k" value="0"/>
         <c:forEach var="user" items="${userList}">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.login}</td>
-                <td>${user.password}</td>
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
                 <td>${user.email}</td>

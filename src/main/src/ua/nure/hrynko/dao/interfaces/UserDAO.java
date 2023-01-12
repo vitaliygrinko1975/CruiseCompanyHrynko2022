@@ -23,8 +23,8 @@ public interface UserDAO {
     void addToUsersDb(String login, String password, String firstName, String lastName, String email, String phone,
                       boolean blocked, int roleId, int accountsId) throws DBException;
 
-    void addToUsersDb(Connection con, String login, String password, String firstName, String lastName, String email, String phone,
-                      boolean blocked, int roleId, int accountsId) throws DBException, SQLException;
+    void addToUsersDb(Connection con, String login, String password, String firstName, String lastName, String email,
+                      String phone, int roleId, int accountsId) throws DBException, SQLException;
 
     void removeUserFromDb(Integer id) throws DBException;
 

@@ -18,15 +18,28 @@
 <fmt:message bundle="${loc}" key="local.cruise_name" var="cruise_name"/>
 <fmt:message bundle="${loc}" key="local.description" var="description"/>
 <fmt:message bundle="${loc}" key="local.price" var="price"/>
-<fmt:message bundle="${loc}" key="local.ships_id" var="ships_id"/>
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
 <fmt:message bundle="${loc}" key="local.start_of_cruise" var="start_of_cruise"/>
 <fmt:message bundle="${loc}" key="local.find_cruise" var="find_cruise"/>
 <fmt:message bundle="${loc}" key="local.start_date" var="start_date"/>
 <fmt:message bundle="${loc}" key="local.cruise_duration" var="cruise_duration"/>
-
+<fmt:message bundle="${loc}" key="local.deposit" var="deposit"/>
+<fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
 <body>
-<div align='center'>
+<ul>
+    <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+
+    <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+    <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>
+</ul>
+<div align='right'>
+    <c:set var="count" value="0"/>
+    <c:forEach var="cruise" items="${mapForBasket}">
+        <c:set var="count" value="${count + cruise.value}"/>
+    </c:forEach>
+    <c:out value="Выбрано - ${count} штук"/>
+</div>
+<div align='left'>
     <%--===========================================================================
     Type user name if the user object is presented in the current session.
     ===========================================================================--%>
@@ -38,102 +51,68 @@
         <c:out value="(${userRole.name})"/>
     </c:if>
 </div>
-<div align='right'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <a href="controller?command=logout">
-            <button class="btn btn-primary btn-block btn-large">${logout}</button>
-        </a>
-    </div>
-</div>
-
-
 <%--<div align='right'>--%>
-    <%--@elvariable id="mapForBasket" type="java.util.Map"--%>
+<%--@elvariable id="mapForBasket" type="java.util.Map"--%>
 <%--    <c:out value="${basket} - ${mapForBasket.size()} ${positions}"/></div>--%>
-
 <div align='right'>
-    <c:set var="count" value="0"/>
-    <c:forEach var="cruise" items="${mapForBasket}">
-            <c:set var="count" value="${count + cruise.value}"/>
-    </c:forEach>
-    <c:out value="Всего количество - ${count} штук"/>
-
-    <div align='right'>
-        <div style="display: inline-block; padding-right: 50px;">
-            <a href="controller?command=goToBasket">
-                <button class="btn btn-primary btn-block btn-large">${basket}</button>
-            </a>
-        </div>
-    </div>
-
-    <h1 align='center'>${client_page}</h1>
-
-    <form align='center' method="get" action="controller">
-        <div style="display: inline-block; padding-right: 50px;">
-            <input type="hidden" name="command" value="ClientPageGoToTopUpYourAccount"/>
-            <button type="submit" name="userIdForTopUpYourAccount" value="${user.id}"
-                    class="btn btn-primary btn-block btn-large">${accounts}</button>
-        </div>
-    </form>
-    <div align='center'>
-        <table border='1'>
-            <caption><h2>${cruises}</h2></caption>
+<h1 align='center'>${client_page}</h1>
+<div align='center'>
+    <table border='1'>
+        <caption><h2>${cruises}</h2></caption>
+        <tr>
+            <td>№</td>
+            <td>${cruise_name}</td>
+            <td>${description}</td>
+            <td>${price}</td>
+            <td>${ships_id}</td>
+            <td>${availability}</td>
+            <td>${start_of_cruise}</td>
+            <td>${cruise_duration}</td>
+        </tr>
+        <c:set var="k" value="0"/>
+        <%--@elvariable id="allCruises" type="java.util.List"--%>
+        <c:forEach var="cruise" items="${allCruises}">
+            <c:set var="k" value="${k+1}"/>
             <tr>
-                <td>№</td>
-                <td>${cruise_name}</td>
-                <td>${description}</td>
-                <td>${price}</td>
-                <td>${ships_id}</td>
-                <td>${availability}</td>
-                <td>${start_of_cruise}</td>
-                <td>${cruise_duration}</td>
+                <td><c:out value="${k}"/></td>
+                <td>${cruise.name}</td>
+                <td>${cruise.description}</td>
+                <td>${cruise.price}</td>
+                <td>${cruise.shipId}</td>
+                <td>${cruise.capacity}</td>
+                <td>${cruise.startOfCruise}</td>
+                <td>${cruise.duration}</td>
+                <td>
+                    <form method="get" action="controller">
+                        <input type="hidden" name="command" value="AddToBasket"/>
+                        <input type="hidden" name="userIdForBasketUsersHasCruisesButt" value=${user.id}>
+                        <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.id}"
+                                class="btn btn-primary btn-block btn-large">${Add_to_cart}
+                    </form>
+                </td>
             </tr>
-            <c:set var="k" value="0"/>
-            <%--@elvariable id="allCruises" type="java.util.List"--%>
-            <c:forEach var="cruise" items="${allCruises}">
-                <c:set var="k" value="${k+1}"/>
-                <tr>
-                    <td><c:out value="${k}"/></td>
-                    <td>${cruise.name}</td>
-                    <td>${cruise.description}</td>
-                    <td>${cruise.price}</td>
-                    <td>${cruise.shipId}</td>
-                    <td>${cruise.capacity}</td>
-                    <td>${cruise.startOfCruise}</td>
-                    <td>${cruise.duration}</td>
-                    <td>
-                        <form method="get" action="controller">
-                            <input type="hidden" name="command" value="AddToBasket"/>
-                            <input type="hidden" name="userIdForBasketUsersHasCruisesButt" value=${user.id}>
-                            <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.id}"
-                                    class="btn btn-primary btn-block btn-large">${Add_to_cart}
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
+        </c:forEach>
+    </table>
+</div>
+<form class="form-inline" action="controller" method="get">
+    <input type="hidden" name="command" value="cruiseFindByStartDate">
+    <div class="form-group" style="display: inline-block; margin-right: 25px;">
+        <legend>${start_date}:</legend>
+        <input type="date" name="startDate" required>
     </div>
-        <form class="form-inline" action="controller" method="get">
-            <input type="hidden" name="command" value="cruiseFindByStartDate">
-        <div class="form-group" style="display: inline-block; margin-right: 25px;">
-            <legend>${start_date}:</legend>
-            <input type="date" name="startDate" required>
-        </div>
-        <div class="form-group" style="display: inline-block; margin-right: 25px;">
-            <input type="submit" name="selectOption" value="${find_cruise}">
-        </div>
-        </form>
-        <form class="form-inline" action="controller" method="get">
-            <input type="hidden" name="command" value="cruiseFindByDuration">
-            <div class="form-group" style="display: inline-block; margin-right: 25px;">
-                <legend>${cruise_duration}:</legend>
-                <input type="number" min="1" max="60" name="duration" required>
-            </div>
-            <div class="form-group" style="display: inline-block; margin-right: 25px;">
-                <input type="submit" name="selectOption" value="${find_cruise}">
-            </div>
-
-        </form>
-
+    <div class="form-group" style="display: inline-block; margin-right: 25px;">
+        <input type="submit" name="selectOption" value="${find_cruise}">
+    </div>
+</form>
+<form class="form-inline" action="controller" method="get">
+    <input type="hidden" name="command" value="cruiseFindByDuration">
+    <div class="form-group" style="display: inline-block; margin-right: 25px;">
+        <legend>${cruise_duration}:</legend>
+        <input type="number" min="1" max="60" name="duration" required>
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 25px;">
+        <input type="submit" name="selectOption" value="${find_cruise}">
+    </div>
+</form>
 </body>
 </html>
