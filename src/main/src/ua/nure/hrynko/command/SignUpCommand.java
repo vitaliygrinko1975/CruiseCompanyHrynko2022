@@ -5,9 +5,9 @@ import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.dao.interfaces.AccountDAO;
 import ua.nure.hrynko.dao.interfaces.UserDAO;
-import ua.nure.hrynko.dto.Account;
-import ua.nure.hrynko.dto.Entity;
-import ua.nure.hrynko.dto.User;
+import ua.nure.hrynko.models.Account;
+import ua.nure.hrynko.models.Entity;
+import ua.nure.hrynko.models.User;
 import ua.nure.hrynko.exception.AppException;
 
 import javax.servlet.ServletException;

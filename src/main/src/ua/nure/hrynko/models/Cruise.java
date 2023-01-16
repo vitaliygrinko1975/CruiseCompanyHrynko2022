@@ -1,4 +1,4 @@
-package ua.nure.hrynko.dto;
+package ua.nure.hrynko.models;
 
 import java.util.Date;
 import java.util.Objects;
@@ -16,11 +16,13 @@ public class Cruise extends Entity {
 
     private int shipId;
 
-    private int  capacity;
+    private int capacity;
 
     private Date startOfCruise;
 
     private int duration;
+
+    private String status;
 
     public String getName() {
         return name;
@@ -70,25 +72,34 @@ public class Cruise extends Entity {
         this.startOfCruise = startOfCruise;
     }
 
-    public int getDuration() { return duration;}
+    public int getDuration() {
+        return duration;
+    }
 
-    public void setDuration(int duration) {this.duration = duration;}
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cruise)) return false;
         Cruise cruise = (Cruise) o;
-        return Double.compare(cruise.price, price) == 0 && shipId == cruise.shipId && capacity == cruise.capacity
-                && duration == cruise.duration && name.equals(cruise.name) && description.equals(cruise.description)
-                && startOfCruise.equals(cruise.startOfCruise);
+        return Double.compare(cruise.price, price) == 0 && shipId == cruise.shipId && capacity == cruise.capacity && duration == cruise.duration && name.equals(cruise.name) && description.equals(cruise.description) && startOfCruise.equals(cruise.startOfCruise) && status.equals(cruise.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, price, shipId, capacity, startOfCruise, duration);
+        return Objects.hash(name, description, price, shipId, capacity, startOfCruise, duration, status);
     }
-
     @Override
     public String toString() {
         return "Cruise{" +
@@ -99,6 +110,8 @@ public class Cruise extends Entity {
                 ", capacity=" + capacity +
                 ", startOfCruise=" + startOfCruise +
                 ", duration=" + duration +
+                ", status='" + status + '\'' +
                 '}';
     }
+
 }

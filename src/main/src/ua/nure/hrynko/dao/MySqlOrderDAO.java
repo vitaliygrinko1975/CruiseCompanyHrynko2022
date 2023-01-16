@@ -4,7 +4,7 @@ import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.Fields;
 import ua.nure.hrynko.Querys;
 import ua.nure.hrynko.dao.interfaces.OrderDAO;
-import ua.nure.hrynko.dto.Order;
+import ua.nure.hrynko.models.Order;
 import ua.nure.hrynko.exception.DBException;
 import ua.nure.hrynko.exception.Messages;
 

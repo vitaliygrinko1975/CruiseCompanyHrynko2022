@@ -96,6 +96,11 @@
       <artifactId>javax.mail</artifactId>
       <version>1.6.2</version>
     </dependency>
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jsp-api</artifactId>
+          <version>7.0</version>
+      </dependency>
   </dependencies>
   <build>
     <finalName>CruiseCompanyHrynko2022</finalName>

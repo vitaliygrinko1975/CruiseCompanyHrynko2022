@@ -3,7 +3,7 @@ package ua.nure.hrynko.command;
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.dao.interfaces.AccountDAO;
-import ua.nure.hrynko.dto.Account;
+import ua.nure.hrynko.models.Account;
 import ua.nure.hrynko.exception.AppException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

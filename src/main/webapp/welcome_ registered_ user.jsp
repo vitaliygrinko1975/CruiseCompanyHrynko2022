@@ -8,6 +8,8 @@
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="mytaglib" prefix="mt" %>
 <html>
 <head>
     <title>Message</title>
@@ -43,6 +45,13 @@
             <c:out value="(${userRole.name})"/>
         </c:if>
     </div>
+    <div align='center'>
+        <mt:myTag/>
+    </div>
+    <div class='mydiv'>
+        <h1 align='center'>${messageAboutPay} </h1>
+        <h1 align='center'>${messageAboutUpdate} </h1>
+    </div>
 </c:if>
 <c:if test="${userRole.name eq 'admin'}">
     <ul>
@@ -64,12 +73,13 @@
             <c:out value="(${userRole.name})"/>
         </c:if>
     </div>
+    <div align='center'>
+        <mt:myTag/>
+    </div>
+    <div class='mydiv'>
+        <h1 align='center'>${messageAboutPay} </h1>
+        <h1 align='center'>${messageAboutUpdate} </h1>
+    </div>
 </c:if>
-</body>
-</html>
-</title>
-</head>
-<body>
-
 </body>
 </html>

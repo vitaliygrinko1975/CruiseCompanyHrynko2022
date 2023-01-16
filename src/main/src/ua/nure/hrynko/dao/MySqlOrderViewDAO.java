@@ -5,7 +5,7 @@ import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.Fields;
 import ua.nure.hrynko.Querys;
 import ua.nure.hrynko.dao.interfaces.OrderViewDAO;
-import ua.nure.hrynko.dto.OrderView;
+import ua.nure.hrynko.models.OrderView;
 import ua.nure.hrynko.exception.DBException;
 
 import java.sql.*;
@@ -85,6 +85,7 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
         orderView.setUsersLastName(rs.getString(Fields.USER_LAST_NAME));
         orderView.setUsersEmail(rs.getString(Fields.USER_EMAIL));
         orderView.setCruisesDescription(rs.getString(Fields.CRUISE_DESCRIPTION));
+        orderView.setStatusOfCruises(rs.getString(Fields.STATUS_OF_CRUISES));
         orderView.setStatus(rs.getString(Fields.STATUS));
 
 

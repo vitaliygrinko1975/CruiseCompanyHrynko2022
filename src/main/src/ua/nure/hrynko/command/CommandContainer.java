@@ -2,6 +2,7 @@ package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.dao.*;
+import ua.nure.hrynko.models.Cruise;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
 
 
@@ -56,6 +57,8 @@ public class CommandContainer {
 		commands.put("clientPageGoToUpdatingAccountPage", new ClientPageGoToUpdatingAccountPageCommand());
 		commands.put("clientUpdatingPageUpdateAccount",
 				new ClientUpdatingPageUpdateAccountCommand(MySqlAccountDAO.getInstance()));
+		commands.put("clientUpdatingPageUpdateYourProfile",
+				new ClientUpdatingPageUpdateYourProfileCommand(MySqlUserDAO.getInstance()));
 //		commands.put("clientPageToPay",
 //				new ClientPageToPayCommand(MySqlUsersDAO.getInstance(),MySqlAccountsDAO.getInstance(),
 //						MySqlTariffsDAO.getInstance(), MySqlUsersHasTariffsDAO.getInstance()));
@@ -68,6 +71,14 @@ public class CommandContainer {
 		commands.put("pageAdminChangeStatusWithWithdrawalFromDeposit",
 				new AdminPageChangeStatusWithWithdrawalFromDepositCommand(new AllMethodsWithTransactions(),
 						MySqlOrderDAO.getInstance(), MySqlOrderViewDAO.getInstance()));
+		commands.put("adminPageCruiseRemoveCruise", new AdminPageRemoveCruiseCommand(MySqlCruiseDAO.getInstance()));
+		commands.put("adminGoToPageForUpdatingCruise",
+				new AdminGoToPageForUpdatingCruiseCommand(MySqlCruiseDAO.getInstance()));
+		commands.put("adminUpdatingPageUpdateCruise", new AdminUpdatingPageUpdateCruiseCommand(
+				MySqlCruiseDAO.getInstance(), new Cruise()));
+		commands.put("adminGoToPageForAddingCruise", new AdminGoToPageForAddingCruiseCommand());
+		commands.put("adminAddingPageAddCruise", new AdminAddingPageAddCruiseCommand(MySqlCruiseDAO.getInstance()));
+
 //		commands.put("adminPageRemoveUser", new AdminPageRemoveUserCommand(MySqlUsersDAO.getInstance(),
 //				MySqlAccountsDAO.getInstance()));
 //		commands.put("adminGoToUpdatingPage", new AdminGoToUpdatingPageCommand(MySqlUsersDAO.getInstance()));
@@ -75,13 +86,7 @@ public class CommandContainer {
 //		commands.put("adminGoToPageAddingUser", new AdminGoToPageForAddingUserCommand());
 //		commands.put("adminAddingPageAddUser",
 //				new AdminAddingPageAddUserCommand(MySqlUsersDAO.getInstance(),MySqlAccountsDAO.getInstance()));
-//		commands.put("adminPageBlockingUser",new AdminPageBlockingUserCommand(MySqlUsersDAO.getInstance()));
-//		commands.put("adminPageUnBlockingUser",new AdminPageUnBlockingUserCommand(MySqlUsersDAO.getInstance()));
-//		commands.put("adminPageTariffsRemoveTariff", new AdminPageTariffsRemoveTariffCommand(MySqlTariffsDAO.getInstance()));
-//		commands.put("adminGoToPageForAddingTariff", new AdminGoToPageForAddingTariffCommand());
-//		commands.put("adminAddingPageAddTariff", new AdminAddingPageAddTariffCommand(MySqlTariffsDAO.getInstance()));
-//		commands.put("adminGoToPageForUpdatingTariff",
-//				new AdminGoToPageForUpdatingTariffCommand(MySqlTariffsDAO.getInstance()));
+//
 //		commands.put("adminUpdatingPageUpdateTariff", new AdminUpdatingPageUpdateTariffCommand(MySqlTariffsDAO.getInstance()));
 
 

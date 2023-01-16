@@ -1,7 +1,9 @@
-<%--@elvariable id="user" type="ua.nure.hrynko.dto.User"--%>
+<%--@elvariable id="user" type="ua.nure.hrynko.models.User"--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="mytaglib" prefix="mt" %>
 <html>
 <head>
     <link href='./style/style2.css' rel='stylesheet' type='text/css'>
@@ -51,6 +53,9 @@
         <c:out value="(${userRole.name})"/>
     </c:if>
 </div>
+<div align='left'>
+    <mt:myTag/>
+</div>
 <%--<div align='right'>--%>
 <%--@elvariable id="mapForBasket" type="java.util.Map"--%>
 <%--    <c:out value="${basket} - ${mapForBasket.size()} ${positions}"/></div>--%>
@@ -64,7 +69,6 @@
             <td>${cruise_name}</td>
             <td>${description}</td>
             <td>${price}</td>
-            <td>${ships_id}</td>
             <td>${availability}</td>
             <td>${start_of_cruise}</td>
             <td>${cruise_duration}</td>
@@ -78,7 +82,6 @@
                 <td>${cruise.name}</td>
                 <td>${cruise.description}</td>
                 <td>${cruise.price}</td>
-                <td>${cruise.shipId}</td>
                 <td>${cruise.capacity}</td>
                 <td>${cruise.startOfCruise}</td>
                 <td>${cruise.duration}</td>

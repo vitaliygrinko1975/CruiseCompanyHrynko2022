@@ -5,7 +5,7 @@ import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.Fields;
 import ua.nure.hrynko.Querys;
 import ua.nure.hrynko.dao.interfaces.CruiseDAO;
-import ua.nure.hrynko.dto.Cruise;
+import ua.nure.hrynko.models.Cruise;
 import ua.nure.hrynko.exception.DBException;
 import ua.nure.hrynko.exception.Messages;
 
@@ -13,6 +13,10 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 
 public class MySqlCruiseDAO implements CruiseDAO {
     private static final Logger LOG = Logger.getLogger(MySqlCruiseDAO.class);
@@ -147,7 +151,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
 
 
     @Override
-    public void addCruiseToCruisesDb(Connection con, Cruise cruise) throws SQLException {
+    public void updateCruisesDb(Connection con, Cruise cruise) throws SQLException {
         PreparedStatement pstmt;
         ResultSet rs = null;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -162,12 +166,91 @@ public class MySqlCruiseDAO implements CruiseDAO {
         pstmt.setInt(5, cruise.getCapacity());
         pstmt.setString(6, stringStartOfCruise);
         pstmt.setInt(7, cruise.getDuration());
-        pstmt.setInt(8, cruise.getId());
+        pstmt.setString(8, cruise.getStatus());
+        pstmt.setInt(9, cruise.getId());
 
         pstmt.executeUpdate();
 
         DBManager.close(rs);
         DBManager.close(pstmt);
+    }
+    @Override
+    public void updateCruiseDb(int id, String name, String description, double price, int shipId, int capacity,
+                              String startOfCruise, int duration) throws DBException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID);
+            pstmt.setString(1, name);
+            pstmt.setString(2, description);
+            pstmt.setDouble(3, price);
+            pstmt.setInt(4, shipId);
+            pstmt.setInt(5, capacity);
+            pstmt.setString(6, startOfCruise);
+            pstmt.setInt(7, duration);
+            pstmt.setInt(8, id);
+            pstmt.executeUpdate();
+            con.commit();
+            LOG.trace("update to SQL seccesful--> ");
+        } catch (SQLException ex) {
+            LOG.trace("ERRor--> ");
+            ex.printStackTrace();
+            DBManager.rollback(con);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+    }
+
+    @Override
+    public void addToCruiseDb(String name, String description, double price, int shipsId,int capacity,String startOfCruise,
+                              int duration,String status) throws DBException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_INSERT_CRUISE);
+
+            pstmt.setString(1, name);
+            pstmt.setString(2, description);
+
+            pstmt.setDouble(3, price);
+            pstmt.setInt(4, shipsId);
+            pstmt.setInt(5, capacity);
+            pstmt.setString(6, startOfCruise);
+            pstmt.setInt(7, duration);
+            pstmt.setString(8, status);
+            pstmt.executeUpdate();
+            con.commit();
+            LOG.trace("add tariff to SQL succesful--> ");
+        } catch (SQLException ex) {
+            LOG.trace("ERRor--> ");
+            ex.printStackTrace();
+            DBManager.rollback(con);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+    }
+
+
+    @Override
+    public void removeCruiseFromDb(int id) throws DBException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            stmt = con.prepareStatement(Querys.SQL_DELETE_CRUISE_BY_ID);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+        } finally {
+            DBManager.close(con, stmt, rs);
+        }
     }
 
 
@@ -182,6 +265,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
         cruise.setCapacity(rs.getInt(Fields.CRUISE_CAPACITY));
         cruise.setStartOfCruise(rs.getTimestamp(Fields.CRUISE_START_OF_CRUISE));
         cruise.setDuration(rs.getInt(Fields.CRUISE_DURATION));
+        cruise.setStatus(rs.getString(Fields.CRUISE_STATUS));
 
         return cruise;
     }

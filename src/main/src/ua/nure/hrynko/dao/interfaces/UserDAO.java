@@ -1,6 +1,6 @@
 package ua.nure.hrynko.dao.interfaces;
 
-import ua.nure.hrynko.dto.User;
+import ua.nure.hrynko.models.User;
 import ua.nure.hrynko.exception.DBException;
 
 import java.sql.Connection;
@@ -34,4 +34,5 @@ public interface UserDAO {
 
     User extractUser(ResultSet rs) throws SQLException;
 
+    void updateUserToDb(int id, String firstName, String lastName, String email, String phone) throws DBException;
 }

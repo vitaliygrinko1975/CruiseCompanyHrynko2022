@@ -4,7 +4,7 @@
 <%@ page import="java.util.*" %>
 <html>
 <head>
-    <link href='./style/style2.css' rel='stylesheet' type='text/css'>
+    <link href='style/style2.css' rel='stylesheet' type='text/css'>
 </head>
 <fmt:setLocale value="${local}"/>
 <fmt:setBundle basename="localization.local" var="loc"/>
@@ -17,15 +17,13 @@
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
 <fmt:message bundle="${loc}" key="local.start_of_cruise" var="start_of_cruise"/>
 <fmt:message bundle="${loc}" key="local.cruise_duration" var="cruise_duration"/>
-<fmt:message bundle="${loc}" key="local.add_cruise" var="add_cruise"/>
-<fmt:message bundle="${loc}" key="local.tariffs_name" var="tariffs_name"/>
 <fmt:message bundle="${loc}" key="local.description" var="description"/>
 <fmt:message bundle="${loc}" key="local.price" var="price"/>
-<fmt:message bundle="${loc}" key="local.services_id" var="services_id"/>
 <fmt:message bundle="${loc}" key="local.remove" var="remove"/>
 <fmt:message bundle="${loc}" key="local.update" var="update"/>
 <fmt:message bundle="${loc}" key="local.users" var="users"/>
 <fmt:message bundle="${loc}" key="local.orders" var="orders"/>
+<fmt:message bundle="${loc}" key="local.add_cruise" var="add_cruise"/>
 <body>
 <ul>
     <li><a href="controller?command=adminPage">${users}</a></li>
@@ -62,15 +60,15 @@
                 <td>${cruise.duration}</td>
                 <td>
                     <form method="post" action="controller">
-                        <input type="hidden" name="command" value="adminPageTariffsRemoveTariff"/>
-                        <button type="submit" name="removeTariffButt" value="${tariff.id}"
+                        <input type="hidden" name="command" value="adminPageCruiseRemoveCruise"/>
+                        <button type="submit" name="cruiseIdForRemoveCruiseButt" value="${cruise.id}"
                                 class="btn btn-primary btn-block btn-large">${remove}</button>
                     </form>
                 </td>
                 <td>
                     <form method="get" action="controller">
-                        <input type="hidden" name="command" value="adminGoToPageForUpdatingTariff"/>
-                        <button type="submit" name="tariffIdForUpdateButt" value="${tariff.id}"
+                        <input type="hidden" name="command" value="adminGoToPageForUpdatingCruise"/>
+                        <button type="submit" name="cruiseIdForUpdateCruiseButt" value="${cruise.id}"
                                 class="btn btn-primary btn-block btn-large">${update}</button>
                     </form>
                 </td>
@@ -78,7 +76,7 @@
         </c:forEach>
     </table>
     <div align='center' style="display: inline-block;">
-        <a href="controller?command=adminGoToPageForAddingTariff">
+        <a href="controller?command=adminGoToPageForAddingCruise">
             <button class="btn btn-primary btn-block btn-large">${add_cruise}</button>
         </a>
     </div>

@@ -2,9 +2,8 @@ package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
-import ua.nure.hrynko.dao.MySqlOrderDAO;
 import ua.nure.hrynko.dao.MySqlOrderViewDAO;
-import ua.nure.hrynko.dto.OrderView;
+import ua.nure.hrynko.models.OrderView;
 import ua.nure.hrynko.exception.AppException;
 
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package ua.nure.hrynko.dto;
+package ua.nure.hrynko.models;
 
 import java.util.Objects;
 

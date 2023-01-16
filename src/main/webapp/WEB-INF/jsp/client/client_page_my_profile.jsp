@@ -1,4 +1,4 @@
-<%--@elvariable id="user" type="ua.nure.hrynko.dto.User"--%>
+<%--@elvariable id="user" type="ua.nure.hrynko.models.User"--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -33,7 +33,6 @@
 <fmt:message bundle="${loc}" key="local.email" var="email"/>
 <fmt:message bundle="${loc}" key="local.phone" var="phone"/>
 <fmt:message bundle="${loc}" key="local.blocked" var="blocked"/>
-<fmt:message bundle="${loc}" key="local.role_id" var="role_id"/>
 <fmt:message bundle="${loc}" key="local.accounts_id" var="accounts_id"/>
 <fmt:message bundle="${loc}" key="local.update" var="update"/>
 <fmt:message bundle="${loc}" key="local.balance_recharge" var="balance_recharge"/>
@@ -61,24 +60,24 @@
     </c:if>
 </div>
 
-<div align='right'>
-<div style="display: inline-block; padding-right: 50px;">
-    <h3> Загрузите данные </h3>
-    <form align='center' action="upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file"/>
-        <button class="btn btn-primary btn-block btn-large">Загрузить</button>
-    </form>
-</div>
-</div>
+<%--<div align='right'>--%>
+<%--<div style="display: inline-block; padding-right: 50px;">--%>
+<%--    <h3> Загрузите данные </h3>--%>
+<%--    <form align='center' action="upload" method="post" enctype="multipart/form-data">--%>
+<%--        <input type="file" name="file"/>--%>
+<%--        <button class="btn btn-primary btn-block btn-large">Загрузить</button>--%>
+<%--    </form>--%>
+<%--</div>--%>
+<%--</div>--%>
     <div class='mydiv'>
         <h1 align='center'>${update}</h1>
         <form method='post' action="controller">
-            <input type="hidden" name="command" value="adminUpdatingPageUpdateUser"/>
+            <input type="hidden" name="command" value="clientUpdatingPageUpdateYourProfile"/>
             ${first_name}: <input type='text' name='updateFirstNameUser' value=${user.firstName}>
             ${last_name}: <input type='text' name='updateLastNameUser' value=${user.lastName}>
             ${email}: <input type='email' name='updateEmailUser' value=${user.email}>
             ${phone}: <input type='text' pattern="^[+3]\d{12,12}$" title="В формате +3ххххххххххх" name='updatePhoneUser' value=${user.phone}>
-            <button type='submit' name='userForUpdateButt' value="${user.id}" class='btn btn-primary btn-block btn-large'>
+            <button type='submit' name='userIdForUpdateButt' value="${user.id}" class='btn btn-primary btn-block btn-large'>
                 ${update}
             </button>
         </form>

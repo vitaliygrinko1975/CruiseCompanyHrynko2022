@@ -22,6 +22,7 @@
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
 <fmt:message bundle="${loc}" key="local.start_of_cruise" var="start_of_cruise"/>
 <fmt:message bundle="${loc}" key="local.cruise_duration" var="cruise_duration"/>
+<fmt:message bundle="${loc}" key="local.status_of_cruise" var="status_of_cruise"/>
 <fmt:message bundle="${loc}" key="local.add_cruise" var="add_cruise"/>
 <fmt:message bundle="${loc}" key="local.description" var="description"/>
 <fmt:message bundle="${loc}" key="local.price" var="price"/>
@@ -51,21 +52,21 @@
                 <td>${last_name}</td>
                 <td>${email}</td>
                 <td>${description}</td>
+                <td>${status_of_cruise}</td>
                 <td>${status}</td>
             </tr>
             <%--@elvariable id="allItemOfOrdersViewWithLimit" type="java.util.List"--%>
             <c:forEach var="ordersView" items="${allItemOfOrdersViewWithLimit}">
-                <%--                <c:set var="k" value="${k+1}"/>--%>
                 <tr>
-                        <%--                    <td><c:out value="${k}"/></td>--%>
                             <td>${ordersView.id}</td>
                             <td>${ordersView.usersFirstName}</td>
                             <td>${ordersView.usersLastName}</td>
                             <td>${ordersView.usersEmail}</td>
                             <td>${ordersView.cruisesDescription}</td>
+                            <td>${ordersView.statusOfCruises}</td>
                             <td>${ordersView.status}</td>
                     <td>
-                        <c:if test="${ordersView.status  ne 'Оплачено'}">
+                        <c:if test="${ordersView.status  ne 'Оплачено'and ordersView.statusOfCruises eq 'Не начался' }">
                         <form method="post" action="controller">
                             <input type="hidden" name="command" value="pageAdminChangeStatusWithWithdrawalFromDeposit"/>
                             <input type="hidden" name="status" value="${ordersView.status}"/>

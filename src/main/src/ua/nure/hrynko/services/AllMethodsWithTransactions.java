@@ -6,9 +6,9 @@ import ua.nure.hrynko.dao.MySqlAccountDAO;
 import ua.nure.hrynko.dao.MySqlCruiseDAO;
 import ua.nure.hrynko.dao.MySqlUserDAO;
 import ua.nure.hrynko.dao.MySqlOrderDAO;
-import ua.nure.hrynko.dto.Account;
-import ua.nure.hrynko.dto.Cruise;
-import ua.nure.hrynko.dto.User;
+import ua.nure.hrynko.models.Account;
+import ua.nure.hrynko.models.Cruise;
+import ua.nure.hrynko.models.User;
 import ua.nure.hrynko.exception.DBException;
 
 import java.sql.Connection;
@@ -39,11 +39,11 @@ public class AllMethodsWithTransactions {
                 depositAmount += item.getKey().getPrice() * item.getValue();
                 for (int i = 0; i < item.getValue(); i++) {
                     int cruiseId = item.getKey().getId();
-                    orderDAO.addItemToOrdersDb(con, userId, cruiseId, "не оплачено");
+                    orderDAO.addItemToOrdersDb(con, userId, cruiseId, "Не оплачено");
                     Cruise currentCruise = cruiseDAO.findCruiseById(con, cruiseId);
                     int newCapacity = currentCruise.getCapacity() - 1;
                     currentCruise.setCapacity(newCapacity);
-                    cruiseDAO.addCruiseToCruisesDb(con, currentCruise);
+                    cruiseDAO.updateCruisesDb(con, currentCruise);
                 }
             }
             con.commit();

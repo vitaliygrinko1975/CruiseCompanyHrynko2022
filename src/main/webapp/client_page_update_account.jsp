@@ -1,4 +1,4 @@
-<%--@elvariable id="user" type="ua.nure.hrynko.dto.User"--%>
+<%--@elvariable id="user" type="ua.nure.hrynko.models.User"--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -52,7 +52,7 @@
     <form method='post' action="controller">
         <input type="hidden" name="command" value="clientUpdatingPageUpdateAccount"/>
         ${replenish_this_amount}  ${depositAmount}:<input type='text' pattern="^[0-9]*[.]?[0-9]+$" title="Только
-        цифры и . для чисел с плавающей точкой" name='increaseTheBalanceBy' required='required'/>
+        цифры и . для чисел с плавающей точкой" name='increaseTheBalanceBy' value=${depositAmount}>
         <input type="hidden" name='accountForUpdateButt' value=${user.accountsId}>
         <button type="submit" class="btn btn-primary btn-block btn-large">${replenish}</button>
     </form>

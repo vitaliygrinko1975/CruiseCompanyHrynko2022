@@ -2,7 +2,7 @@ package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
-import ua.nure.hrynko.dto.Cruise;
+import ua.nure.hrynko.models.Cruise;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
 

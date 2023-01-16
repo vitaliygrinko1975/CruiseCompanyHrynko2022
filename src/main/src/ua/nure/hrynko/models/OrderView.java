@@ -1,4 +1,4 @@
-package ua.nure.hrynko.dto;
+package ua.nure.hrynko.models;
 
 
 import java.util.Objects;
@@ -15,8 +15,9 @@ public class OrderView extends Entity {
 
     private String cruisesDescription;
 
-    private String status;
+    private String statusOfCruises;
 
+    private String status;
 
     public String getUsersFirstName() {
         return usersFirstName;
@@ -50,7 +51,12 @@ public class OrderView extends Entity {
         this.cruisesDescription = cruisesDescription;
     }
 
-
+    public String getStatusOfCruises() {
+        return statusOfCruises;
+    }
+    public void setStatusOfCruises(String statusOfCruises) {
+        this.statusOfCruises = statusOfCruises;
+    }
     public String getStatus() {
         return status;
     }
@@ -58,20 +64,18 @@ public class OrderView extends Entity {
     public void setStatus(String status) {
         this.status = status;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof OrderView)) return false;
         OrderView orderView = (OrderView) o;
-        return Objects.equals(usersFirstName, orderView.usersFirstName) && Objects.equals(usersLastName, orderView.usersLastName) && Objects.equals(usersEmail, orderView.usersEmail) && Objects.equals(cruisesDescription, orderView.cruisesDescription) && Objects.equals(status, orderView.status);
+        return usersFirstName.equals(orderView.usersFirstName) && usersLastName.equals(orderView.usersLastName) && usersEmail.equals(orderView.usersEmail) && cruisesDescription.equals(orderView.cruisesDescription) && statusOfCruises.equals(orderView.statusOfCruises) && status.equals(orderView.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(usersFirstName, usersLastName, usersEmail, cruisesDescription, status);
+        return Objects.hash(usersFirstName, usersLastName, usersEmail, cruisesDescription, statusOfCruises, status);
     }
-
 
     @Override
     public String toString() {
@@ -79,9 +83,11 @@ public class OrderView extends Entity {
                 "usersFirstName='" + usersFirstName + '\'' +
                 ", usersLastName='" + usersLastName + '\'' +
                 ", usersEmail='" + usersEmail + '\'' +
-                ", usersDescription='" + cruisesDescription + '\'' +
+                ", cruisesDescription='" + cruisesDescription + '\'' +
+                ", statusOfCruises='" + statusOfCruises + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
+
 }
 

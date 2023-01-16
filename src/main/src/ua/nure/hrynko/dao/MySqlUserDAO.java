@@ -7,7 +7,7 @@ import ua.nure.hrynko.Fields;
 import ua.nure.hrynko.Querys;
 
 import ua.nure.hrynko.dao.interfaces.UserDAO;
-import ua.nure.hrynko.dto.User;
+import ua.nure.hrynko.models.User;
 import ua.nure.hrynko.exception.DBException;
 import ua.nure.hrynko.exception.Messages;
 
@@ -236,6 +236,31 @@ public class MySqlUserDAO implements UserDAO {
             DBManager.rollback(con);
         } finally {
             DBManager.close(con, stmt, rs);
+        }
+    }
+    @Override
+    public void updateUserToDb(int id, String firstName, String lastName, String email,
+                               String phone) throws DBException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_UPDATE_FOUR_PARAMETERS_OF_USERS_BY_ID);
+            pstmt.setString(1, firstName);
+            pstmt.setString(2, lastName);
+            pstmt.setString(3, email);
+            pstmt.setString(4, phone);
+            pstmt.setInt(5, id);
+            pstmt.executeUpdate();
+            con.commit();
+            LOG.trace("update to SQL seccesful--> ");
+        } catch (SQLException ex) {
+            LOG.trace(ERROR);
+            ex.printStackTrace();
+            DBManager.rollback(con);
+        } finally {
+            DBManager.close(con, pstmt, rs);
         }
     }
 

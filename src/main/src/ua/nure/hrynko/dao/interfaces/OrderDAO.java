@@ -1,6 +1,6 @@
 package ua.nure.hrynko.dao.interfaces;
 
-import ua.nure.hrynko.dto.Order;
+import ua.nure.hrynko.models.Order;
 import ua.nure.hrynko.exception.DBException;
 
 import java.sql.Connection;

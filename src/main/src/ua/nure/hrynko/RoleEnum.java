@@ -1,6 +1,6 @@
 package ua.nure.hrynko;
 
-import ua.nure.hrynko.dto.User;
+import ua.nure.hrynko.models.User;
 
 /**
  * Role enum.

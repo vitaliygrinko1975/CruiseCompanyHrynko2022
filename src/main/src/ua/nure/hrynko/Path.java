@@ -25,12 +25,12 @@ public final class Path {
 
 	// admin pages
 	public static final String PAGE_ADMIN = "/WEB-INF/jsp/admin/admin_page.jsp";
-	public static final String PAGE_ADMIN_CRUISES = "/WEB-INF/jsp/admin/admin_page_cruises.jsp";
+	public static final String PAGE_ADMIN_CRUISES = "admin_page_cruises.jsp";
 	public static final String PAGE_ADMIN_ORDERS = "admin_page_orders.jsp";
 	public static final String ADMIN_PAGE_UPDATE_USER = "/WEB-INF/jsp/admin/admin_page_update_user.jsp";
 	public static final String ADMIN_PAGE_ADD_USER = "/WEB-INF/jsp/admin/admin_page_add_user.jsp";
-	public static final String ADMIN_PAGE_ADD_TARIFF = "/WEB-INF/jsp/admin/admin_page_add_tariff.jsp";
-	public static final String ADMIN_PAGE_UPDATE_TARIFF = "/WEB-INF/jsp/admin/admin_page_update_tariff.jsp";
+	public static final String ADMIN_PAGE_ADD_CRUISE = "/WEB-INF/jsp/admin/admin_page_add_cruise.jsp";
+	public static final String ADMIN_PAGE_UPDATE_CRUISE = "/WEB-INF/jsp/admin/admin_page_update_cruise.jsp";
 
 
 	// commands

@@ -1,6 +1,9 @@
-<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
-<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="mytaglib" prefix="mt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.*" %>
 <html>
 <head>
     <link href="./style/style2.css" rel="stylesheet" type="text/css">
@@ -21,8 +24,7 @@
 <fmt:message bundle="${loc}" key="local.last_name" var="last_name"/>
 <fmt:message bundle="${loc}" key="local.email" var="email"/>
 <fmt:message bundle="${loc}" key="local.phone" var="phone"/>
-<fmt:message bundle="${loc}" key="local.blocked" var="blocked"/>
-<fmt:message bundle="${loc}" key="local.role_id" var="role_id"/>
+<fmt:message bundle="${loc}" key="local.role" var="role"/>
 <fmt:message bundle="${loc}" key="local.accounts_id" var="accounts_id"/>
 <body>
 <ul>
@@ -31,7 +33,7 @@
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
 </ul>
-<div align='left'>
+<div align='right'>
     <%--===========================================================================
     Type user name if the user object is presented in the current session.
     ===========================================================================--%>
@@ -43,6 +45,10 @@
         <c:out value="(${userRole.name})"/>
     </c:if>
 </div>
+<div align='right'>
+<mt:myTag/>
+</div>
+
 <h1 align='center'>${admin_page}</h1>
 <div align='center'>
     <table border='1'>
@@ -53,16 +59,22 @@
             <td>${last_name}</td>
             <td>${email}</td>
             <td>${phone}</td>
-            <td>${role_id}</td>
+            <td>${role}</td>
         </tr>
         <c:set var="k" value="0"/>
         <c:forEach var="user" items="${userList}">
             <tr>
+                <td>${user.id}</td>
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
                 <td>${user.email}</td>
                 <td>${user.phone}</td>
-                <td>${user.roleId}</td>
+                <c:if test="${user.roleId eq '1'}">
+                <td>admin</td>
+                </c:if>
+                <c:if test="${user.roleId eq '2'}">
+                    <td>client</td>
+                </c:if>
                 <td>
                     <form method="post" action="controller">
                         <input type="hidden" name="command" value="adminPageRemoveUser"/>

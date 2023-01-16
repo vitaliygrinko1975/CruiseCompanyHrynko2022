@@ -4,15 +4,15 @@ import org.apache.log4j.Logger;
 import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.Fields;
 import ua.nure.hrynko.Querys;
-import ua.nure.hrynko.dao.interfaces.ServicesDAO;
-import ua.nure.hrynko.dto.Ship;
+import ua.nure.hrynko.dao.interfaces.ShipsDAO;
+import ua.nure.hrynko.models.Ship;
 import ua.nure.hrynko.exception.DBException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySqlShipDAO implements ServicesDAO {
+public class MySqlShipDAO implements ShipsDAO {
     private static final Logger LOG = Logger.getLogger(MySqlShipDAO.class);
 
     private static MySqlShipDAO instance;

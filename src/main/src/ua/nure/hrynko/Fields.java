@@ -30,7 +30,7 @@ public final class Fields {
     public static final String CRUISE_CAPACITY = "capacity";
     public static final String CRUISE_START_OF_CRUISE = "start_of_cruise";
     public static final String CRUISE_DURATION = "duration";
-
+    public static final String CRUISE_STATUS = "status";
     //accounts
     public static final String ACCOUNTS_BALANCE = "balance";
 
@@ -39,4 +39,7 @@ public final class Fields {
     public static final String CRUISES_ID = "cruises_id";
     public static final String STATUS = "status";
 
+// orders view
+
+    public static final String STATUS_OF_CRUISES = "status_of_cruises";
 }

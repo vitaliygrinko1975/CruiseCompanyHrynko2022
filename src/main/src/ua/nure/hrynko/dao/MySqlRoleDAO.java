@@ -6,7 +6,7 @@ import ua.nure.hrynko.Fields;
 import ua.nure.hrynko.Querys;
 import ua.nure.hrynko.dao.interfaces.RoleDAO;
 
-import ua.nure.hrynko.dto.Role;
+import ua.nure.hrynko.models.Role;
 
 import ua.nure.hrynko.exception.DBException;
 

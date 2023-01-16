@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
 
 import ua.nure.hrynko.dao.interfaces.UserDAO;
-import ua.nure.hrynko.dto.User;
+import ua.nure.hrynko.models.User;
 import ua.nure.hrynko.exception.AppException;
 
 import javax.servlet.ServletException;

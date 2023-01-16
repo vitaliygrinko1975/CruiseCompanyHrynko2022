@@ -1,6 +1,6 @@
 package ua.nure.hrynko.dao.interfaces;
 
-import ua.nure.hrynko.dto.Role;
+import ua.nure.hrynko.models.Role;
 
 import ua.nure.hrynko.exception.DBException;
 
