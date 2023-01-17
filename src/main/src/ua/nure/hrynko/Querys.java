@@ -48,8 +48,10 @@ public class Querys {
             "email=?,phone=?,roles_id=?, accounts_id=? WHERE id=?";
     public static final String SQL_UPDATE_FOUR_PARAMETERS_OF_USERS_BY_ID = "UPDATE users SET first_name=?, last_name=?," +
             "email=?,phone=? WHERE id=?";
-    public static final String SQL_UPDATE_CRUISE_BY_ID = "UPDATE cruises SET name=?, description=?, price=?, ships_id=?," +
-            "capacity=?,start_of_cruise=?,duration=?, status=? WHERE id=?";
+    public static final String SQL_UPDATE_CRUISE_BY_ID_EIGHT = "UPDATE cruises SET name=?, description=?, price=?, ships_id=?," +
+            "capacity=?,start_of_cruise=?,duration=? WHERE id=?";
+    public static final String SQL_UPDATE_CRUISE_BY_ID_NINE = "UPDATE cruises SET name=?, description=?, price=?, ships_id=?," +
+            "capacity=?,start_of_cruise=?,duration=?,status=? WHERE id=?";
     public static final String SQL_UPDATE_ORDERS_BY_OBJECT_OF_ORDERS = "UPDATE orders" +
             " SET users_id=?,cruises_id=?,status=? WHERE id=?";
     public static final String SQL_UPDATE_ORDERS_BY_ID = "UPDATE orders" +

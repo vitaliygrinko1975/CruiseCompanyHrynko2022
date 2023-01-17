@@ -79,6 +79,7 @@
     <div class='mydiv'>
         <h1 align='center'>${messageAboutPay} </h1>
         <h1 align='center'>${messageAboutUpdate} </h1>
+        <h1 align='center'>${messageAboutDelete} </h1>
     </div>
 </c:if>
 </body>

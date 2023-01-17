@@ -1,9 +1,11 @@
 package ua.nure.hrynko.command;
+
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.dao.interfaces.CruiseDAO;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.models.Cruise;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,43 +13,49 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-public class AdminUpdatingPageUpdateCruiseCommand extends Command {
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
+
+public class AdminAddingPageAddCruiseCommand extends Command {
 
     private static final long serialVersionUID = -3071536593627692473L;
 
-    private static final Logger LOG = Logger.getLogger(AdminUpdatingPageUpdateCruiseCommand.class);
+    private static final Logger LOG = Logger.getLogger(AdminAddingPageAddCruiseCommand.class);
 
-    private  final transient CruiseDAO cruiseDAO;
+    private  final transient CruiseDAO  cruiseDAO;
 
-    public AdminUpdatingPageUpdateCruiseCommand(CruiseDAO cruiseDAO) {
+    public AdminAddingPageAddCruiseCommand( CruiseDAO  cruiseDAO) {
         this.cruiseDAO = cruiseDAO;
     }
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, AppException {
-        LOG.debug("AdminUpdatingPageUpdateCruiseCommand starts");
+        LOG.debug("AdminAddingPageAddCruiseCommand starts");
         HttpSession session = request.getSession();
-
-        int id = Integer.parseInt(request.getParameter("cruiseIdForUpdateButt"));
-        LOG.trace("Request parameter: id --> " + id);
-        String name = request.getParameter("updateNameCruise");
+        String name = request.getParameter("addNameCruise");
         LOG.trace("Request parameter: name --> " + name);
-        String description =  request.getParameter("updateDescriptionCruise");
+
+        String description =  request.getParameter("addDescriptionCruise");
         LOG.trace("Request parameter: description --> " + description);
-        double price = Double.parseDouble(request.getParameter("updatePriceCruise"));
+
+        double price = parseDouble(request.getParameter("addPriceCruise"));
         LOG.trace("Request parameter: price --> " + price);
-        int shipId = Integer.parseInt(request.getParameter("updateShipIdCruise"));
-        LOG.trace("Request parameter: shipId --> " + shipId);
-        int capacity = Integer.parseInt(request.getParameter("updateCapacityCruise"));
+
+        int shipsId = parseInt(request.getParameter("addShipIdCruise"));
+        LOG.trace("Request parameter: shipsId --> " + shipsId);
+
+        int capacity = parseInt(request.getParameter("addCapacityCruise"));
         LOG.trace("Request parameter: capacity --> " + capacity);
-        String startOfCruise = request.getParameter("updateStartOfCruise");
+
+        String startOfCruise = request.getParameter("addStartOfCruise");
         LOG.trace("Request parameter: startOfCruise --> " + startOfCruise);
-        int duration = Integer.parseInt(request.getParameter("updateDurationCruise"));
+
+        int duration = parseInt(request.getParameter("addDurationCruise"));
         LOG.trace("Request parameter: duration --> " + duration);
 
-        cruiseDAO.updateCruiseDb(id,name,description,price,shipId,capacity,startOfCruise,duration);
-        LOG.trace("update cruise  by ID: --> " );
+        String status = "Не начался";
+
+        cruiseDAO.addToCruiseDb(name,description, price,shipsId,capacity,startOfCruise,duration,status);
 
         List<Cruise> allCruises = cruiseDAO.findAllCruises();
         LOG.trace("Found in DB: allCruises --> " + allCruises);
@@ -56,7 +64,12 @@ public class AdminUpdatingPageUpdateCruiseCommand extends Command {
         session.setAttribute("allCruises", allCruises);
         LOG.trace("Set session attribute: allCruises --> " + allCruises);
 
+        LOG.trace("add cruise: --> " );
+
+        LOG.debug("AdminAddingPageAddCruiseCommand finished");
+
         return Path.PAGE_ADMIN_CRUISES;
+
     }
 
 }

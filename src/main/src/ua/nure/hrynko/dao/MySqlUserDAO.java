@@ -210,7 +210,7 @@ public class MySqlUserDAO implements UserDAO {
 
     @Override
     public void updateUserToDb(int id, String login, String password, String firstName, String lastName, String email,
-                               String phone, boolean blocked, int roleId, int accountsId) throws DBException {
+                               String phone, int roleId, int accountsId) throws DBException {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Connection con = null;
@@ -223,10 +223,9 @@ public class MySqlUserDAO implements UserDAO {
             stmt.setString(4, lastName);
             stmt.setString(5, email);
             stmt.setString(6, phone);
-            stmt.setBoolean(7, blocked);
-            stmt.setInt(8, roleId);
-            stmt.setInt(9, accountsId);
-            stmt.setInt(10, id);
+            stmt.setInt(7, roleId);
+            stmt.setInt(8, accountsId);
+            stmt.setInt(9, id);
             stmt.executeUpdate();
             con.commit();
             LOG.trace("update to SQL seccesful--> ");

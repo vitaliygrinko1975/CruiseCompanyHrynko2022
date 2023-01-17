@@ -12,7 +12,6 @@ public final class Path {
 	public static final String PAGE_LOGIN = "/login.jsp";
 	public static final String PAGE_SIGN_UP = "/WEB-INF/jsp/client/sign_up_page.jsp";
 	public static final String PAGE_ERROR_PAGE = "error_page.jsp";
-	public static final String PAGE_SETTINGS = "/WEB-INF/jsp/settings.jsp";
 	public static final String PAGE_MESSAGE = "message.jsp";
 
 	// client pages

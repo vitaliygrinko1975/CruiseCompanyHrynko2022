@@ -13,9 +13,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
-import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class MySqlCruiseDAO implements CruiseDAO {
@@ -158,7 +156,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
 
         String stringStartOfCruise = formatter.format(cruise.getStartOfCruise());
 
-        pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID);
+        pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID_NINE);
         pstmt.setString(1, cruise.getName());
         pstmt.setString(2, cruise.getDescription());
         pstmt.setDouble(3, cruise.getPrice());
@@ -182,7 +180,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
         Connection con = null;
         try {
             con = DBManager.getInstance().getConnection();
-            pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID);
+            pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID_EIGHT);
             pstmt.setString(1, name);
             pstmt.setString(2, description);
             pstmt.setDouble(3, price);

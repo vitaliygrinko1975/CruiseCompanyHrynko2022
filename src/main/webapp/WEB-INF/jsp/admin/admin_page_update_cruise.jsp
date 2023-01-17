@@ -2,7 +2,7 @@
 <%--@elvariable id="cruise" type="ua.nure.hrynko.models.Cruise"--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.util.*" %>
 <%@page isELIgnored="false" %>
 <%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
@@ -54,6 +54,7 @@
         ${start_of_cruise}: <input type='date' name='updateStartOfCruise' placeholder="dd-mm-yyyy"
                                    value=${cruise.startOfCruise} min=<mt:myTag/> max="2030-12-31">
         ${cruise_duration}: <input type='text' name='updateDurationCruise' value=${cruise.duration}>
+
         <button type='submit' name='cruiseIdForUpdateButt' value="${cruise.id}" class='btn btn-primary btn-block btn-large'>
             ${update}
         </button>

@@ -63,7 +63,8 @@
       <param-name>admin</param-name>
       <param-value> adminPage listAdmin pageAdminCruises pageAdminOrders pageAdminChangeStatusWithWithdrawalFromDeposit
         adminPageCruiseRemoveCruise adminPageRemoveUser adminGoToPageForUpdatingCruise adminUpdatingPageUpdateCruise
-        adminGoToPageForAddingCruise adminAddingPageAddCruise adminGoToPageAddingUser adminUpdatingPageUpdateUser adminGoToPageAddingUser adminAddingPageAddUser
+        adminGoToPageForAddingCruise adminAddingPageAddCruise adminGoToUpdatingPage adminGoToPageAddingUser
+        adminUpdatingPageUpdateUser adminGoToPageAddingUser adminAddingPageAddUser
       </param-value>
     </init-param>
     <init-param>

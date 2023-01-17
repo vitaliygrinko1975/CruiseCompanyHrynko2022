@@ -25,7 +25,6 @@ public class CommandContainer {
 		commands.put("loginPage", new LoginPageCommand());
 		commands.put("signUpPage", new SignUpPageCommand());
 		commands.put("logout", new LogoutCommand());
-		commands.put("viewSettings", new ViewSettingsCommand());
 		commands.put("noCommand", new NoCommand());
 		commands.put("signUpUser", new SignUpCommand(MySqlUserDAO.getInstance(), MySqlAccountDAO.getInstance()));
 
@@ -42,16 +41,6 @@ public class CommandContainer {
 		commands.put("cruiseFindByStartDate", new ClientPageCruiseFindByStartDateCommand(MySqlCruiseDAO.getInstance()));
 		commands.put("cruiseFindByDuration", new ClientPageCruiseFindByDurationCommand(MySqlCruiseDAO.getInstance()));
 		commands.put("ClientPageGoToMyProfile", new ClientPageGoToMyProfileCommand());
-
-
-//		commands.put("clientPageSortedDownByName", new ClientPageSortedDownByNameCommand(MySqlTariffsDAO.getInstance(),
-//				MySqlUsersHasTariffsDAO.getInstance()));
-//		commands.put("clientPageSortedUpByName", new ClientPageSortedUpByNameCommand(MySqlTariffsDAO.getInstance(),
-//				MySqlUsersHasTariffsDAO.getInstance()));
-//		commands.put("clientPageSortedUpByPrice", new ClientPageSortedUpByPriceCommand(MySqlTariffsDAO.getInstance(),
-//				MySqlUsersHasTariffsDAO.getInstance()));
-//		commands.put("clientPageSortedDownByPrice", new ClientPageSortedDownByPriceCommand(MySqlTariffsDAO.getInstance(),
-//				MySqlUsersHasTariffsDAO.getInstance()));
 		commands.put("ClientPageGoToTopUpYourAccount",
 				new ClientPageGoToTopUpYourAccountCommand(MySqlUserDAO.getInstance(),MySqlAccountDAO.getInstance()));
 		commands.put("clientPageGoToUpdatingAccountPage", new ClientPageGoToUpdatingAccountPageCommand());
@@ -59,9 +48,6 @@ public class CommandContainer {
 				new ClientUpdatingPageUpdateAccountCommand(MySqlAccountDAO.getInstance()));
 		commands.put("clientUpdatingPageUpdateYourProfile",
 				new ClientUpdatingPageUpdateYourProfileCommand(MySqlUserDAO.getInstance()));
-//		commands.put("clientPageToPay",
-//				new ClientPageToPayCommand(MySqlUsersDAO.getInstance(),MySqlAccountsDAO.getInstance(),
-//						MySqlTariffsDAO.getInstance(), MySqlUsersHasTariffsDAO.getInstance()));
 
 		// admin commands
 		commands.put("adminPage", new AdminPageCommand(MySqlUserDAO.getInstance()));
@@ -75,21 +61,16 @@ public class CommandContainer {
 		commands.put("adminGoToPageForUpdatingCruise",
 				new AdminGoToPageForUpdatingCruiseCommand(MySqlCruiseDAO.getInstance()));
 		commands.put("adminUpdatingPageUpdateCruise", new AdminUpdatingPageUpdateCruiseCommand(
-				MySqlCruiseDAO.getInstance(), new Cruise()));
+				MySqlCruiseDAO.getInstance()));
 		commands.put("adminGoToPageForAddingCruise", new AdminGoToPageForAddingCruiseCommand());
 		commands.put("adminAddingPageAddCruise", new AdminAddingPageAddCruiseCommand(MySqlCruiseDAO.getInstance()));
-
-//		commands.put("adminPageRemoveUser", new AdminPageRemoveUserCommand(MySqlUsersDAO.getInstance(),
-//				MySqlAccountsDAO.getInstance()));
-//		commands.put("adminGoToUpdatingPage", new AdminGoToUpdatingPageCommand(MySqlUsersDAO.getInstance()));
-//		commands.put("adminUpdatingPageUpdateUser", new AdminUpdatingPageUpdateUserCommand(MySqlUsersDAO.getInstance()));
-//		commands.put("adminGoToPageAddingUser", new AdminGoToPageForAddingUserCommand());
-//		commands.put("adminAddingPageAddUser",
-//				new AdminAddingPageAddUserCommand(MySqlUsersDAO.getInstance(),MySqlAccountsDAO.getInstance()));
-//
-//		commands.put("adminUpdatingPageUpdateTariff", new AdminUpdatingPageUpdateTariffCommand(MySqlTariffsDAO.getInstance()));
-
-
+		commands.put("adminPageRemoveUser", new AdminPageRemoveUserCommand(MySqlUserDAO.getInstance(),
+				MySqlAccountDAO.getInstance()));
+		commands.put("adminGoToUpdatingPage", new AdminGoToUpdatingPageUserCommand(MySqlUserDAO.getInstance()));
+		commands.put("adminUpdatingPageUpdateUser", new AdminUpdatingPageUpdateUserCommand(MySqlUserDAO.getInstance()));
+		commands.put("adminGoToPageAddingUser", new AdminGoToPageForAddingUserCommand());
+		commands.put("adminAddingPageAddUser",
+				new AdminAddingPageAddUserCommand(MySqlUserDAO.getInstance(),MySqlAccountDAO.getInstance()));
 		LOG.debug("Command container was successfully initialized");
 		LOG.trace("Number of commands --> " + commands.size());
 	}

@@ -29,7 +29,7 @@ public interface UserDAO {
     void removeUserFromDb(Integer id) throws DBException;
 
     void updateUserToDb(int id, String login, String password, String firstName, String lastName, String email,
-                        String phone, boolean blocked, int roleId, int accountsId) throws DBException;
+                        String phone, int roleId, int accountsId) throws DBException;
     void updateUserToDb(User user) throws DBException;
 
     User extractUser(ResultSet rs) throws SQLException;
