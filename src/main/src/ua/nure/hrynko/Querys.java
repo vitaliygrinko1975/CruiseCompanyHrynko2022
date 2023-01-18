@@ -31,13 +31,19 @@ public class Querys {
 
     public static final String SQL_FIND_ALL_ITEM_ON_ORDERS_VIEW_WITH_LIMIT = "SELECT * FROM orders_view LIMIT ?,?";
 
+    public static final String SQL_FIND_ALL_ITEM_ON_ORDERS_VIEW_BY_USER_ID_WITH_LIMIT =
+            "SELECT * FROM orders_view WHERE users_id=? LIMIT ?,?";
+
+    public static final String SQL_FIND_ALL_ITEM_ON_ORDERS_VIEW_BY_USER_ID =
+            "SELECT * FROM orders_view WHERE users_id=?";
+
     public static final String SQL_FIND_ALL_ROLE = "SELECT * FROM roles";
 
     public static final String SQL_FIND_ALL_ACCOUNT = "SELECT * FROM accounts";
 
     public static final String SQL_FIND_ALL_CRUISES = "SELECT * FROM cruises";
 
-    public static final String SQL_FIND_ALL_SERVICES = "SELECT * FROM  services";
+    public static final String SQL_FIND_ALL_SHIPS = "SELECT * FROM  ships";
 
     public static final String SQL_FIND_ACCOUNT_BY_ID = "SELECT * FROM accounts WHERE id=?";
 

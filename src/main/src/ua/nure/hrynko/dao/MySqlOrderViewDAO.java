@@ -49,6 +49,31 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
         }
         return allItemOfOrderViewList;
     }
+    @Override
+    public List<OrderView> findAllIItemOfOrderViewByUserId(int userId) throws DBException {
+        List<OrderView> listAllIItemOfOrderViewByUserId = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_FIND_ALL_ITEM_ON_ORDERS_VIEW_BY_USER_ID);
+            pstmt.setInt(1, userId);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                listAllIItemOfOrderViewByUserId.add(extractOrdersView(rs));
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            LOG.error("cannot select all items orders view by userId", ex);
+            throw new DBException("cannot select all items orders view by userId", ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return listAllIItemOfOrderViewByUserId;
+    }
+
 
 
     @Override
@@ -76,6 +101,33 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
         }
         return listAllIItemOfOrderViewWithLimit;
     }
+
+    @Override
+    public List<OrderView> findAllIItemOfOrderViewByUserIdWithLimit(int id, int start, int total) throws DBException {
+        List<OrderView> listAllIItemOfOrderViewWithLimit = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_FIND_ALL_ITEM_ON_ORDERS_VIEW_BY_USER_ID_WITH_LIMIT);
+            pstmt.setInt(1, id);
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, total);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                listAllIItemOfOrderViewWithLimit.add(extractOrdersView(rs));
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            LOG.error("cannot select all items orders view with limit ", ex);
+            throw new DBException("cannot select all items orders view with limit", ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return listAllIItemOfOrderViewWithLimit;
+    }
     @Override
     public OrderView extractOrdersView(ResultSet rs) throws SQLException {
 
@@ -84,6 +136,7 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
         orderView.setUsersFirstName(rs.getString(Fields.USER_FIRST_NAME));
         orderView.setUsersLastName(rs.getString(Fields.USER_LAST_NAME));
         orderView.setUsersEmail(rs.getString(Fields.USER_EMAIL));
+//        orderView.setId(rs.getInt(Fields.USERS_ID));
         orderView.setCruisesDescription(rs.getString(Fields.CRUISE_DESCRIPTION));
         orderView.setStatusOfCruises(rs.getString(Fields.STATUS_OF_CRUISES));
         orderView.setStatus(rs.getString(Fields.STATUS));

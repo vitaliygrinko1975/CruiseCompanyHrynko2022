@@ -34,15 +34,15 @@ public class MySqlShipDAO implements ShipsDAO {
         try {
             con = DBManager.getInstance().getConnection();
             stmt = con.createStatement();
-            rs = stmt.executeQuery(Querys.SQL_FIND_ALL_SERVICES);
+            rs = stmt.executeQuery(Querys.SQL_FIND_ALL_SHIPS);
             while (rs.next()) {
                 allServicesList.add(extractShip(rs));
             }
             con.commit();
         } catch (SQLException ex) {
             DBManager.rollback(con);
-            LOG.error("cannot select all services", ex);
-            throw new DBException("cannot select all services", ex);
+            LOG.error("cannot select all ships", ex);
+            throw new DBException("cannot select all ships", ex);
         } finally {
             DBManager.close(con, stmt, rs);
         }
@@ -57,6 +57,7 @@ public class MySqlShipDAO implements ShipsDAO {
         ship.setId(rs.getInt(Fields.ENTITY_ID));
         ship.setName(rs.getString(Fields.SHIPS_NAME));
         ship.setDescription(rs.getString(Fields.SHIPS_DESCRIPTION));
+        ship.setCapacity(rs.getInt(Fields.SHIPS_CAPACITY));
 
         return ship;
 

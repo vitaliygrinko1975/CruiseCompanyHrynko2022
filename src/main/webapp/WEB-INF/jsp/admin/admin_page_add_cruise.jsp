@@ -26,7 +26,8 @@
 <fmt:message bundle="${loc}" key="local.ships_id" var="ships_id"/>
 <fmt:message bundle="${loc}" key="local.price" var="price"/>
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
-
+<fmt:message bundle="${loc}" key="local.users" var="users"/>
+<fmt:message bundle="${loc}" key="local.orders" var="orders"/>
 
 <body>
 <div align='center'>

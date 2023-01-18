@@ -37,7 +37,7 @@ public class ClientBasketConfirmOrderOfSelectedUnitsCommand extends Command {
 
         HashMap<Cruise, Integer> mapForBasket = (HashMap<Cruise, Integer>) session.getAttribute("mapForBasket");
 
-        int depositAmount = allMethodsWithTransactions.addBasketToUsersHasCruisesDbReturnDepositAmount(userId, mapForBasket);
+        int depositAmount = allMethodsWithTransactions.addBasketToOrdersDbReturnDepositAmount(userId, mapForBasket);
 
         session.setAttribute("depositAmount", depositAmount);
         LOG.trace("Set the session attribute: depositAmount --> " + depositAmount);

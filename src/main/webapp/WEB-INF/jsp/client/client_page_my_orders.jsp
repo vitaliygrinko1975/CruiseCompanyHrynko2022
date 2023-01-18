@@ -1,3 +1,4 @@
+<%--@elvariable id="user" type="ua.nure.hrynko.models.User"--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -32,15 +33,17 @@
 <fmt:message bundle="${loc}" key="local.first_name" var="first_name"/>
 <fmt:message bundle="${loc}" key="local.last_name" var="last_name"/>
 <fmt:message bundle="${loc}" key="local.email" var="email"/>
+<fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
+
+
 
 <body>
 <ul>
-    <li><a href="controller?command=adminPage">${users}</a></li>
-    <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
+    <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
 </ul>
-    <h1 align='center'>${admin_page}</h1>
+<h1 align='center'>${client_page}</h1>
 
     <div align='center'>
 
@@ -65,23 +68,13 @@
                             <td>${ordersView.cruisesDescription}</td>
                             <td>${ordersView.statusOfCruises}</td>
                             <td>${ordersView.status}</td>
-                    <td>
-                        <c:if test="${ordersView.status  ne 'Оплачено'and ordersView.statusOfCruises eq 'Не начался'and
-                        ordersView.status  ne 'Нет свободных мест'}">
-                        <form method="post" action="controller">
-                            <input type="hidden" name="command" value="pageAdminChangeStatusWithWithdrawalFromDeposit"/>
-                            <input type="hidden" name="status" value="${ordersView.status}"/>
-                            <button type="submit" name="ordersViewIdForUpdateButt" value="${ordersView.id}"
-                                    class="btn btn-primary btn-block btn-large">${pay_from_balance}</button>
-                        </form>
-                        </c:if>
-                    </td>
                 </tr>
             </c:forEach>
         </table>
         <div class="pagination">
+            <%--@elvariable id="countAllCruises" type="java"--%>
             <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
-                <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>
+                <a href="controller?command=clientPageMyOrders&userId=${user.id}&page=${i}">${i}</a>
             </c:forEach>
         </div>
     </div>

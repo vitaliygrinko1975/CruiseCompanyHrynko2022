@@ -27,6 +27,7 @@
 <fmt:message bundle="${loc}" key="local.cruise_duration" var="cruise_duration"/>
 <fmt:message bundle="${loc}" key="local.deposit" var="deposit"/>
 <fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
+<fmt:message bundle="${loc}" key="local.status" var="status"/>
 <body>
 <ul>
     <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
@@ -72,6 +73,7 @@
             <td>${availability}</td>
             <td>${start_of_cruise}</td>
             <td>${cruise_duration}</td>
+            <td>${status}</td>
         </tr>
         <c:set var="k" value="0"/>
         <%--@elvariable id="allCruises" type="java.util.List"--%>
@@ -85,13 +87,16 @@
                 <td>${cruise.capacity}</td>
                 <td>${cruise.startOfCruise}</td>
                 <td>${cruise.duration}</td>
+                <td>${cruise.status}</td>
                 <td>
+                    <c:if test="${cruise.capacity ne '0' and cruise.status eq 'Не начался'}">
                     <form method="get" action="controller">
                         <input type="hidden" name="command" value="AddToBasket"/>
                         <input type="hidden" name="userIdForBasketUsersHasCruisesButt" value=${user.id}>
                         <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.id}"
                                 class="btn btn-primary btn-block btn-large">${Add_to_cart}
                     </form>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>

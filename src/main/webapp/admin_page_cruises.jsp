@@ -24,8 +24,11 @@
 <fmt:message bundle="${loc}" key="local.users" var="users"/>
 <fmt:message bundle="${loc}" key="local.orders" var="orders"/>
 <fmt:message bundle="${loc}" key="local.add_cruise" var="add_cruise"/>
+<fmt:message bundle="${loc}" key="local.ships" var="ships"/>
+<fmt:message bundle="${loc}" key="local.status" var="status"/>
 <body>
 <ul>
+    <li><a href="controller?command=pageAdminShips">${ships}</a></li>
     <li><a href="controller?command=adminPage">${users}</a></li>
     <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
 
@@ -45,6 +48,7 @@
             <td>${availability}</td>
             <td>${start_of_cruise}</td>
             <td>${cruise_duration}</td>
+            <td>${status}</td>
         </tr>
         <c:set var="k" value="0"/>
         <%--@elvariable id="allCruises" type="java.util.List"--%>
@@ -58,6 +62,7 @@
                 <td>${cruise.capacity}</td>
                 <td>${cruise.startOfCruise}</td>
                 <td>${cruise.duration}</td>
+                <td>${cruise.status}</td>
                 <td>
                     <form method="post" action="controller">
                         <input type="hidden" name="command" value="adminPageCruiseRemoveCruise"/>

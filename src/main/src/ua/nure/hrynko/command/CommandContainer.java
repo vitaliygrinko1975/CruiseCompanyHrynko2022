@@ -48,6 +48,8 @@ public class CommandContainer {
 				new ClientUpdatingPageUpdateAccountCommand(MySqlAccountDAO.getInstance()));
 		commands.put("clientUpdatingPageUpdateYourProfile",
 				new ClientUpdatingPageUpdateYourProfileCommand(MySqlUserDAO.getInstance()));
+		commands.put("clientPageMyOrders", new ClientPageMyOrdersCommand(MySqlOrderViewDAO.getInstance()));
+
 
 		// admin commands
 		commands.put("adminPage", new AdminPageCommand(MySqlUserDAO.getInstance()));
@@ -71,6 +73,8 @@ public class CommandContainer {
 		commands.put("adminGoToPageAddingUser", new AdminGoToPageForAddingUserCommand());
 		commands.put("adminAddingPageAddUser",
 				new AdminAddingPageAddUserCommand(MySqlUserDAO.getInstance(),MySqlAccountDAO.getInstance()));
+
+		commands.put("pageAdminShips", new AdminPageShipsCommand(MySqlShipDAO.getInstance()));
 		LOG.debug("Command container was successfully initialized");
 		LOG.trace("Number of commands --> " + commands.size());
 	}

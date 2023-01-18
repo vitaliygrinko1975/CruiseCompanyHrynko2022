@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.dao.MySqlOrderDAO;
 import ua.nure.hrynko.dao.MySqlOrderViewDAO;
-import ua.nure.hrynko.models.Order;
 import ua.nure.hrynko.models.OrderView;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
@@ -45,23 +44,14 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
                           HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("AdminPageChangeStatusWithWithdrawalFromDepositCommand starts");
         HttpSession session = request.getSession();
-        int ordersViewIdForUpdate = Integer.parseInt(request.getParameter("ordersViewIdForUpdateButt"));
-        LOG.trace("Request parameter: usersHasCruisesIdForUpdateButt --> " + ordersViewIdForUpdate);
+        int orderIdForUpdate = Integer.parseInt(request.getParameter("ordersViewIdForUpdateButt"));
+        LOG.trace("Request parameter: ordersViewIdForUpdateButt --> " + orderIdForUpdate);
         String status = request.getParameter("status");
         LOG.trace("Request parameter: status --> " + status);
         int numberPage = (int) session.getAttribute("numberPage");
-        LOG.trace("Get session attribute: pageOrder --> " + numberPage);
+        LOG.trace("Get session attribute: numberPage --> " + numberPage);
 
-        Order orderForUpdate= orderDAO.findOrderById(ordersViewIdForUpdate);
-
-        int usersIdForWithdrawalFromDeposit = orderForUpdate.getUserId();
-        LOG.trace("UsersIdForUpdate --> " + usersIdForWithdrawalFromDeposit);
-
-        int cruiseId = orderForUpdate.getCruiseId();
-        LOG.trace("CruiseId --> " + cruiseId);
-
-        allMethodsWithTransactions.changeStatusWithWithdrawalFromDeposit(usersIdForWithdrawalFromDeposit,
-               cruiseId,ordersViewIdForUpdate,status);
+        allMethodsWithTransactions.changeStatusWithWithdrawalFromDeposit(orderIdForUpdate,status);
 
         //get all item orders_view from DB to calculate the number of pagination pages
          List<OrderView> allOrdersViewList = orderViewDAO.findAllItemOfOrdersView();
@@ -80,7 +70,7 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
 
     // put cruises items list to the request
         session.setAttribute("allItemOfOrdersViewWithLimit",allItemOfOrdersViewWithLimit);
-        LOG.trace("Set the session attribute: allOrdersView --> " + allItemOfOrdersViewWithLimit);
+        LOG.trace("Set the session attribute: allItemOfOrdersViewWithLimit --> " + allItemOfOrdersViewWithLimit);
 
 
         LOG.debug("AdminPageChangeStatusWithWithdrawalFromDepositCommand finished");

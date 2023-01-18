@@ -13,6 +13,8 @@ public class OrderView extends Entity {
 
     private String usersEmail;
 
+    private int usersId;
+
     private String cruisesDescription;
 
     private String statusOfCruises;
@@ -42,7 +44,13 @@ public class OrderView extends Entity {
     public void setUsersEmail(String usersEmail) {
         this.usersEmail = usersEmail;
     }
+    public int getUsersId() {
+        return usersId;
+    }
 
+    public void setUsersId(int usersId) {
+        this.usersId = usersId;
+    }
     public String getCruisesDescription() {
         return cruisesDescription;
     }
@@ -64,17 +72,18 @@ public class OrderView extends Entity {
     public void setStatus(String status) {
         this.status = status;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof OrderView)) return false;
         OrderView orderView = (OrderView) o;
-        return usersFirstName.equals(orderView.usersFirstName) && usersLastName.equals(orderView.usersLastName) && usersEmail.equals(orderView.usersEmail) && cruisesDescription.equals(orderView.cruisesDescription) && statusOfCruises.equals(orderView.statusOfCruises) && status.equals(orderView.status);
+        return usersId == orderView.usersId && usersFirstName.equals(orderView.usersFirstName) && usersLastName.equals(orderView.usersLastName) && usersEmail.equals(orderView.usersEmail) && cruisesDescription.equals(orderView.cruisesDescription) && statusOfCruises.equals(orderView.statusOfCruises) && status.equals(orderView.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(usersFirstName, usersLastName, usersEmail, cruisesDescription, statusOfCruises, status);
+        return Objects.hash(usersFirstName, usersLastName, usersEmail, usersId, cruisesDescription, statusOfCruises, status);
     }
 
     @Override
@@ -83,11 +92,11 @@ public class OrderView extends Entity {
                 "usersFirstName='" + usersFirstName + '\'' +
                 ", usersLastName='" + usersLastName + '\'' +
                 ", usersEmail='" + usersEmail + '\'' +
+                ", usersId=" + usersId +
                 ", cruisesDescription='" + cruisesDescription + '\'' +
                 ", statusOfCruises='" + statusOfCruises + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
-
 }
 

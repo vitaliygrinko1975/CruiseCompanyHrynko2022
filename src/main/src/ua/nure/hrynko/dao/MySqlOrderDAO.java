@@ -67,6 +67,23 @@ public class MySqlOrderDAO implements OrderDAO {
         return allItemOfOrdersList;
     }
 
+    @Override
+    public List<Order> findAllItemOfOrder(Connection con) throws DBException, SQLException {
+        List<Order> allItemOfOrdersList = new ArrayList<>();
+        Statement stmt;
+        ResultSet rs;
+
+            con = DBManager.getInstance().getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(Querys.SQL_FIND_ALL_ITEM_ON_ORDERS);
+            while (rs.next()) {
+                allItemOfOrdersList.add(extractOrder(rs));
+            }
+        LOG.trace("find all item of table Orders succesful--> ");
+        DBManager.close(rs);
+        DBManager.close(stmt);
+        return allItemOfOrdersList;
+    }
 
 
     @Override
@@ -117,19 +134,37 @@ public class MySqlOrderDAO implements OrderDAO {
         }
         return order;
     }
+
     @Override
-    public void updateItemOfUsersHasCruise(Connection con, Order itemUserHasCruise) throws SQLException {
+    public Order findOrderById(Connection con,int id) throws SQLException {
+        Order order = null;
+        PreparedStatement pstmt;
+        ResultSet rs;
+
+            pstmt = con.prepareStatement(Querys.SQL_FIND_ORDER_BY_ID);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                order = extractOrder(rs);
+            }
+        LOG.trace("find order by id  succesful--> ");
+        DBManager.close(rs);
+        DBManager.close(pstmt);
+        return order;
+    }
+    @Override
+    public void updateItemOrder(Connection con, Order itemOrder) throws SQLException {
         PreparedStatement pstmt;
         ResultSet rs = null;
         pstmt = con.prepareStatement(Querys.SQL_UPDATE_ORDERS_BY_OBJECT_OF_ORDERS);
-        pstmt.setString(1,itemUserHasCruise.getStatus());
-        pstmt.setInt(2, itemUserHasCruise.getId());
+        pstmt.setString(1,itemOrder.getStatus());
+        pstmt.setInt(2, itemOrder.getId());
         pstmt.executeUpdate();
         DBManager.close(rs);
         DBManager.close(pstmt);
     }
     @Override
-    public void updateItemOfUsersHasCruise(Connection con, int id, String status) throws SQLException {
+    public void updateItemOrder(Connection con, int id, String status) throws SQLException {
         PreparedStatement pstmt;
         ResultSet rs = null;
         pstmt = con.prepareStatement(Querys.SQL_UPDATE_ORDERS_BY_ID);

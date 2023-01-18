@@ -52,6 +52,23 @@ public class MySqlCruiseDAO implements CruiseDAO {
         return allCruisesList;
     }
 
+    @Override
+    public List<Cruise> findAllCruises(Connection con) throws  SQLException {
+        List<Cruise> allCruisesList = new ArrayList<>();
+        Statement stmt;
+        ResultSet rs;
+
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(Querys.SQL_FIND_ALL_CRUISES);
+            while (rs.next()) {
+                allCruisesList.add(extractCruises(rs));
+            }
+            LOG.trace("find all item of table Orders succesful--> ");
+            DBManager.close(rs);
+            DBManager.close(stmt);
+
+        return allCruisesList;
+    }
 
     @Override
     public Cruise findCruiseById(int id) throws DBException {
@@ -98,7 +115,6 @@ public class MySqlCruiseDAO implements CruiseDAO {
     @Override
     public List<Cruise> findCruiseByStartOfCruise(String date) throws DBException {
         List<Cruise> allCruisesList = new ArrayList<>();
-        Cruise cruise = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Connection con = null;
@@ -123,7 +139,6 @@ public class MySqlCruiseDAO implements CruiseDAO {
     @Override
     public List<Cruise> findCruiseByDuration(int duration) throws DBException {
         List<Cruise> allCruisesList = new ArrayList<>();
-        Cruise cruise = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Connection con = null;
@@ -172,15 +187,17 @@ public class MySqlCruiseDAO implements CruiseDAO {
         DBManager.close(rs);
         DBManager.close(pstmt);
     }
+
+
     @Override
     public void updateCruiseDb(int id, String name, String description, double price, int shipId, int capacity,
-                              String startOfCruise, int duration) throws DBException {
+                               String startOfCruise, int duration, String status) throws DBException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Connection con = null;
         try {
             con = DBManager.getInstance().getConnection();
-            pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID_EIGHT);
+            pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID_NINE);
             pstmt.setString(1, name);
             pstmt.setString(2, description);
             pstmt.setDouble(3, price);
@@ -188,7 +205,8 @@ public class MySqlCruiseDAO implements CruiseDAO {
             pstmt.setInt(5, capacity);
             pstmt.setString(6, startOfCruise);
             pstmt.setInt(7, duration);
-            pstmt.setInt(8, id);
+            pstmt.setString(8, status);
+            pstmt.setInt(9, id);
             pstmt.executeUpdate();
             con.commit();
             LOG.trace("update to SQL seccesful--> ");

@@ -64,7 +64,7 @@
       <param-value> adminPage listAdmin pageAdminCruises pageAdminOrders pageAdminChangeStatusWithWithdrawalFromDeposit
         adminPageCruiseRemoveCruise adminPageRemoveUser adminGoToPageForUpdatingCruise adminUpdatingPageUpdateCruise
         adminGoToPageForAddingCruise adminAddingPageAddCruise adminGoToUpdatingPage adminGoToPageAddingUser
-        adminUpdatingPageUpdateUser adminGoToPageAddingUser adminAddingPageAddUser
+        adminUpdatingPageUpdateUser adminGoToPageAddingUser adminAddingPageAddUser pageAdminShips
       </param-value>
     </init-param>
     <init-param>
@@ -72,7 +72,8 @@
       <param-value>listClient clientPage AddToBasket goToBasket RemoveOneUnitFromBasket AddOneUnitInBasket
         RemoveOnePositionFromBasket clientBasketConfirmOrderOfSelectedUnits cruiseFindByStartDate
         cruiseFindByDuration ClientPageGoToTopUpYourAccount clientPageGoToUpdatingAccountPage ClientPageGoToMyProfile
-        clientUpdatingPageUpdateYourProfile clientUpdatingPageUpdateAccount clientPageToPay clientPageToGoPageTariffsForChooseTariffs
+        clientUpdatingPageUpdateYourProfile clientUpdatingPageUpdateAccount clientPageToPay
+        clientPageToGoPageTariffsForChooseTariffs clientPageMyOrders
       </param-value>
     </init-param>
     <init-param>

@@ -8,8 +8,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface OrderViewDAO {
-
+    List<OrderView> findAllIItemOfOrderViewByUserId(int userId) throws DBException;
     List<OrderView> findAllIItemOfOrderViewWithLimit(int start, int total) throws DBException;
+    List<OrderView> findAllIItemOfOrderViewByUserIdWithLimit(int id, int start, int total) throws DBException;
     List<OrderView> findAllItemOfOrdersView() throws DBException;
     OrderView extractOrdersView(ResultSet rs) throws SQLException;
 }

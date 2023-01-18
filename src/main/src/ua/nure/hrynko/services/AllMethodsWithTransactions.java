@@ -8,6 +8,7 @@ import ua.nure.hrynko.dao.MySqlUserDAO;
 import ua.nure.hrynko.dao.MySqlOrderDAO;
 import ua.nure.hrynko.models.Account;
 import ua.nure.hrynko.models.Cruise;
+import ua.nure.hrynko.models.Order;
 import ua.nure.hrynko.models.User;
 import ua.nure.hrynko.exception.DBException;
 
@@ -24,7 +25,7 @@ public class AllMethodsWithTransactions {
     private   MySqlAccountDAO mySqlAccountDAO;
 
 
-    public int addBasketToUsersHasCruisesDbReturnDepositAmount(Integer userId, Map<Cruise, Integer> mapForBasket) throws DBException {
+    public int addBasketToOrdersDbReturnDepositAmount(Integer userId, Map<Cruise, Integer> mapForBasket) throws DBException {
 
         orderDAO = MySqlOrderDAO.getInstance();
         cruiseDAO = MySqlCruiseDAO.getInstance();
@@ -39,11 +40,15 @@ public class AllMethodsWithTransactions {
                 depositAmount += item.getKey().getPrice() * item.getValue();
                 for (int i = 0; i < item.getValue(); i++) {
                     int cruiseId = item.getKey().getId();
-                    orderDAO.addItemToOrdersDb(con, userId, cruiseId, "Не оплачено");
                     Cruise currentCruise = cruiseDAO.findCruiseById(con, cruiseId);
                     int newCapacity = currentCruise.getCapacity() - 1;
-                    currentCruise.setCapacity(newCapacity);
-                    cruiseDAO.updateCruisesDb(con, currentCruise);
+                    if(newCapacity>=0) {
+                        orderDAO.addItemToOrdersDb(con, userId, cruiseId, "В обработке");
+                        currentCruise.setCapacity(newCapacity);
+                        cruiseDAO.updateCruisesDb(con, currentCruise);
+                    }else{
+                        orderDAO.addItemToOrdersDb(con, userId, cruiseId, "Нет свободных мест");
+                    }
                 }
             }
             con.commit();
@@ -58,35 +63,38 @@ public class AllMethodsWithTransactions {
 
     }
 
-    public String changeStatusWithWithdrawalFromDeposit(int usersIdForWithdrawalFromDeposit,
-                                                        int cruiseId, int usersHasCruisesIdForUpdate, String status)throws DBException{
+    public String changeStatusWithWithdrawalFromDeposit(int orderIdForUpdate, String status)throws DBException{
         orderDAO = MySqlOrderDAO.getInstance();
         cruiseDAO = MySqlCruiseDAO.getInstance();
         mySqlUserDAO = MySqlUserDAO.getInstance();
         mySqlAccountDAO = MySqlAccountDAO.getInstance();
 
-        String message = "Транзакция прошла успешно" ;
+        String message = "Оплачено";
         //START TRANSACTION
         Connection con = DBManager.getInstance().getConnection();
         try {
             con.setAutoCommit(false);
-            Cruise cruiseWithOrder = cruiseDAO.findCruiseById(con, cruiseId);
-            User userWithOrder = mySqlUserDAO.findUserById(con, usersIdForWithdrawalFromDeposit);
+            Order orderForUpdate= orderDAO.findOrderById(con,orderIdForUpdate);
+            User userWithOrder = mySqlUserDAO.findUserById(con, orderForUpdate.getUserId());
+            LOG.trace("userWithOrder --> " + userWithOrder);
+            Cruise cruiseWithOrder = cruiseDAO.findCruiseById(con, orderForUpdate.getCruiseId());
             int accountsId = userWithOrder.getAccountsId();
+            LOG.trace("accountsId --> " + accountsId);
             Account usersAccount = mySqlAccountDAO.findAccountById(con, accountsId);
             double currentBalance = usersAccount.getBalance();
-            double depositReducer = cruiseWithOrder.getPrice();
-            double newPrice = currentBalance - depositReducer;
-
-            if (newPrice >= 0 && !status.equals("Оплачено") ) {
-                mySqlAccountDAO.updateAccountToDb(con, usersIdForWithdrawalFromDeposit, newPrice);
-                orderDAO.updateItemOfUsersHasCruise(con, usersHasCruisesIdForUpdate,"Оплачено");
-            }
-            if (newPrice < 0 && !status.equals("Оплачено")){
-                message = "На счете не достаточно средств";
-                orderDAO.updateItemOfUsersHasCruise(con, usersHasCruisesIdForUpdate,message);
-            }
-
+            LOG.trace("currentBalance --> " +currentBalance);
+            double balanceReducer = cruiseWithOrder.getPrice();
+            LOG.trace("balanceReducer --> " + balanceReducer);
+            double newBalance = currentBalance - balanceReducer;
+            LOG.trace("newBalance --> " + newBalance);
+                if (newBalance >= 0 && !status.equals(message)){
+                    mySqlAccountDAO.updateAccountToDb(con, orderForUpdate.getUserId(), newBalance);
+                    orderDAO.updateItemOrder(con, orderIdForUpdate,message);
+                }
+                if (newBalance < 0 && !status.equals("Оплачено")) {
+                    message = "На счете не достаточно средств";
+                    orderDAO.updateItemOrder(con, orderIdForUpdate, message);
+                }
             con.commit();
         } catch(Exception ex) {
             DBManager.rollback(con);

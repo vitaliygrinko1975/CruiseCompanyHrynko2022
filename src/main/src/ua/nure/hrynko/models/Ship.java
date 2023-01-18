@@ -10,6 +10,10 @@ public class Ship extends Entity {
 
     private String description;
 
+    private int capacity;
+
+
+
     public String getName() {
         return name;
     }
@@ -26,24 +30,29 @@ public class Ship extends Entity {
         this.description = description;
     }
 
+    public int getCapacity() {return capacity;}
+
+    public void setCapacity(int capacity) {this.capacity = capacity;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Ship)) return false;
-        Ship ships = (Ship) o;
-        return name.equals(ships.name) && description.equals(ships.description);
+        Ship ship = (Ship) o;
+        return capacity == ship.capacity && name.equals(ship.name) && description.equals(ship.description);
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(name, description);
+        return Objects.hash(name, description, capacity);
     }
 
     @Override
     public String toString() {
-        return "Ships{" +
+        return "Ship{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", capacity=" + capacity +
                 '}';
     }
+
 }

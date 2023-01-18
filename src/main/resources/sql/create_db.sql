@@ -53,7 +53,8 @@ CREATE TABLE ships
 (
     id          INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR(45)  NOT NULL,
-    description VARCHAR(255) NOT NULL
+    description VARCHAR(255) NOT NULL,
+    capacity    INTEGER      NOT NULL
 );
 
 --
@@ -120,24 +121,24 @@ VALUES ('client', 'client', ' Petr ', 'Petrov', 'client@gmail.com',
         '+380992589896', 2, 2);
 
 
-INSERT INTO ships (name, description)
-VALUES ('Ориана', 'Океанический пассажирский');
-INSERT INTO ships (name, description)
-VALUES ('Исследователь морей', 'Океанический пассажирский');
-INSERT INTO ships (name, description)
-VALUES ('Минерва', 'Океанический пассажирский');
+INSERT INTO ships (name, description,capacity)
+VALUES ('Ориана', 'Океанический пассажирский',2000);
+INSERT INTO ships (name, description,capacity)
+VALUES ('Исследователь морей', 'Океанический пассажирский',2000);
+INSERT INTO ships (name, description,capacity)
+VALUES ('Минерва', 'Океанический пассажирский',2000);
 
 
 
 INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, duration,status)
 VALUES ('Малое путишествие', 'Одесса-Стамбул-Одесса', '2000', '1',1600,
-        20221223120000, 10,'Не начался');
+        20230123120000, 10,'Не начался');
 INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, duration,status)
-VALUES ('Среднее путишествие', 'Одесса-Стамбул-Лисабон-Одесса', '5000', '1',1600,
-        20221228120000, 15,'Не начался');
+VALUES ('Среднее путишествие', 'Одесса-Стамбул-Лисабон-Одесса', '5000', '2',1600,
+        20230128120000, 15,'Не начался');
 INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, duration,status)
 VALUES ('Большое путишествие', 'Одесса-Стамбул-Палермо-Барселона-Лиссабон-Одесса', '10000',
-        '2',2000,20221224120000, 25,'Не начался');
+        '3',2000,20230130120000, 25,'Не начался');
 
 INSERT INTO cruises (name, description, price, ships_id,capacity, start_of_cruise, duration,status)
 VALUES ('Малое путишествие', 'Одесса-Стамбул-Одесса', '2000', '1',1600,
@@ -151,8 +152,8 @@ VALUES ('Большое путишествие', 'Одесса-Стамбул-П
 
 
 
-INSERT INTO orders (users_id, cruises_id,status)
-VALUES (2, 1, 'Не оплачено');
+# INSERT INTO orders (users_id, cruises_id,status)
+# VALUES (2, 1, 'В обработке');
 
 
 

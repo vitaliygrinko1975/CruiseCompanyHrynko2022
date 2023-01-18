@@ -30,7 +30,7 @@
 <fmt:message bundle="${loc}" key="local.ships_id" var="ships_id"/>
 <fmt:message bundle="${loc}" key="local.price" var="price"/>
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
-
+<fmt:message bundle="${loc}" key="local.status" var="status"/>
 <body>
 <div align='center'>
     <ul>
@@ -52,9 +52,10 @@
         ${ships_id}: <input type='text' name='updateShipIdCruise' value=${cruise.shipId}>
         ${availability}: <input type='text' name='updateCapacityCruise' value=${cruise.capacity}>
         ${start_of_cruise}: <input type='date' name='updateStartOfCruise' placeholder="dd-mm-yyyy"
-                                   value=${cruise.startOfCruise} min=<mt:myTag/> max="2030-12-31">
+                                   value=${cruise.startOfCruise}>
+<%--        min=<mt:myTag/> max="2030-12-31"--%>
         ${cruise_duration}: <input type='text' name='updateDurationCruise' value=${cruise.duration}>
-
+        ${status}: <input type='text' name='updateStatusCruise' value=${cruise.status}>
         <button type='submit' name='cruiseIdForUpdateButt' value="${cruise.id}" class='btn btn-primary btn-block btn-large'>
             ${update}
         </button>

@@ -38,11 +38,13 @@
 <fmt:message bundle="${loc}" key="local.balance_recharge" var="balance_recharge"/>
 <fmt:message bundle="${loc}" key="local.cruises" var="cruises"/>
 <fmt:message bundle="${loc}" key="local.basket" var="basket"/>
+<fmt:message bundle="${loc}" key="local.my_orders" var="my_orders"/>
 <body>
 <ul>
     <li><a href="controller?command=ClientPageGoToTopUpYourAccount&userIdForTopUpYourAccount=${user.id}">
         ${balance_recharge}</a></li>
     <li><a href="controller?command=clientPage">${cruises}</a>
+    <li><a href="controller?command=clientPageMyOrders&page=1&userIdForOrder=${user.id}">${my_orders}</a>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>

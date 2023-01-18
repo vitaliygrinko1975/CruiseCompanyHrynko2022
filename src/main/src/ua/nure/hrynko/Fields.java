@@ -21,6 +21,7 @@ public final class Fields {
     //ships
     public static final String SHIPS_NAME = "name";
     public static final String SHIPS_DESCRIPTION = "description";
+    public static final String SHIPS_CAPACITY = "capacity";
 
     //cruises
     public static final String CRUISE_NAME = "name";

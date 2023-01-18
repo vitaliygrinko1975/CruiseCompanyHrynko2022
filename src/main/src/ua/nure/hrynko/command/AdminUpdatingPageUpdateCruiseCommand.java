@@ -45,8 +45,10 @@ public class AdminUpdatingPageUpdateCruiseCommand extends Command {
         LOG.trace("Request parameter: startOfCruise --> " + startOfCruise);
         int duration = Integer.parseInt(request.getParameter("updateDurationCruise"));
         LOG.trace("Request parameter: duration --> " + duration);
+        String status = request.getParameter("updateStatusCruise");
+        LOG.trace("Request parameter: status --> " + status);
 
-        cruiseDAO.updateCruiseDb(id,name,description,price,shipId,capacity,startOfCruise,duration);
+        cruiseDAO.updateCruiseDb(id,name,description,price,shipId,capacity,startOfCruise,duration,status);
         LOG.trace("update cruise  by ID: --> " );
 
         List<Cruise> allCruises = cruiseDAO.findAllCruises();
