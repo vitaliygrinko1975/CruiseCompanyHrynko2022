@@ -27,7 +27,6 @@ public class MySqlAccountDAO implements AccountDAO {
 
     }
 
-    @Override
     public List<Account> findAllAccounts() throws DBException {
         List<Account> allAccountsList = new ArrayList<>();
         Statement stmt = null;

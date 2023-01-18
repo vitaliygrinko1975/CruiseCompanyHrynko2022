@@ -178,14 +178,14 @@ public class MySqlOrderDAO implements OrderDAO {
     @Override
     public Order extractOrder(ResultSet rs) throws SQLException {
 
-        Order usersHasCruises = new Order();
-        usersHasCruises.setId(rs.getInt(Fields.ENTITY_ID));
-        usersHasCruises.setUserId(rs.getInt(Fields.USERS_ID));
-        usersHasCruises.setCruiseId(rs.getInt(Fields.CRUISES_ID));
-        usersHasCruises.setStatus(rs.getString(Fields.STATUS));
+        Order order = new Order();
+        order.setId(rs.getInt(Fields.ENTITY_ID));
+        order.setUserId(rs.getInt(Fields.USERS_ID));
+        order.setCruiseId(rs.getInt(Fields.CRUISES_ID));
+        order.setStatus(rs.getString(Fields.STATUS));
 
 
-        return usersHasCruises;
+        return order;
 
     }
 }

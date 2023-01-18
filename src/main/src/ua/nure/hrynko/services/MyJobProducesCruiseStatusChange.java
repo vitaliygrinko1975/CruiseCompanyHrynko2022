@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.quartz.*;
 import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.dao.MySqlCruiseDAO;
-import ua.nure.hrynko.exception.DBException;
 import ua.nure.hrynko.models.Cruise;
 import java.sql.Connection;
 import java.util.Calendar;
