@@ -37,8 +37,6 @@ public class AdminUpdatingPageUpdateCruiseCommand extends Command {
         LOG.trace("Request parameter: description --> " + description);
         double price = Double.parseDouble(request.getParameter("updatePriceCruise"));
         LOG.trace("Request parameter: price --> " + price);
-        int shipId = Integer.parseInt(request.getParameter("updateShipIdCruise"));
-        LOG.trace("Request parameter: shipId --> " + shipId);
         int capacity = Integer.parseInt(request.getParameter("updateCapacityCruise"));
         LOG.trace("Request parameter: capacity --> " + capacity);
         String startOfCruise = request.getParameter("updateStartOfCruise");
@@ -48,7 +46,7 @@ public class AdminUpdatingPageUpdateCruiseCommand extends Command {
         String status = request.getParameter("updateStatusCruise");
         LOG.trace("Request parameter: status --> " + status);
 
-        cruiseDAO.updateCruiseDb(id,name,description,price,shipId,capacity,startOfCruise,duration,status);
+        cruiseDAO.updateCruiseDb(id,name,description,price,capacity,startOfCruise,duration,status);
         LOG.trace("update cruise  by ID: --> " );
 
         List<Cruise> allCruises = cruiseDAO.findAllCruises();

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlOrderDAO implements OrderDAO {
-
     private static final Logger LOG = Logger.getLogger(MySqlOrderDAO.class);
 
     private static MySqlOrderDAO instance;
@@ -25,7 +24,6 @@ public class MySqlOrderDAO implements OrderDAO {
         return instance;
 
     }
-
 
     @Override
     public void addItemToOrdersDb(Connection con, int usersId, int cruiseId, String status) throws SQLException {
@@ -73,12 +71,12 @@ public class MySqlOrderDAO implements OrderDAO {
         Statement stmt;
         ResultSet rs;
 
-            con = DBManager.getInstance().getConnection();
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(Querys.SQL_FIND_ALL_ITEM_ON_ORDERS);
-            while (rs.next()) {
-                allItemOfOrdersList.add(extractOrder(rs));
-            }
+        con = DBManager.getInstance().getConnection();
+        stmt = con.createStatement();
+        rs = stmt.executeQuery(Querys.SQL_FIND_ALL_ITEM_ON_ORDERS);
+        while (rs.next()) {
+            allItemOfOrdersList.add(extractOrder(rs));
+        }
         LOG.trace("find all item of table Orders succesful--> ");
         DBManager.close(rs);
         DBManager.close(stmt);
@@ -141,12 +139,12 @@ public class MySqlOrderDAO implements OrderDAO {
         PreparedStatement pstmt;
         ResultSet rs;
 
-            pstmt = con.prepareStatement(Querys.SQL_FIND_ORDER_BY_ID);
-            pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                order = extractOrder(rs);
-            }
+        pstmt = con.prepareStatement(Querys.SQL_FIND_ORDER_BY_ID);
+        pstmt.setInt(1, id);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            order = extractOrder(rs);
+        }
         LOG.trace("find order by id  succesful--> ");
         DBManager.close(rs);
         DBManager.close(pstmt);
@@ -189,4 +187,3 @@ public class MySqlOrderDAO implements OrderDAO {
 
     }
 }
-

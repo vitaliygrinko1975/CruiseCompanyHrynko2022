@@ -28,6 +28,11 @@
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
 <fmt:message bundle="${loc}" key="local.users" var="users"/>
 <fmt:message bundle="${loc}" key="local.orders" var="orders"/>
+<fmt:message bundle="${loc}" key="local.start_of_contract" var="start_of_contract"/>
+<fmt:message bundle="${loc}" key="local.end_of_contract" var="end_of_contract"/>
+<fmt:message bundle="${loc}" key="local.rent" var="rent"/>
+
+
 
 <body>
 <div align='center'>
@@ -41,16 +46,13 @@
 </div>
 <div class='mydiv'>
     <h1 align='center'>${admin_page}</h1>
-
     <form method='post' action="controller">
-        <input type="hidden" name="command" value="adminAddingPageAddCruise"/>
-        ${cruise_name}: <input type='text' name='addNameCruise' required='required'/>
-        ${description}: <input type='text' name='addDescriptionCruise' required='required'/>
-        ${price}: <input type='text' pattern=^[-+]?[0-9]*[.][0-9]+(?:[eE][-+]?[0-9]+)?$ name='addPriceCruise' required='required'/>
-        ${availability}: <input type='text' name='addCapacityCruise' required='required'/>
-        ${start_of_cruise}: <input type='date' name='addStartOfCruise' required='required'/>
-        ${cruise_duration}: <input type='text' name='addDurationCruise' required='required'/>
-        <button type='submit' name='Butt' value='0' class='btn btn-primary btn-block btn-large'>${add_cruise}</button>
+        <input type="hidden" name="command" value="adminRentingPageAddShipToCruiseHasShip"/>
+        ${cruises}: <input type='text' name='cruiseIdForRent' required='required'/>
+        <input type="hidden" name='shipIdForRent' value="${shipId}"/>
+        ${start_of_contract}: <input type='date' name='startOfContract' required='required'/>
+        ${end_of_contract }: <input type='date' name='endOfContract' required='required'/>
+        <button type='submit' name='Butt' value='0' class='btn btn-primary btn-block btn-large'>${rent}</button>
     </form>
 </div>
 </body>

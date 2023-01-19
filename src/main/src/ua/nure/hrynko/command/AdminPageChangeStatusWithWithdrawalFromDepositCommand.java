@@ -27,15 +27,13 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
 
     private final transient AllMethodsWithTransactions allMethodsWithTransactions;
 
-    private final transient MySqlOrderDAO orderDAO;
     private final transient MySqlOrderViewDAO orderViewDAO;
     private List<OrderView> allItemOfOrdersViewWithLimit;
 
     public AdminPageChangeStatusWithWithdrawalFromDepositCommand(AllMethodsWithTransactions allMethodsWithTransactions,
-                                                                 MySqlOrderDAO orderDAO, MySqlOrderViewDAO orderViewDAO) {
+                                                                 MySqlOrderViewDAO orderViewDAO) {
 
         this.allMethodsWithTransactions = allMethodsWithTransactions;
-        this.orderDAO = orderDAO;
         this.orderViewDAO = orderViewDAO;
     }
 
@@ -62,7 +60,7 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
         int total = 5;
         int start = (numberPage - 1) * total;
 
-            allItemOfOrdersViewWithLimit = orderViewDAO.findAllIItemOfOrderViewWithLimit(start, total);
+            allItemOfOrdersViewWithLimit = orderViewDAO.findAllItemOfOrderViewWithLimit(start, total);
     }
     // put count of cruises  to the  session
         session.setAttribute("countAllCruises",countAllCruises);

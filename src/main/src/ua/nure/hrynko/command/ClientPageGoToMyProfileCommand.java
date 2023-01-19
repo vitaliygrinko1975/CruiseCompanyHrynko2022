@@ -26,10 +26,6 @@ public class ClientPageGoToMyProfileCommand extends Command {
 						  HttpServletResponse response) throws IOException, ServletException, AppException {
 
 		LOG.debug("ClientPageGoToMyProfileCommand starts");
-//		HttpSession session = request.getSession();
-//		User user = session.getAttribute("user");
-
-
 
 		LOG.debug("ClientPageGoToMyProfileCommand finished");
 

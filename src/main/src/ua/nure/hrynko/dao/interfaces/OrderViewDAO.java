@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface OrderViewDAO {
     List<OrderView> findAllIItemOfOrderViewByUserId(int userId) throws DBException;
-    List<OrderView> findAllIItemOfOrderViewWithLimit(int start, int total) throws DBException;
+    List<OrderView> findAllItemOfOrderViewWithLimit(int start, int total) throws DBException;
     List<OrderView> findAllIItemOfOrderViewByUserIdWithLimit(int id, int start, int total) throws DBException;
     List<OrderView> findAllItemOfOrdersView() throws DBException;
     OrderView extractOrdersView(ResultSet rs) throws SQLException;

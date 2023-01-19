@@ -14,8 +14,6 @@ public class Cruise extends Entity {
 
     private double price;
 
-    private int shipId;
-
     private int capacity;
 
     private Date startOfCruise;
@@ -46,14 +44,6 @@ public class Cruise extends Entity {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getShipId() {
-        return shipId;
-    }
-
-    public void setShipId(int shipId) {
-        this.shipId = shipId;
     }
 
     public int getCapacity() {
@@ -93,20 +83,20 @@ public class Cruise extends Entity {
         if (this == o) return true;
         if (!(o instanceof Cruise)) return false;
         Cruise cruise = (Cruise) o;
-        return Double.compare(cruise.price, price) == 0 && shipId == cruise.shipId && capacity == cruise.capacity && duration == cruise.duration && name.equals(cruise.name) && description.equals(cruise.description) && startOfCruise.equals(cruise.startOfCruise) && status.equals(cruise.status);
+        return Double.compare(cruise.price, price) == 0 && capacity == cruise.capacity && duration == cruise.duration && name.equals(cruise.name) && description.equals(cruise.description) && startOfCruise.equals(cruise.startOfCruise) && status.equals(cruise.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, price, shipId, capacity, startOfCruise, duration, status);
+        return Objects.hash(name, description, price, capacity, startOfCruise, duration, status);
     }
+
     @Override
     public String toString() {
         return "Cruise{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", shipId=" + shipId +
                 ", capacity=" + capacity +
                 ", startOfCruise=" + startOfCruise +
                 ", duration=" + duration +

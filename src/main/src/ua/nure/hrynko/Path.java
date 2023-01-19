@@ -31,6 +31,8 @@ public final class Path {
 	public static final String ADMIN_PAGE_ADD_USER = "/WEB-INF/jsp/admin/admin_page_add_user.jsp";
 	public static final String ADMIN_PAGE_ADD_CRUISE = "/WEB-INF/jsp/admin/admin_page_add_cruise.jsp";
 	public static final String ADMIN_PAGE_UPDATE_CRUISE = "/WEB-INF/jsp/admin/admin_page_update_cruise.jsp";
+	public static final String ADMIN_PAGE_RENT_SHIP = "/WEB-INF/jsp/admin/admin_page_rent_ship.jsp";
+	public static final String PAGE_ADMIN_CONTRACTS = "/WEB-INF/jsp/admin/admin_page_contracts.jsp";
 
 
 	// commands

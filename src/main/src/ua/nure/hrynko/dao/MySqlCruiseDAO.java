@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
 
 public class MySqlCruiseDAO implements CruiseDAO {
     private static final Logger LOG = Logger.getLogger(MySqlCruiseDAO.class);
@@ -175,12 +174,11 @@ public class MySqlCruiseDAO implements CruiseDAO {
         pstmt.setString(1, cruise.getName());
         pstmt.setString(2, cruise.getDescription());
         pstmt.setDouble(3, cruise.getPrice());
-        pstmt.setInt(4, cruise.getShipId());
-        pstmt.setInt(5, cruise.getCapacity());
-        pstmt.setString(6, stringStartOfCruise);
-        pstmt.setInt(7, cruise.getDuration());
-        pstmt.setString(8, cruise.getStatus());
-        pstmt.setInt(9, cruise.getId());
+        pstmt.setInt(4, cruise.getCapacity());
+        pstmt.setString(5, stringStartOfCruise);
+        pstmt.setInt(6, cruise.getDuration());
+        pstmt.setString(7, cruise.getStatus());
+        pstmt.setInt(8, cruise.getId());
 
         pstmt.executeUpdate();
 
@@ -190,7 +188,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
 
 
     @Override
-    public void updateCruiseDb(int id, String name, String description, double price, int shipId, int capacity,
+    public void updateCruiseDb(int id, String name, String description, double price, int capacity,
                                String startOfCruise, int duration, String status) throws DBException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -201,12 +199,11 @@ public class MySqlCruiseDAO implements CruiseDAO {
             pstmt.setString(1, name);
             pstmt.setString(2, description);
             pstmt.setDouble(3, price);
-            pstmt.setInt(4, shipId);
-            pstmt.setInt(5, capacity);
-            pstmt.setString(6, startOfCruise);
-            pstmt.setInt(7, duration);
-            pstmt.setString(8, status);
-            pstmt.setInt(9, id);
+            pstmt.setInt(4, capacity);
+            pstmt.setString(5, startOfCruise);
+            pstmt.setInt(6, duration);
+            pstmt.setString(7, status);
+            pstmt.setInt(8, id);
             pstmt.executeUpdate();
             con.commit();
             LOG.trace("update to SQL seccesful--> ");
@@ -220,7 +217,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
     }
 
     @Override
-    public void addToCruiseDb(String name, String description, double price, int shipsId,int capacity,String startOfCruise,
+    public void addToCruiseDb(String name, String description, double price,int capacity,String startOfCruise,
                               int duration,String status) throws DBException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -233,11 +230,10 @@ public class MySqlCruiseDAO implements CruiseDAO {
             pstmt.setString(2, description);
 
             pstmt.setDouble(3, price);
-            pstmt.setInt(4, shipsId);
-            pstmt.setInt(5, capacity);
-            pstmt.setString(6, startOfCruise);
-            pstmt.setInt(7, duration);
-            pstmt.setString(8, status);
+            pstmt.setInt(4, capacity);
+            pstmt.setString(5, startOfCruise);
+            pstmt.setInt(6, duration);
+            pstmt.setString(7, status);
             pstmt.executeUpdate();
             con.commit();
             LOG.trace("add tariff to SQL succesful--> ");
@@ -277,7 +273,6 @@ public class MySqlCruiseDAO implements CruiseDAO {
         cruise.setName(rs.getString(Fields.CRUISE_NAME));
         cruise.setDescription(rs.getString(Fields.CRUISE_DESCRIPTION));
         cruise.setPrice(rs.getDouble(Fields.CRUISE_PRICE));
-        cruise.setShipId(rs.getInt(Fields.CRUISE_SHIPS_ID));
         cruise.setCapacity(rs.getInt(Fields.CRUISE_CAPACITY));
         cruise.setStartOfCruise(rs.getTimestamp(Fields.CRUISE_START_OF_CRUISE));
         cruise.setDuration(rs.getInt(Fields.CRUISE_DURATION));

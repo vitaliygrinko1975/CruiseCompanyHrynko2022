@@ -77,7 +77,7 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
 
 
     @Override
-    public List<OrderView> findAllIItemOfOrderViewWithLimit(int start, int total) throws DBException {
+    public List<OrderView> findAllItemOfOrderViewWithLimit(int start, int total) throws DBException {
         List<OrderView> listAllIItemOfOrderViewWithLimit = new ArrayList<>();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -136,7 +136,6 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
         orderView.setUsersFirstName(rs.getString(Fields.USER_FIRST_NAME));
         orderView.setUsersLastName(rs.getString(Fields.USER_LAST_NAME));
         orderView.setUsersEmail(rs.getString(Fields.USER_EMAIL));
-//        orderView.setId(rs.getInt(Fields.USERS_ID));
         orderView.setCruisesDescription(rs.getString(Fields.CRUISE_DESCRIPTION));
         orderView.setStatusOfCruises(rs.getString(Fields.STATUS_OF_CRUISES));
         orderView.setStatus(rs.getString(Fields.STATUS));

@@ -27,7 +27,6 @@ public final class Fields {
     public static final String CRUISE_NAME = "name";
     public static final String CRUISE_DESCRIPTION = "description";
     public static final String CRUISE_PRICE = "price";
-    public static final String CRUISE_SHIPS_ID = "ships_id";
     public static final String CRUISE_CAPACITY = "capacity";
     public static final String CRUISE_START_OF_CRUISE = "start_of_cruise";
     public static final String CRUISE_DURATION = "duration";
@@ -40,7 +39,10 @@ public final class Fields {
     public static final String CRUISES_ID = "cruises_id";
     public static final String STATUS = "status";
 
-// orders view
-
+    // orders view
     public static final String STATUS_OF_CRUISES = "status_of_cruises";
+    //cruises_has_ships
+    public static final String SHIPS_ID = "ships_id";
+    public static final String START_OF_CONTRACT = "start_of_contract";
+    public static final String END_OF_CONTRACT = "end_of_contract";
 }

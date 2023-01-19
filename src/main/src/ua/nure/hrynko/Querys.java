@@ -25,6 +25,8 @@ public class Querys {
 
     public static final String SQL_FIND_ALL_ITEM_ON_ORDERS = "SELECT * FROM orders";
 
+    public static final String SQL_FIND_ALL_ITEM_OF_CRUISE_HAS_SHIPS = "SELECT * FROM cruises_has_ships";
+
     public static final String SQL_FIND_ALL_ITEM_ON_ORDERS_VIEW = "SELECT * FROM orders_view";
 
     public static final String SQL_FIND_ALL_ITEM_ON_ORDERS_WITH_LIMIT = "SELECT * FROM orders LIMIT ?,?";
@@ -56,7 +58,7 @@ public class Querys {
             "email=?,phone=? WHERE id=?";
     public static final String SQL_UPDATE_CRUISE_BY_ID_EIGHT = "UPDATE cruises SET name=?, description=?, price=?, ships_id=?," +
             "capacity=?,start_of_cruise=?,duration=? WHERE id=?";
-    public static final String SQL_UPDATE_CRUISE_BY_ID_NINE = "UPDATE cruises SET name=?, description=?, price=?, ships_id=?," +
+    public static final String SQL_UPDATE_CRUISE_BY_ID_NINE = "UPDATE cruises SET name=?, description=?, price=?," +
             "capacity=?,start_of_cruise=?,duration=?,status=? WHERE id=?";
     public static final String SQL_UPDATE_ORDERS_BY_OBJECT_OF_ORDERS = "UPDATE orders" +
             " SET users_id=?,cruises_id=?,status=? WHERE id=?";
@@ -74,10 +76,10 @@ public class Querys {
     //insert
     public static final String SQL_INSERT_USER = "INSERT INTO users (login, password, first_name, last_name, email,phone," +
             "roles_id, accounts_id) VALUE (?,?,?,?,?,?,?,?)";
-    public static final String SQL_INSERT_CRUISE = "INSERT INTO cruises (name,description, price,ships_id,capacity," +
-            "start_of_cruise,duration,status) VALUE (?,?,?,?,?,?,?,?)";
+    public static final String SQL_INSERT_CRUISE = "INSERT INTO cruises (name,description, price,capacity," +
+            "start_of_cruise,duration,status) VALUE (?,?,?,?,?,?,?)";
        public static final String SQL_INSERT_TO_ORDERS = "INSERT INTO orders (users_id, cruises_id,status)  VALUE (?,?,?)";
-
+    public static final String SQL_INSERT_TO_CRUISES_HAS_SHIPS =
+            "INSERT INTO cruises_has_ships (cruises_id,ships_id,start_of_contract,end_of_contract,status)  VALUE (?,?,?,?,?)";
     public static final String SQL_INSERT_ACCOUNT = "INSERT INTO accounts (balance) VALUE (?)";
-
 }

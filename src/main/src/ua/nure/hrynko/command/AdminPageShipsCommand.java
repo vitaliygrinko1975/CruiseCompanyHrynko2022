@@ -2,12 +2,9 @@ package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
-import ua.nure.hrynko.dao.MySqlCruiseDAO;
 import ua.nure.hrynko.dao.interfaces.ShipsDAO;
 import ua.nure.hrynko.exception.AppException;
-import ua.nure.hrynko.models.Cruise;
 import ua.nure.hrynko.models.Ship;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +13,7 @@ import java.util.List;
 
 
 /**
- * Lists cruises items.
+ * Lists ships items.
  */
 public class AdminPageShipsCommand extends Command {
 

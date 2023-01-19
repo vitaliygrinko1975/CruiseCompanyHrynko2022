@@ -49,7 +49,6 @@
         ${cruise_name}: <input type='text' name='updateNameCruise' value=${cruise.name}>
         ${description}: <input type='text' name='updateDescriptionCruise' value=${cruise.description}>
         ${price}: <input type='text' name='updatePriceCruise' value=${cruise.price}>
-        ${ships_id}: <input type='text' name='updateShipIdCruise' value=${cruise.shipId}>
         ${availability}: <input type='text' name='updateCapacityCruise' value=${cruise.capacity}>
         ${start_of_cruise}: <input type='date' name='updateStartOfCruise' placeholder="dd-mm-yyyy"
                                    value=${cruise.startOfCruise}>

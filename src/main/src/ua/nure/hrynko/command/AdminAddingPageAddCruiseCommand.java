@@ -41,9 +41,6 @@ public class AdminAddingPageAddCruiseCommand extends Command {
         double price = parseDouble(request.getParameter("addPriceCruise"));
         LOG.trace("Request parameter: price --> " + price);
 
-        int shipsId = parseInt(request.getParameter("addShipIdCruise"));
-        LOG.trace("Request parameter: shipsId --> " + shipsId);
-
         int capacity = parseInt(request.getParameter("addCapacityCruise"));
         LOG.trace("Request parameter: capacity --> " + capacity);
 
@@ -55,7 +52,7 @@ public class AdminAddingPageAddCruiseCommand extends Command {
 
         String status = "Не начался";
 
-        cruiseDAO.addToCruiseDb(name,description, price,shipsId,capacity,startOfCruise,duration,status);
+        cruiseDAO.addToCruiseDb(name,description, price,capacity,startOfCruise,duration,status);
 
         List<Cruise> allCruises = cruiseDAO.findAllCruises();
         LOG.trace("Found in DB: allCruises --> " + allCruises);

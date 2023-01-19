@@ -21,10 +21,10 @@ public interface CruiseDAO {
     List<Cruise> findCruiseByDuration(int duration) throws DBException;
     void updateCruisesDb(Connection con, Cruise cruise) throws SQLException;
 
-    void updateCruiseDb(int id, String name, String description, double price, int shipId, int capacity,
+    void updateCruiseDb(int id, String name, String description, double price, int capacity,
                         String startOfCruise, int duration, String status) throws DBException;
 
-    void addToCruiseDb(String name, String description, double price, int shipsId, int capacity, String startOfCruise,
+    void addToCruiseDb(String name, String description, double price, int capacity, String startOfCruise,
                        int duration, String status) throws DBException;
     void removeCruiseFromDb(int id) throws DBException;
     Cruise extractCruises(ResultSet rs) throws SQLException;

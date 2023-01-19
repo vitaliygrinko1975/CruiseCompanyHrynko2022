@@ -60,8 +60,6 @@ public class AdminAddingPageAddUserCommand extends Command {
         String phone = request.getParameter("addPhoneUser");
         LOG.trace("Request parameter: phone --> " + phone);
 
-        boolean blocked = Boolean.parseBoolean(request.getParameter("addBlockedUser"));
-        LOG.trace("Request parameter: blocked --> " + blocked);
 
         //validator start
         List<User> userList = userDAO.findAllUsers();

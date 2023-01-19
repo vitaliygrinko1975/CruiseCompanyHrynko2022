@@ -2,10 +2,7 @@ package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.dao.*;
-import ua.nure.hrynko.models.Cruise;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
-
-
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -58,7 +55,7 @@ public class CommandContainer {
 		commands.put("pageAdminOrders", new AdminPageOrderCommand(MySqlOrderViewDAO.getInstance()));
 		commands.put("pageAdminChangeStatusWithWithdrawalFromDeposit",
 				new AdminPageChangeStatusWithWithdrawalFromDepositCommand(new AllMethodsWithTransactions(),
-						MySqlOrderDAO.getInstance(), MySqlOrderViewDAO.getInstance()));
+						 MySqlOrderViewDAO.getInstance()));
 		commands.put("adminPageCruiseRemoveCruise", new AdminPageRemoveCruiseCommand(MySqlCruiseDAO.getInstance()));
 		commands.put("adminGoToPageForUpdatingCruise",
 				new AdminGoToPageForUpdatingCruiseCommand(MySqlCruiseDAO.getInstance()));
@@ -75,6 +72,10 @@ public class CommandContainer {
 				new AdminAddingPageAddUserCommand(MySqlUserDAO.getInstance(),MySqlAccountDAO.getInstance()));
 
 		commands.put("pageAdminShips", new AdminPageShipsCommand(MySqlShipDAO.getInstance()));
+		commands.put("adminGoToPageForRentShip", new AdminGoToPageForRentShipCommand());
+		commands.put("adminRentingPageAddShipToCruiseHasShip",
+				new AdminRentingPageAddShipToCruiseHasShipCommand(MySqlCruiseHasShipDAO.getInstance()));
+
 		LOG.debug("Command container was successfully initialized");
 		LOG.trace("Number of commands --> " + commands.size());
 	}

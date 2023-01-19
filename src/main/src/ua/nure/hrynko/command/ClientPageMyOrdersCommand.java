@@ -6,6 +6,7 @@ import ua.nure.hrynko.dao.MySqlOrderViewDAO;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.models.OrderView;
 import ua.nure.hrynko.models.User;
+import ua.nure.hrynko.services.Paginations;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,6 @@ public class ClientPageMyOrdersCommand extends Command {
 
     private final transient MySqlOrderViewDAO orderViewDAO;
 
-    private List<OrderView> allItemOfOrdersViewWithLimit;
-
     public ClientPageMyOrdersCommand(MySqlOrderViewDAO orderViewDAO) {
         this.orderViewDAO = orderViewDAO;
     }
@@ -37,6 +36,7 @@ public class ClientPageMyOrdersCommand extends Command {
                           HttpServletResponse response) throws IOException, ServletException, AppException {
 
         LOG.debug("ClientPageMyOrdersCommand starts");
+        Paginations paginations = new Paginations();
         HttpSession session = request.getSession();
         int numberPage = Integer.parseInt(request.getParameter("page"));
         LOG.trace("Request parameter: page --> " + numberPage);
@@ -48,11 +48,10 @@ public class ClientPageMyOrdersCommand extends Command {
         List<OrderView> allOrdersViewByUserIdList = orderViewDAO.findAllIItemOfOrderViewByUserId(id);
         int countAllCruises = allOrdersViewByUserIdList.size();
         LOG.trace("total items in the list --> " + countAllCruises);
-        if (numberPage > 0) {
-            int total = 5;
-            int start = (numberPage - 1) * total;
-            allItemOfOrdersViewWithLimit = orderViewDAO.findAllIItemOfOrderViewByUserIdWithLimit(id,start, total);
-        }
+
+        //get list with limit
+        List<OrderView> allItemOfOrdersViewWithLimit = paginations.makePaginationForMyOrders(id, numberPage);
+
         // put count of cruises  to the request
         request.setAttribute("countAllCruises", countAllCruises);
         LOG.trace("Set the request attribute: countAllCruises --> " + countAllCruises);

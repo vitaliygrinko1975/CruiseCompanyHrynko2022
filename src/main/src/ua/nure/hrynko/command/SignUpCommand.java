@@ -58,12 +58,13 @@ public class SignUpCommand extends Command {
             con.setAutoCommit(false);
             List<User> userList = userDAO.findAllUsers(con);
             LOG.trace("find all users to userList : --> " + userList);
+
+
             boolean matchToEmail = userList.stream().anyMatch(number -> number.getEmail().equalsIgnoreCase(email));
             boolean matchToLogins = userList.stream().anyMatch(number -> number.getLogin().equalsIgnoreCase(login));
             if (matchToLogins) {
                 String message = "Этот логин уже существует. Введите другой.";
                 session.setAttribute("message", message);
-
                 return Path.PAGE_ERROR_PAGE;
             }
             if (matchToEmail) {
