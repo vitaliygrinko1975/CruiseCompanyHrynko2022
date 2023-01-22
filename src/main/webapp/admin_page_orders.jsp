@@ -32,6 +32,9 @@
 <fmt:message bundle="${loc}" key="local.first_name" var="first_name"/>
 <fmt:message bundle="${loc}" key="local.last_name" var="last_name"/>
 <fmt:message bundle="${loc}" key="local.email" var="email"/>
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
+
 
 <body>
 <ul>
@@ -39,25 +42,29 @@
     <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+    <li style="float:right"><a href="controller?command=pageAdminOrders&page=1&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=pageAdminOrders&page=1&local=ru">${ru}</a></li>
 </ul>
-    <h1 align='center'>${admin_page}</h1>
 
-    <div align='center'>
 
-        <table border='1'>
-            <caption><h2>${orders}</h2></caption>
-            <tr>
-                <td>№</td>
-                <td>${first_name}</td>
-                <td>${last_name}</td>
-                <td>${email}</td>
-                <td>${description}</td>
-                <td>${status_of_cruise}</td>
-                <td>${status}</td>
-            </tr>
-            <%--@elvariable id="allItemOfOrdersViewWithLimit" type="java.util.List"--%>
-            <c:forEach var="ordersView" items="${allItemOfOrdersViewWithLimit}">
-                <tr>
+            <h1 align='center'>${admin_page}</h1>
+
+            <div align='center'>
+
+                <table border='1'>
+                    <caption><h2>${orders}</h2></caption>
+                    <tr>
+                        <td>№</td>
+                        <td>${first_name}</td>
+                        <td>${last_name}</td>
+                        <td>${email}</td>
+                        <td>${description}</td>
+                        <td>${status_of_cruise}</td>
+                        <td>${status}</td>
+                    </tr>
+                    <%--@elvariable id="allItemOfOrdersViewWithLimit" type="java.util.List"--%>
+                    <c:forEach var="ordersView" items="${allItemOfOrdersViewWithLimit}">
+                        <tr>
                             <td>${ordersView.id}</td>
                             <td>${ordersView.usersFirstName}</td>
                             <td>${ordersView.usersLastName}</td>
@@ -65,26 +72,29 @@
                             <td>${ordersView.cruisesDescription}</td>
                             <td>${ordersView.statusOfCruises}</td>
                             <td>${ordersView.status}</td>
-                    <td>
-                        <c:if test="${ordersView.status  ne 'Оплачено'and ordersView.statusOfCruises eq 'Не начался'and
+                            <td>
+                                <c:if test="${ordersView.status  ne 'Оплачено'and ordersView.statusOfCruises eq 'Не начался'and
                         ordersView.status  ne 'Нет свободных мест'}">
-                        <form method="post" action="controller">
-                            <input type="hidden" name="command" value="pageAdminChangeStatusWithWithdrawalFromDeposit"/>
-                            <input type="hidden" name="status" value="${ordersView.status}"/>
-                            <button type="submit" name="ordersViewIdForUpdateButt" value="${ordersView.id}"
-                                    class="btn btn-primary btn-block btn-large">${pay_from_balance}</button>
-                        </form>
-                        </c:if>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-        <div class="pagination">
-            <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
-                <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>
-            </c:forEach>
-        </div>
-    </div>
+                                    <form method="post" action="controller">
+                                        <input type="hidden" name="command"
+                                               value="pageAdminChangeStatusWithWithdrawalFromDeposit"/>
+                                        <input type="hidden" name="status" value="${ordersView.status}"/>
+                                        <button type="submit" name="ordersViewIdForUpdateButt" value="${ordersView.id}"
+                                                class="btn btn-primary btn-block btn-large">${pay_from_balance}</button>
+                                    </form>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+                <div class="pagination">
+                    <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
+                        <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>
+                    </c:forEach>
+                </div>
+            </div>
+            <script>
 
+            </script>
 </body>
 </html>

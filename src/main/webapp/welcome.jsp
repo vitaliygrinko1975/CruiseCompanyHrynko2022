@@ -50,10 +50,9 @@
 </div>
 
 <h1 align='center'>CRUISE COMPANY</h1>
-<div align='center' >
-
-</div>
-
 <div align='center'><img src='./img/CruiseCompany.png' alt='Hello'></div>
+<div align='center' >
+    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+</div>
 </body>
 </html>

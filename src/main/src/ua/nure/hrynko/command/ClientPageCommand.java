@@ -31,18 +31,13 @@ public class ClientPageCommand extends Command {
 	@Override
 	public String execute(HttpServletRequest request,
 						  HttpServletResponse response) throws IOException, ServletException, AppException {
-
 		LOG.debug("ClientPageCommand starts");
-
 		// get cruises items list
 		List<Cruise> allCruises = cruiseDAO.findAllCruises();
 		LOG.trace("Found in DB: allCruises --> " + allCruises);
-
-
 		// put cruises items list to the request
 		request.setAttribute("allCruises", allCruises);
 		LOG.trace("Set the request attribute: allCruises --> " + allCruises);
-
 		LOG.debug("ClientPageCommand finished");
 
 		return Path.PAGE_CLIENT;

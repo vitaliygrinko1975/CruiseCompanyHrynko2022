@@ -37,12 +37,9 @@ public class AdminPageCruisesCommand extends Command {
 		// get cruises items list
 		List<Cruise> allCruises = cruiseDAO.findAllCruises();
 		LOG.trace("Found in DB: allCruises --> " + allCruises);
-
-
 		// put cruises items list to the request
 		request.setAttribute("allCruises", allCruises);
 		LOG.trace("Set the request attribute: allCruises --> " + allCruises);
-
 		LOG.debug("AdminPageCruisesCommand finished");
 
 		return Path.PAGE_ADMIN_CRUISES;

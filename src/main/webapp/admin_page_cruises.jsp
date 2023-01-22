@@ -26,6 +26,9 @@
 <fmt:message bundle="${loc}" key="local.add_cruise" var="add_cruise"/>
 <fmt:message bundle="${loc}" key="local.ships" var="ships"/>
 <fmt:message bundle="${loc}" key="local.status" var="status"/>
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
+
 <body>
 <ul>
     <li><a href="controller?command=pageAdminShips">${ships}</a></li>
@@ -33,6 +36,8 @@
     <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+    <li style="float:right"><a href="controller?command=pageAdminCruises&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=pageAdminCruises&local=ru">${ru}</a></li>
 </ul>
 <h1 align='center'>${admin_page}</h1>
 

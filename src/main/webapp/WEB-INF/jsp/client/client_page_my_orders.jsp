@@ -34,14 +34,16 @@
 <fmt:message bundle="${loc}" key="local.last_name" var="last_name"/>
 <fmt:message bundle="${loc}" key="local.email" var="email"/>
 <fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
-
-
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
 <body>
 <ul>
-    <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+    <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+    <li style="float:right"><a href="controller?command=clientPageMyOrders&page=1&userIdForOrder=${user.id}&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=clientPageMyOrders&page=1&userIdForOrder=${user.id}&local=ru">${ru}</a></li>
 </ul>
 <h1 align='center'>${client_page}</h1>
 

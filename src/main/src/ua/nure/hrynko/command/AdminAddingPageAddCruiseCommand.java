@@ -22,9 +22,9 @@ public class AdminAddingPageAddCruiseCommand extends Command {
 
     private static final Logger LOG = Logger.getLogger(AdminAddingPageAddCruiseCommand.class);
 
-    private  final transient CruiseDAO  cruiseDAO;
+    private  final transient CruiseDAO cruiseDAO;
 
-    public AdminAddingPageAddCruiseCommand( CruiseDAO  cruiseDAO) {
+    public AdminAddingPageAddCruiseCommand( CruiseDAO cruiseDAO) {
         this.cruiseDAO = cruiseDAO;
     }
     @Override

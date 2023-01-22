@@ -15,6 +15,7 @@ public class ClientPageGoToUpdatingAccountPageCommand extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOG.debug("ClientPageGoToUpdatingAccountPageCommand starts");
+
         LOG.debug("ClientPageGoToUpdatingAccountPageCommand finished");
         return Path.CLIENT_PAGE_UPDATE_ACCOUNT;
     }

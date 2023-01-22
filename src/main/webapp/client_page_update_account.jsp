@@ -19,6 +19,8 @@
 <fmt:message bundle="${loc}" key="local.basket" var="basket"/>
 <fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
 <fmt:message bundle="${loc}" key="local.cruises" var="cruises"/>
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
 <body>
 <ul>
@@ -27,6 +29,8 @@
     </li>
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>
+    <li style="float:right"><a href="controller?command=clientPageGoToUpdatingAccountPage&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=clientPageGoToUpdatingAccountPage&local=ru">${ru}</a></li>
 </ul>
 <div id="rightHeader">
     <%--===========================================================================
@@ -39,13 +43,6 @@
     <c:if test="${not empty userRole}">
         <c:out value="(${userRole.name})"/>
     </c:if>
-</div>
-<div align='right'>
-    <div style="display: inline-block; padding-right: 50px;">
-        <a href="controller?command=logout">
-            <button class="btn btn-primary btn-block btn-large">${logout}</button>
-        </a>
-    </div>
 </div>
 <div class='mydiv'>
     <h1 align='center'>${replenish}  ${deposit}</h1>

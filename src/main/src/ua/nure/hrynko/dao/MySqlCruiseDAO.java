@@ -170,7 +170,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
 
         String stringStartOfCruise = formatter.format(cruise.getStartOfCruise());
 
-        pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID_NINE);
+        pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID);
         pstmt.setString(1, cruise.getName());
         pstmt.setString(2, cruise.getDescription());
         pstmt.setDouble(3, cruise.getPrice());
@@ -195,7 +195,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
         Connection con = null;
         try {
             con = DBManager.getInstance().getConnection();
-            pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID_NINE);
+            pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_BY_ID);
             pstmt.setString(1, name);
             pstmt.setString(2, description);
             pstmt.setDouble(3, price);
@@ -236,7 +236,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
             pstmt.setString(7, status);
             pstmt.executeUpdate();
             con.commit();
-            LOG.trace("add tariff to SQL succesful--> ");
+            LOG.trace("add ship to SQL succesful--> ");
         } catch (SQLException ex) {
             LOG.trace("ERRor--> ");
             ex.printStackTrace();

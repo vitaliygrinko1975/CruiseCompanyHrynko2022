@@ -31,10 +31,7 @@ public class AdminPageCommand extends Command {
         LOG.debug("Command starts");
 
         List<User> userList = userDAO.findAllUsers();
-
         LOG.trace("Found in DB: userList --> " + userList);
-
-
         // put user order beans list to request
         request.setAttribute("userList", userList);
         LOG.trace("Set the request attribute: userList --> " + userList);

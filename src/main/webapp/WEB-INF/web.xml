@@ -65,25 +65,26 @@
         adminPageCruiseRemoveCruise adminPageRemoveUser adminGoToPageForUpdatingCruise adminUpdatingPageUpdateCruise
         adminGoToPageForAddingCruise adminAddingPageAddCruise adminGoToUpdatingPage adminGoToPageAddingUser
         adminUpdatingPageUpdateUser adminGoToPageAddingUser adminAddingPageAddUser pageAdminShips adminGoToPageForRentShip
-        adminRentingPageAddShipToCruiseHasShip
+        adminRentingPageAddShipToCruiseHasShip adminPageShipsRemoveShip adminGoToPageForAddingShip adminAddingPageAddShip
+        adminGoToPageForUpdatingShip adminUpdatingPageUpdateShip
       </param-value>
     </init-param>
     <init-param>
       <param-name>client</param-name>
-      <param-value>listClient clientPage AddToBasket goToBasket RemoveOneUnitFromBasket AddOneUnitInBasket
-        RemoveOnePositionFromBasket clientBasketConfirmOrderOfSelectedUnits cruiseFindByStartDate
-        cruiseFindByDuration ClientPageGoToTopUpYourAccount clientPageGoToUpdatingAccountPage ClientPageGoToMyProfile
+      <param-value>listClient clientPage addToBasket goToBasket removeOneUnitFromBasket addOneUnitInBasket
+        removeOnePositionFromBasket clientBasketConfirmOrderOfSelectedUnits cruiseFindByStartDate
+        cruiseFindByDuration clientPageGoToTopUpYourAccount clientPageGoToUpdatingAccountPage clientPageGoToMyProfile
         clientUpdatingPageUpdateYourProfile clientUpdatingPageUpdateAccount clientPageToPay
-        clientPageToGoPageTariffsForChooseTariffs clientPageMyOrders
+        clientPageMyOrders
       </param-value>
     </init-param>
     <init-param>
       <param-name>common</param-name>
-      <param-value>logout noCommand viewSettings</param-value>
+      <param-value>logout noCommand viewSettings goToWelcomeRegisteredUser</param-value>
     </init-param>
     <init-param>
       <param-name>out-of-control</param-name>
-      <param-value>loginPage login logout welcome signUpPage signUpUser </param-value>
+      <param-value>goToWelcomePage loginPage login logout signUpPage signUpUser </param-value>
     </init-param>
   </filter>
 

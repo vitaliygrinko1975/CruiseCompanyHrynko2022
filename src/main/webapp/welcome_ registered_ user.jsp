@@ -25,13 +25,18 @@
 <fmt:message bundle="${loc}" key="local.users" var="users"/>
 <fmt:message bundle="${loc}" key="local.orders" var="orders"/>
 <fmt:message bundle="${loc}" key="local.ships" var="ships"/>
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
+
 <body>
 <c:if test="${userRole.name eq 'client'}">
     <ul>
-        <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+        <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
         <li><a href="controller?command=clientPage">${cruises}</a>
         <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
         <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>
+        <li style="float:right"><a href="controller?command=goToWelcomeRegisteredUser&local=en">${en}</a></li>
+        <li style="float:right"><a href="controller?command=goToWelcomeRegisteredUser&local=ru">${ru}</a></li>
     </ul>
     <div align='center'>
             <%--===========================================================================
@@ -61,6 +66,8 @@
         <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
 
         <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+        <li style="float:right"><a href="controller?command=goToWelcomeRegisteredUser&local=en">${en}</a></li>
+        <li style="float:right"><a href="controller?command=goToWelcomeRegisteredUser&local=ru">${ru}</a></li>
     </ul>
     <div align='center'>
             <%--===========================================================================

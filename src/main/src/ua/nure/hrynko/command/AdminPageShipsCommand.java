@@ -2,7 +2,7 @@ package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
-import ua.nure.hrynko.dao.interfaces.ShipsDAO;
+import ua.nure.hrynko.dao.interfaces.ShipDAO;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.models.Ship;
 import javax.servlet.ServletException;
@@ -21,9 +21,9 @@ public class AdminPageShipsCommand extends Command {
 
 	private static final Logger LOG = Logger.getLogger(AdminPageShipsCommand.class);
 
-	private final transient ShipsDAO shipsDAO;
+	private final transient ShipDAO shipsDAO;
 
-	public AdminPageShipsCommand(ShipsDAO shipsDAO) {
+	public AdminPageShipsCommand(ShipDAO shipsDAO) {
 		this.shipsDAO = shipsDAO;
 	}
 
@@ -32,7 +32,6 @@ public class AdminPageShipsCommand extends Command {
 						  HttpServletResponse response) throws IOException, ServletException, AppException {
 
 		LOG.debug("AdminPageShipsCommand starts");
-
 		// get all ships items list
 		List<Ship> allShips = shipsDAO.findAllShips();
 		LOG.trace("Found in DB: allShips --> " + allShips);
@@ -41,6 +40,8 @@ public class AdminPageShipsCommand extends Command {
 		// put all ships items list to the request
 		request.setAttribute("allShips", allShips);
 		LOG.trace("Set the request attribute: allShips --> " + allShips);
+//		session.setAttribute("freeShipsFromRange", null);
+//		LOG.trace("Set the session attribute: freeShipsFromRange --> " + null);
 
 		LOG.debug("AdminPageShipsCommand finished");
 

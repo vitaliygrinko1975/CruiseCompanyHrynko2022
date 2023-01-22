@@ -74,7 +74,6 @@ public class LoginCommand extends Command {
         session.setAttribute("mapForBasket", mapForBasket);
         LOG.trace("Set the session attribute: mapForBasket --> " + mapForBasket);
         LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
-
         LOG.debug("LoginCommand finished");
 
         return forward;

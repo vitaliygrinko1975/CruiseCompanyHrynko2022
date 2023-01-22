@@ -55,11 +55,11 @@ public class AdminPageOrderCommand extends Command {
         request.setAttribute("allItemOfOrdersViewWithLimit", allItemOfOrdersViewWithLimit);
         LOG.trace("Set the request attribute: allItemOfOrdersViewWithLimit --> " + allItemOfOrdersViewWithLimit);
 
-
         // put numberPage to the session
         session.setAttribute("numberPage", numberPage);
         LOG.trace("Set the request attribute: numberPage --> " + numberPage);
         LOG.debug("AdminPageOrderCommand finished");
+
 
         return Path.PAGE_ADMIN_ORDERS;
     }

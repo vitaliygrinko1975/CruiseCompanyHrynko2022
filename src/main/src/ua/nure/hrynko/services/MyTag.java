@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class MyTag extends TagSupport{
     Logger logger = Logger.getLogger(MyTag.class);
 
-    /* Видає поточну дату */
+    /*Выдает текущую дату */
     @Override
     public int doStartTag() throws JspException {
         JspWriter out = pageContext.getOut();

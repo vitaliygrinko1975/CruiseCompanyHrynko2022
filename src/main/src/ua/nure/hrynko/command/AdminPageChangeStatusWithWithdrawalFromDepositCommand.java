@@ -2,12 +2,10 @@ package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
-import ua.nure.hrynko.dao.MySqlOrderDAO;
 import ua.nure.hrynko.dao.MySqlOrderViewDAO;
 import ua.nure.hrynko.models.OrderView;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,12 +54,6 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
          int countAllCruises = allOrdersViewList.size();
 
 
-        if(numberPage >0){
-        int total = 5;
-        int start = (numberPage - 1) * total;
-
-            allItemOfOrdersViewWithLimit = orderViewDAO.findAllItemOfOrderViewWithLimit(start, total);
-    }
     // put count of cruises  to the  session
         session.setAttribute("countAllCruises",countAllCruises);
         LOG.trace("Set the session attribute: countAllCruises --> "+ countAllCruises);

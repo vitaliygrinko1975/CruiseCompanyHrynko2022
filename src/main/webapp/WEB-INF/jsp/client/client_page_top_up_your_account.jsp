@@ -22,12 +22,16 @@
 <fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
 <fmt:message bundle="${loc}" key="local.balance_recharge" var="balance_recharge"/>
 <fmt:message bundle="${loc}" key="local.basket" var="basket"/>
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 <body>
 <ul>
-    <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+    <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
     <li><a href="controller?command=clientPage">${cruises}</a>
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>
+    <li style="float:right"><a href="controller?command=clientPageGoToMyProfile&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=clientPageGoToMyProfile&local=ru">${ru}</a></li>
 </ul>
 <div align='center'>
     <%--===========================================================================

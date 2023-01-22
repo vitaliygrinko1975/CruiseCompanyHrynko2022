@@ -10,6 +10,7 @@ import ua.nure.hrynko.exception.DBException;
 import ua.nure.hrynko.models.Account;
 import ua.nure.hrynko.models.Entity;
 import ua.nure.hrynko.models.User;
+import ua.nure.hrynko.services.SignUpValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,9 @@ public class AdminAddingPageAddUserCommand extends Command {
 
     private static final Logger LOG = Logger.getLogger(AdminAddingPageAddUserCommand.class);
 
-    private  final transient UserDAO userDAO;
+    private final transient UserDAO userDAO;
 
-    private  final transient AccountDAO accountDAO;
+    private final transient AccountDAO accountDAO;
 
     public AdminAddingPageAddUserCommand(UserDAO userDAO, AccountDAO accountDAO) {
         this.userDAO = userDAO;
@@ -39,8 +40,6 @@ public class AdminAddingPageAddUserCommand extends Command {
             throws IOException, ServletException, AppException {
 
         LOG.debug("AdminAddingPageAddUserCommand starts");
-
-        HttpSession session = request.getSession();
 
         String login = request.getParameter("addLoginUser");
         LOG.trace("Request parameter: login --> " + login);
@@ -60,31 +59,27 @@ public class AdminAddingPageAddUserCommand extends Command {
         String phone = request.getParameter("addPhoneUser");
         LOG.trace("Request parameter: phone --> " + phone);
 
-
-        //validator start
-        List<User> userList = userDAO.findAllUsers();
-        boolean matchToEmail = userList.stream().anyMatch(number -> number.getEmail().equalsIgnoreCase(email));
-        boolean matchToLogins = userList.stream().anyMatch(number -> number.getLogin().equalsIgnoreCase(login));
-        if (matchToLogins) {
-            String message = "Этот логин уже существует. Введите другое.";
-            session.setAttribute("message", message);
-            return Path.PAGE_ERROR_PAGE;
-        }
-        if (matchToEmail) {
-            String message = "Пользователь с таким адресом электронной почты уже существует. Введите другой адрес.";
-            session.setAttribute("message", message);
-            return Path.PAGE_ERROR_PAGE;
-        }
-       // validator finish
-
+        HttpSession session = request.getSession();
         //START TRANSACTION
         Connection con = DBManager.getInstance().getConnection();
         try {
             con.setAutoCommit(false);
-            accountDAO.addAccountsDb(con,0);
+            List<User> userList = userDAO.findAllUsers(con);
+            SignUpValidator validator = new SignUpValidator();
+            if (validator.checkForUniquenessLogin(userList, login)) {
+                String message = "Этот логин уже существует. Введите другое.";
+                session.setAttribute("message", message);
+                return Path.PAGE_ERROR_PAGE;
+            }
+            if (validator.checkForUniquenessEmail(userList, email)) {
+                String message = "Пользователь с таким адресом электронной почты уже существует. Введите другой адрес.";
+                session.setAttribute("message", message);
+                return Path.PAGE_ERROR_PAGE;
+            }
+            accountDAO.addAccountsDb(con, 0);
             List<Account> listAccounts = accountDAO.findAllAccounts(con);
             int accountsId = listAccounts.stream().map(Entity::getId).max(Integer::compare).get();
-            userDAO.addToUsersDb(con,login, password, firstName, lastName, email, phone,2, accountsId);
+            userDAO.addToUsersDb(con, login, password, firstName, lastName, email, phone, 2, accountsId);
             LOG.trace("add user to SQL succesful--> ");
             con.commit();
             LOG.debug("AdminAddingPageAddUserCommand finished");
@@ -101,5 +96,5 @@ public class AdminAddingPageAddUserCommand extends Command {
             DBManager.close(con);
         }
     }
-    }
+}
 

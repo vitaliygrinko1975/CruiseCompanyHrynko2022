@@ -28,12 +28,17 @@
 <fmt:message bundle="${loc}" key="local.deposit" var="deposit"/>
 <fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
 <fmt:message bundle="${loc}" key="local.status" var="status"/>
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
+
 <body>
 <ul>
-    <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+    <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>
+    <li style="float:right"><a href="controller?command=clientPage&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=clientPage&local=ru">${ru}</a></li>
 </ul>
 <div align='right'>
     <c:set var="count" value="0"/>
@@ -91,7 +96,7 @@
                 <td>
                     <c:if test="${cruise.capacity ne '0' and cruise.status eq 'Не начался'}">
                     <form method="get" action="controller">
-                        <input type="hidden" name="command" value="AddToBasket"/>
+                        <input type="hidden" name="command" value="addToBasket"/>
                         <input type="hidden" name="userIdForBasketUsersHasCruisesButt" value=${user.id}>
                         <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.id}"
                                 class="btn btn-primary btn-block btn-large">${Add_to_cart}

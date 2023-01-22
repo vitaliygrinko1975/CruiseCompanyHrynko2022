@@ -19,9 +19,16 @@
 <fmt:message bundle="${loc}" key="local.registration" var="registration"/>
 <fmt:message bundle="${loc}" key="local.login" var="login"/>
 <fmt:message bundle="${loc}" key="local.registration" var="registration"/>
-
-
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
+<fmt:message bundle="${loc}" key="local.home" var="home"/>
 <body>
+<ul>
+    <li><a href="controller?command=goToWelcomePage">${home}</a>
+
+    <li style="float:right"><a href="controller?command=loginPage&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=loginPage&local=ru">${ru}</a></li>
+</ul>
 <div class="login">
     <h1>${login}</h1>
     <form method="post" action="controller">

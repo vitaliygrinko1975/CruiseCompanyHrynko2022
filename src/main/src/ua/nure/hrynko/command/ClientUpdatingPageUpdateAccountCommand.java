@@ -57,8 +57,6 @@ public class ClientUpdatingPageUpdateAccountCommand extends Command {
 
         request.getSession().setAttribute("messageAboutPay", message);
 
-
-
         LOG.debug("ClientUpdatingPageUpdateAccountCommand finished");
 
 

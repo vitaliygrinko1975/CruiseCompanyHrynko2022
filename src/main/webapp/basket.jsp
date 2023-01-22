@@ -28,15 +28,18 @@
 <fmt:message bundle="${loc}" key="local.cruise_duration" var="cruise_duration"/>
 <fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
 <fmt:message bundle="${loc}" key="local.balance_recharge" var="balance_recharge"/>
-
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 <body>
 <ul>
-    <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
-    <li><a href="controller?command=ClientPageGoToTopUpYourAccount&userIdForTopUpYourAccount=${user.id}">
+    <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+    <li><a href="controller?command=clientPageGoToTopUpYourAccount&userIdForTopUpYourAccount=${user.id}">
         ${balance_recharge}</a></li>
     <li><a href="controller?command=clientPage">${cruises}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+    <li style="float:right"><a href="controller?command=goToBasket&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=goToBasket&local=ru">${ru}</a></li>
 </ul>
 <div align='center'>
     <%--===========================================================================
@@ -77,20 +80,20 @@
                     <td>
                         <c:if test="${cruise.value > 0}">
                             <form method="get" action="controller">
-                                <input type="hidden" name="command" value="RemoveOneUnitFromBasket"/>
+                                <input type="hidden" name="command" value="removeOneUnitFromBasket"/>
                                 <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt"
                                         value="${cruise.key.id}" class="btn btn-primary btn-block btn-large"> - </form>
                         </c:if>
                     </td>
                     <td>
                         <form method="get" action="controller">
-                            <input type="hidden" name="command" value="AddOneUnitInBasket"/>
+                            <input type="hidden" name="command" value="addOneUnitInBasket"/>
                             <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.key.id}"
                                     class="btn btn-primary btn-block btn-large"> + </form>
                     </td>
                     <td>
                         <form method="get" action="controller">
-                            <input type="hidden" name="command" value="RemoveOnePositionFromBasket"/>
+                            <input type="hidden" name="command" value="removeOnePositionFromBasket"/>
                             <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.key.id}"
                                     class="btn btn-primary btn-block btn-large"> x
                         </form>

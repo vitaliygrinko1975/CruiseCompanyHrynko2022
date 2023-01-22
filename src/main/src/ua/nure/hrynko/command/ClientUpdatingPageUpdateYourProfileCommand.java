@@ -2,7 +2,6 @@ package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
-import ua.nure.hrynko.dao.interfaces.CruiseDAO;
 import ua.nure.hrynko.dao.interfaces.UserDAO;
 import ua.nure.hrynko.exception.AppException;
 
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class ClientUpdatingPageUpdateYourProfileCommand extends Command {

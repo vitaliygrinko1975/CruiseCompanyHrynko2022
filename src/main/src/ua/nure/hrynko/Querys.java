@@ -15,6 +15,8 @@ public class Querys {
 
     public static final String SQL_FIND_CRUISE_BY_ID = "SELECT * FROM cruises WHERE id=?";
 
+    public static final String SQL_FIND_SHIP_BY_ID = "SELECT * FROM ships WHERE id=?";
+
     public static final String SQL_FIND_ORDER_BY_ID = "SELECT * FROM orders WHERE id=?";
 
     public static final String SQL_FIND_CRUISE_BY_START_OF_CRUISE = "SELECT * FROM cruises WHERE DATE (start_of_cruise)=?";
@@ -56,10 +58,10 @@ public class Querys {
             "email=?,phone=?,roles_id=?, accounts_id=? WHERE id=?";
     public static final String SQL_UPDATE_FOUR_PARAMETERS_OF_USERS_BY_ID = "UPDATE users SET first_name=?, last_name=?," +
             "email=?,phone=? WHERE id=?";
-    public static final String SQL_UPDATE_CRUISE_BY_ID_EIGHT = "UPDATE cruises SET name=?, description=?, price=?, ships_id=?," +
-            "capacity=?,start_of_cruise=?,duration=? WHERE id=?";
-    public static final String SQL_UPDATE_CRUISE_BY_ID_NINE = "UPDATE cruises SET name=?, description=?, price=?," +
+    public static final String SQL_UPDATE_CRUISE_BY_ID = "UPDATE cruises SET name=?, description=?, price=?," +
             "capacity=?,start_of_cruise=?,duration=?,status=? WHERE id=?";
+
+    public static final String SQL_UPDATE_SHIP_BY_ID = "UPDATE ships SET name=?, description=?,capacity=? WHERE id=?";
     public static final String SQL_UPDATE_ORDERS_BY_OBJECT_OF_ORDERS = "UPDATE orders" +
             " SET users_id=?,cruises_id=?,status=? WHERE id=?";
     public static final String SQL_UPDATE_ORDERS_BY_ID = "UPDATE orders" +
@@ -73,11 +75,16 @@ public class Querys {
 
     public static final String SQL_DELETE_CRUISE_BY_ID = "DELETE FROM cruises WHERE id = ?";
 
+    public static final String SQL_DELETE_SHIP_BY_ID = "DELETE FROM ships WHERE id = ?";
+
     //insert
     public static final String SQL_INSERT_USER = "INSERT INTO users (login, password, first_name, last_name, email,phone," +
             "roles_id, accounts_id) VALUE (?,?,?,?,?,?,?,?)";
     public static final String SQL_INSERT_CRUISE = "INSERT INTO cruises (name,description, price,capacity," +
             "start_of_cruise,duration,status) VALUE (?,?,?,?,?,?,?)";
+
+    public static final String SQL_INSERT_SHIP = "INSERT INTO ships (name,description,capacity) VALUE (?,?,?)";
+
        public static final String SQL_INSERT_TO_ORDERS = "INSERT INTO orders (users_id, cruises_id,status)  VALUE (?,?,?)";
     public static final String SQL_INSERT_TO_CRUISES_HAS_SHIPS =
             "INSERT INTO cruises_has_ships (cruises_id,ships_id,start_of_contract,end_of_contract,status)  VALUE (?,?,?,?,?)";

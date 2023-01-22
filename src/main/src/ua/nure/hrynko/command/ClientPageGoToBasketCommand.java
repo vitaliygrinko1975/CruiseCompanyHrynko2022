@@ -3,7 +3,6 @@ package ua.nure.hrynko.command;
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.exception.AppException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +21,6 @@ public class ClientPageGoToBasketCommand extends Command {
     public String execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("ClientPageGoToBasketCommand starts");
-
 
         LOG.debug("ClientPageGoToBasketCommand finished");
 

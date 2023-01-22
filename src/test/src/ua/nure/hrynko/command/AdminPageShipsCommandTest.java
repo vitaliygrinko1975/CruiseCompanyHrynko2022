@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class AdminPageShipsCommandTest {
     @Mock
@@ -38,6 +39,7 @@ class AdminPageShipsCommandTest {
         AdminPageShipsCommand adminPageShipsCommand =
                 new AdminPageShipsCommand(mySqlShipMock);
         String pagePath = adminPageShipsCommand.execute(httpServletRequest, httpServletResponse);
+        verify(httpServletRequest,times(1)).getSession();
         assertEquals(Path.PAGE_ADMIN_SHIPS, pagePath);
     }
 }

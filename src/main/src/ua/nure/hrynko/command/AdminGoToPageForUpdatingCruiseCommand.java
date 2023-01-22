@@ -29,7 +29,7 @@ public class AdminGoToPageForUpdatingCruiseCommand extends Command {
         int id = Integer.parseInt(request.getParameter("cruiseIdForUpdateCruiseButt"));
         LOG.trace("Request parameter: id --> " + id);
         Cruise cruise = cruiseDAO.findCruiseById(id);
-        LOG.trace("Update cruise: --> " + cruise);
+        LOG.trace("Update cruise with DB  from update: --> " + cruise);
         request.setAttribute("cruise", cruise);
         LOG.trace("User set to Attribute: --> " + cruise);
         LOG.debug("AdminGoToPageForUpdatingCruiseCommand finished");
