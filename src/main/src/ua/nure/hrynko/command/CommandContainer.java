@@ -46,11 +46,10 @@ public class CommandContainer {
 		commands.put("clientUpdatingPageUpdateAccount", new ClientUpdatingPageUpdateAccountCommand(new MySqlAccountDAO()));
 		commands.put("clientUpdatingPageUpdateYourProfile", new ClientUpdatingPageUpdateYourProfileCommand(new MySqlUserDAO()));
 		commands.put("clientPageMyOrders", new ClientPageMyOrdersCommand(new MySqlOrderViewDAO()));
-
+		commands.put("clientPageMyProfileFileUpload", new ClientPageMyProfileFileUploadCommand());
 
 		// admin commands
 		commands.put("adminPage", new AdminPageCommand(new MySqlUserDAO()));
-
 		commands.put("pageAdminCruises", new AdminPageCruisesCommand(new MySqlCruiseDAO()));
 		commands.put("pageAdminOrders", new AdminPageOrderCommand(new MySqlOrderViewDAO()));
 		commands.put("pageAdminChangeStatusWithWithdrawalFromDeposit",

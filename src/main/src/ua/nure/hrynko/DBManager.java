@@ -137,6 +137,11 @@ public final class DBManager {
         close(stmt);
         close(con);
     }
+    public static void close(ResultSet rs, Statement stmt) {
+        close(rs);
+        close(stmt);
+    }
+
 
     /**
      * Rollbacks a connection.

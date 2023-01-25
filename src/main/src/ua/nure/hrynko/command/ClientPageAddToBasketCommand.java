@@ -20,8 +20,6 @@ public class ClientPageAddToBasketCommand extends Command {
     private static final long serialVersionUID = 7732286214029478505L;
     private static final Logger LOG = Logger.getLogger(ClientPageAddToBasketCommand.class);
     private final transient MySqlCruiseDAO cruiseDAO;
-
-
     public ClientPageAddToBasketCommand(MySqlCruiseDAO cruiseDAO) {
         this.cruiseDAO = cruiseDAO;
     }

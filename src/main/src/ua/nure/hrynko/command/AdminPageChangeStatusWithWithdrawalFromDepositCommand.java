@@ -6,6 +6,8 @@ import ua.nure.hrynko.dao.MySqlOrderViewDAO;
 import ua.nure.hrynko.models.OrderView;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
+import ua.nure.hrynko.services.Paginations;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +42,7 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
                           HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("AdminPageChangeStatusWithWithdrawalFromDepositCommand starts");
         HttpSession session = request.getSession();
+        Paginations paginations = new Paginations();
         int orderIdForUpdate = Integer.parseInt(request.getParameter("ordersViewIdForUpdateButt"));
         LOG.trace("Request parameter: ordersViewIdForUpdateButt --> " + orderIdForUpdate);
         String status = request.getParameter("status");
@@ -57,6 +60,9 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
     // put count of cruises  to the  session
         session.setAttribute("countAllCruises",countAllCruises);
         LOG.trace("Set the session attribute: countAllCruises --> "+ countAllCruises);
+
+        //get list with limit
+        List<OrderView> allItemOfOrdersViewWithLimit = paginations.makePaginationForOrders(numberPage);
 
     // put cruises items list to the request
         session.setAttribute("allItemOfOrdersViewWithLimit",allItemOfOrdersViewWithLimit);

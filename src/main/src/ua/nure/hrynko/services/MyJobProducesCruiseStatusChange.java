@@ -47,7 +47,8 @@ public class MyJobProducesCruiseStatusChange implements Job {
                     mySqlCruiseDAO.updateCruisesDb(con, itemCruise);
                     LOG.trace("Change status on--> " + "Не начался");
                 }
-                if (currentDateInMilliseconds >= cruiseStartInMilliseconds) {
+                if (currentDateInMilliseconds >= cruiseStartInMilliseconds &&
+                        currentDateInMilliseconds < cruiseFinishInMilliseconds) {
                     itemCruise.setStatus("Начался");
                     mySqlCruiseDAO.updateCruisesDb(con, itemCruise);
                     LOG.trace("Change status on--> " + "Начался");

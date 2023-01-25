@@ -40,7 +40,8 @@
 <fmt:message bundle="${loc}" key="local.basket" var="basket"/>
 <fmt:message bundle="${loc}" key="local.my_orders" var="my_orders"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
-<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>сhoose_file_to_upload_in_server
+<fmt:message bundle="${loc}" key="local.select_file_to_upload_in_server" var="select_file_to_upload_in_server"/>upload
 <body>
 <ul>
     <li><a href="controller?command=clientPageGoToTopUpYourAccount&userIdForTopUpYourAccount=${user.id}">
@@ -67,15 +68,17 @@
     </c:if>
 </div>
 
-<%--<div align='right'>--%>
-<%--<div style="display: inline-block; padding-right: 50px;">--%>
-<%--    <h3> Загрузите данные </h3>--%>
-<%--    <form align='center' action="upload" method="post" enctype="multipart/form-data">--%>
-<%--        <input type="file" name="file"/>--%>
-<%--        <button class="btn btn-primary btn-block btn-large">Загрузить</button>--%>
-<%--    </form>--%>
-<%--</div>--%>
-<%--</div>--%>
+<div align='right'>
+<div style="display: inline-block; padding-right: 50px;">
+    <div>
+        <h3>${select_file_to_upload_in_server}</h3>
+        <form action="controller?command=clientPageMyProfileFileUpload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <input type="submit" value="upload" />
+        </form>
+    </div>
+</div>
+</div>
     <div class='mydiv'>
         <h1 align='center'>${update}</h1>
         <form method='post' action="controller">

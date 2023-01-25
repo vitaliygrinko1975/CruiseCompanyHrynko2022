@@ -57,7 +57,7 @@
             <td>${ships_id }</td>
             <td>${start_of_contract}</td>
             <td>${end_of_contract }</td>
-            <td>${status_of_}</td>
+            <td>${status_of_cruise}</td>
         </tr>
         <%--@elvariable id="allCruisesHasShipList" type="java.util.List"--%>
         <c:forEach var="itemCruisesHasShip" items="${allCruisesHasShipList}">

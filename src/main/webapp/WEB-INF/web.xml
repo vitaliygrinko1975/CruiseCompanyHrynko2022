@@ -75,7 +75,7 @@
         removeOnePositionFromBasket clientBasketConfirmOrderOfSelectedUnits cruiseFindByStartDate
         cruiseFindByDuration clientPageGoToTopUpYourAccount clientPageGoToUpdatingAccountPage clientPageGoToMyProfile
         clientUpdatingPageUpdateYourProfile clientUpdatingPageUpdateAccount clientPageToPay
-        clientPageMyOrders
+        clientPageMyOrders clientPageMyProfileFileUpload
       </param-value>
     </init-param>
     <init-param>

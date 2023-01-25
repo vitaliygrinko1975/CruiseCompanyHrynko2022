@@ -63,8 +63,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
                 allCruisesList.add(extractCruises(rs));
             }
             LOG.trace("find all item of table Orders succesful--> ");
-            DBManager.close(rs);
-            DBManager.close(stmt);
+        DBManager.close(rs,stmt);
 
         return allCruisesList;
     }
@@ -106,8 +105,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
         if (rs.next()) {
             cruise = extractCruises(rs);
         }
-        DBManager.close(rs);
-        DBManager.close(pstmt);
+        DBManager.close(rs,pstmt);
         return cruise;
     }
 
@@ -122,7 +120,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
             pstmt = con.prepareStatement(Querys.SQL_FIND_CRUISE_BY_START_OF_CRUISE);
             pstmt.setString(1,date);
             rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 allCruisesList.add(extractCruises(rs));
             }
             con.commit();
@@ -146,7 +144,7 @@ public class MySqlCruiseDAO implements CruiseDAO {
             pstmt = con.prepareStatement(Querys.SQL_FIND_CRUISE_BY_DURATION);
             pstmt.setInt(1,duration);
             rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 allCruisesList.add(extractCruises(rs));
             }
             con.commit();
@@ -182,8 +180,8 @@ public class MySqlCruiseDAO implements CruiseDAO {
 
         pstmt.executeUpdate();
 
-        DBManager.close(rs);
-        DBManager.close(pstmt);
+        DBManager.close(rs,pstmt);
+
     }
 
 
