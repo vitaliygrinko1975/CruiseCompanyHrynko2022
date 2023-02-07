@@ -33,7 +33,7 @@
 
 <body>
 <ul>
-    <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+    <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}&accountsId=${user.accountsId}">${my_profile}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>

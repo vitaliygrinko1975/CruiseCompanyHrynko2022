@@ -38,7 +38,7 @@
 
 <body>
 <ul>
-    <li><a href="controller?command=adminPage">${users}</a></li>
+    <li><a href="controller?command=adminPage&page=1">${users}</a></li>
     <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
@@ -88,7 +88,8 @@
                     </c:forEach>
                 </table>
                 <div class="pagination">
-                    <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
+                    <%--@elvariable id="countAllOrders" type="java"--%>
+                    <c:forEach begin="1" end="${Math.ceil(countAllOrders*1.0/5)}" var="i">
                         <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>
                     </c:forEach>
                 </div>

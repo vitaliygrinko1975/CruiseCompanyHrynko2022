@@ -49,6 +49,7 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
         }
         return allItemOfOrderViewList;
     }
+
     @Override
     public List<OrderView> findAllIItemOfOrderViewByUserId(int userId) throws DBException {
         List<OrderView> listAllIItemOfOrderViewByUserId = new ArrayList<>();
@@ -73,7 +74,6 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
         }
         return listAllIItemOfOrderViewByUserId;
     }
-
 
 
     @Override
@@ -128,6 +128,30 @@ public class MySqlOrderViewDAO implements OrderViewDAO {
         }
         return listAllIItemOfOrderViewWithLimit;
     }
+
+    @Override
+    public int countingTheNumberOfRecordsToOrderViewDb() throws DBException {
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        int result;
+        try {
+            con = DBManager.getInstance().getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(Querys.SQL_COUNT_ITEMS_IN_ORDERS_VIEW);
+            rs.next();
+            result = rs.getInt(1);
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            LOG.error("cannot select count all items orders view", ex);
+            throw new DBException("cannot select count all items orders view", ex);
+        } finally {
+            DBManager.close(con, stmt, rs);
+        }
+        return result;
+    }
+
     @Override
     public OrderView extractOrdersView(ResultSet rs) throws SQLException {
 

@@ -43,6 +43,7 @@ public class CommandAccessFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         LOG.debug("Filter starts");
+        //get parameter "local" from request and set attribute "local" to session
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession();
         String local = request.getParameter("local");
@@ -97,7 +98,7 @@ public class CommandAccessFilter implements Filter {
 
     }
 
-    public void init(FilterConfig fConfig) throws ServletException {
+    public void init(FilterConfig fConfig){
         LOG.debug("Filter initialization starts");
 
         // roles

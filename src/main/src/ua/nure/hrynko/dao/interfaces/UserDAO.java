@@ -20,6 +20,8 @@ public interface UserDAO {
 
     List<User> findAllUsers(Connection con) throws SQLException;
 
+    int countingTheNumberOfRecordsToUserDb() throws DBException;
+
     void addToUsersDb(String login, String password, String firstName, String lastName, String email, String phone,
                       boolean blocked, int roleId, int accountsId) throws DBException;
 
@@ -35,4 +37,6 @@ public interface UserDAO {
     User extractUser(ResultSet rs) throws SQLException;
 
     void updateUserToDb(int id, String firstName, String lastName, String email, String phone) throws DBException;
+
+    List<User> findAllItemOfUserWithLimit(int start, int total) throws DBException;
 }

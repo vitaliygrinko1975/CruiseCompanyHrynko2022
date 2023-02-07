@@ -13,3 +13,4 @@
               connectionProperties="useUnicode=yes;characterEncoding=utf8;"
               url="jdbc:mysql://localhost:3306/cruises?serverTimezone=UTC"/>
 </Context>
+<!--        useSSL=false;-->

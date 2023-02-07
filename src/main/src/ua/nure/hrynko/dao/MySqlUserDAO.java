@@ -7,6 +7,7 @@ import ua.nure.hrynko.Fields;
 import ua.nure.hrynko.Querys;
 
 import ua.nure.hrynko.dao.interfaces.UserDAO;
+import ua.nure.hrynko.models.OrderView;
 import ua.nure.hrynko.models.User;
 import ua.nure.hrynko.exception.DBException;
 import ua.nure.hrynko.exception.Messages;
@@ -117,6 +118,34 @@ public class MySqlUserDAO implements UserDAO {
         return allUserList;
     }
 
+    @Override
+    public List<User> findAllItemOfUserWithLimit(int start, int total) throws DBException {
+        List<User> listAllIItemOfUserWithLimit = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_FIND_ALL_ITEM_ON_USER_WITH_LIMIT);
+            pstmt.setInt(1, start);
+            pstmt.setInt(2, total);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                listAllIItemOfUserWithLimit.add(extractUser(rs));
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            LOG.error("cannot select all items user with limit ", ex);
+            throw new DBException("cannot select all items user with limit", ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return listAllIItemOfUserWithLimit;
+    }
+
+
+
     // //////////////////////////////////////////////////////////
     // Entity access methods (for transactions)
     // //////////////////////////////////////////////////////////
@@ -135,6 +164,29 @@ public class MySqlUserDAO implements UserDAO {
 
         return allUserList;
     }
+    @Override
+    public int countingTheNumberOfRecordsToUserDb() throws DBException {
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        int result;
+        try {
+            con = DBManager.getInstance().getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(Querys.SQL_COUNT_ITEMS_IN_USER);
+            rs.next();
+            result = rs.getInt(1);
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            LOG.error("cannot select count all items user", ex);
+            throw new DBException("cannot select count all items user", ex);
+        } finally {
+            DBManager.close(con, stmt, rs);
+        }
+        return result;
+    }
+
 
     @Override
     public void addToUsersDb(String login, String password, String firstName, String lastName, String email, String phone,

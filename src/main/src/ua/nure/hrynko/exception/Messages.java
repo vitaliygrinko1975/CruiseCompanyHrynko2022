@@ -12,9 +12,6 @@ public class Messages {
 
 	public static final String ERR_CANNOT_OBTAIN_CONNECTION = "Cannot obtain a connection from the pool";
 
-
-	public static final String ERR_CANNOT_OBTAIN_TARIFFS_ITEMS = "Cannot obtain tariffs items";
-
 	public static final String ERR_CANNOT_OBTAIN_USER_BY_ID = "Cannot obtain a user by its id";
 
 	public static final String ERR_CANNOT_OBTAIN_CRUISE_BY_ID = "Cannot obtain a cruise by its id";

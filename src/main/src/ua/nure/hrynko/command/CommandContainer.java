@@ -1,6 +1,8 @@
 package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
+import ua.nure.hrynko.command.admin.*;
+import ua.nure.hrynko.command.client.*;
 import ua.nure.hrynko.dao.*;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
 import java.util.Map;
@@ -39,14 +41,14 @@ public class CommandContainer {
 				new ClientBasketConfirmOrderOfSelectedUnitsCommand(new AllMethodsWithTransactions()));
 		commands.put("cruiseFindByStartDate", new ClientPageCruiseFindByStartDateCommand(new MySqlCruiseDAO()));
 		commands.put("cruiseFindByDuration", new ClientPageCruiseFindByDurationCommand(new MySqlCruiseDAO()));
-		commands.put("clientPageGoToMyProfile", new ClientPageGoToMyProfileCommand());
+		commands.put("clientPageGoToMyProfile", new ClientPageGoToMyProfileCommand(new MySqlAccountDAO()));
 		commands.put("clientPageGoToTopUpYourAccount",
 				new ClientPageGoToTopUpYourAccountCommand(new MySqlUserDAO(),new MySqlAccountDAO()));
 		commands.put("clientPageGoToUpdatingAccountPage", new ClientPageGoToUpdatingAccountPageCommand());
 		commands.put("clientUpdatingPageUpdateAccount", new ClientUpdatingPageUpdateAccountCommand(new MySqlAccountDAO()));
 		commands.put("clientUpdatingPageUpdateYourProfile", new ClientUpdatingPageUpdateYourProfileCommand(new MySqlUserDAO()));
 		commands.put("clientPageMyOrders", new ClientPageMyOrdersCommand(new MySqlOrderViewDAO()));
-		commands.put("clientPageMyProfileFileUpload", new ClientPageMyProfileFileUploadCommand());
+		commands.put("clientPageMyProfileFileUpload", new ClientPageMyProfileFileUploadCommand(new MySqlAccountDAO()));
 
 		// admin commands
 		commands.put("adminPage", new AdminPageCommand(new MySqlUserDAO()));
@@ -68,7 +70,7 @@ public class CommandContainer {
 		commands.put("adminUpdatingPageUpdateUser", new AdminUpdatingPageUpdateUserCommand(new MySqlUserDAO()));
 		commands.put("adminGoToPageAddingUser", new AdminGoToPageForAddingUserCommand());
 		commands.put("adminAddingPageAddUser",
-				new AdminAddingPageAddUserCommand(MySqlUserDAO.getInstance(),new MySqlAccountDAO()));
+				new AdminAddingPageAddUserCommand(new  AllMethodsWithTransactions()));
 
 		commands.put("pageAdminShips", new AdminPageShipsCommand(new MySqlShipDAO()));
 		commands.put("adminGoToPageForRentShip", new AdminGoToPageForRentShipCommand());

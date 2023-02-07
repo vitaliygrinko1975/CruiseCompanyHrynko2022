@@ -39,8 +39,7 @@
     </form>
     <form  id="registration" method="get" action="controller">
         <input type="hidden" name="command" value="signUpPage"/>
-        <button type="submit" class="btn btn-primary btn-block btn-large">${registration}
-        </button>
+        <button type="submit" class="btn btn-primary btn-block btn-large">${registration}</button>
     </form>
 </div>
 <div align='center' class="g-recaptcha" data-sitekey="6LcnqxkkAAAAAEiO0dh5hcpAmxy-sgibiy3hbbAx" required="required"></div>

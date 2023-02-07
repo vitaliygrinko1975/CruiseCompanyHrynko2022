@@ -12,5 +12,8 @@ public interface OrderViewDAO {
     List<OrderView> findAllItemOfOrderViewWithLimit(int start, int total) throws DBException;
     List<OrderView> findAllIItemOfOrderViewByUserIdWithLimit(int id, int start, int total) throws DBException;
     List<OrderView> findAllItemOfOrdersView() throws DBException;
+
+    int countingTheNumberOfRecordsToOrderViewDb() throws DBException;
+
     OrderView extractOrdersView(ResultSet rs) throws SQLException;
 }

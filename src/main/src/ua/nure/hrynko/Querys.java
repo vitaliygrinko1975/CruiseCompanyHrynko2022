@@ -25,6 +25,8 @@ public class Querys {
 
     public static final String SQL_FIND_ALL_USER = "SELECT * FROM users";
 
+    public static final String SQL_FIND_ALL_ITEM_ON_USER_WITH_LIMIT = "SELECT * FROM users LIMIT ?,?";
+
     public static final String SQL_FIND_ALL_ITEM_ON_ORDERS = "SELECT * FROM orders";
 
     public static final String SQL_FIND_ALL_ITEM_OF_CRUISE_HAS_SHIPS = "SELECT * FROM cruises_has_ships";
@@ -40,6 +42,10 @@ public class Querys {
 
     public static final String SQL_FIND_ALL_ITEM_ON_ORDERS_VIEW_BY_USER_ID =
             "SELECT * FROM orders_view WHERE users_id=?";
+
+    public static final String SQL_COUNT_ITEMS_IN_ORDERS_VIEW = "SELECT COUNT(*) FROM orders_view";
+
+    public static final String SQL_COUNT_ITEMS_IN_USER = "SELECT COUNT(*) FROM users";
 
     public static final String SQL_FIND_ALL_ROLE = "SELECT * FROM roles";
 
@@ -66,7 +72,7 @@ public class Querys {
             " SET users_id=?,cruises_id=?,status=? WHERE id=?";
     public static final String SQL_UPDATE_ORDERS_BY_ID = "UPDATE orders" +
             " SET status=? WHERE id=?";
-    public static final String SQL_UPDATE_ACCOUNT_BY_ID = "UPDATE accounts SET balance=? WHERE id=?";
+    public static final String SQL_UPDATE_ACCOUNT_BY_ID = "UPDATE accounts SET balance=?,file_name=? WHERE id=?";
 
     // delete
     public static final String SQL_DELETE_USER_BY_ID = "DELETE FROM users WHERE id = ?";
@@ -88,5 +94,5 @@ public class Querys {
        public static final String SQL_INSERT_TO_ORDERS = "INSERT INTO orders (users_id, cruises_id,status)  VALUE (?,?,?)";
     public static final String SQL_INSERT_TO_CRUISES_HAS_SHIPS =
             "INSERT INTO cruises_has_ships (cruises_id,ships_id,start_of_contract,end_of_contract,status)  VALUE (?,?,?,?,?)";
-    public static final String SQL_INSERT_ACCOUNT = "INSERT INTO accounts (balance) VALUE (?)";
+    public static final String SQL_INSERT_ACCOUNT = "INSERT INTO accounts (balance,file_name) VALUE (?,?)";
 }

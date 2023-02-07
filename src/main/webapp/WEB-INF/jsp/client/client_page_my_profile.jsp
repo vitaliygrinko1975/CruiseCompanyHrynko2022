@@ -1,7 +1,10 @@
+<%--@elvariable id="fileName" type=""--%>
 <%--@elvariable id="user" type="ua.nure.hrynko.models.User"--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="mytaglib" prefix="mt" %>
 <html>
 <head>
     <link href='./style/style2.css' rel='stylesheet' type='text/css'>
@@ -40,8 +43,9 @@
 <fmt:message bundle="${loc}" key="local.basket" var="basket"/>
 <fmt:message bundle="${loc}" key="local.my_orders" var="my_orders"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
-<fmt:message bundle="${loc}" key="local.ru" var="ru"/>сhoose_file_to_upload_in_server
-<fmt:message bundle="${loc}" key="local.select_file_to_upload_in_server" var="select_file_to_upload_in_server"/>upload
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
+<fmt:message bundle="${loc}" key="local.select_file_to_upload_in_server" var="select_file_to_upload_in_server"/>
+<fmt:message bundle="${loc}" key="local.upload" var="upload"/>
 <body>
 <ul>
     <li><a href="controller?command=clientPageGoToTopUpYourAccount&userIdForTopUpYourAccount=${user.id}">
@@ -67,14 +71,33 @@
         <c:out value="(${userRole.name})"/>
     </c:if>
 </div>
+<div align='left'>
+    <mt:myTag/>
+</div>
+<style>
+    img {
+        border: 1px solid #ddd; /* Серая граница */
+        border-radius: 4px;  /* Закругленная граница */
+        padding: 5px; /* Немного отступа */
+        width: 150px; /* Установите небольшую ширину */
+    }
 
+    /* Добавить эффект наведения (синяя тень) */
+    img:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+</style>
+    <a target="_blank" href='${fileName}'>
+    <img src='${fileName}' alt="Лес">
+<%--        <div align='center'><img src='${fileName}' alt='Hello'></div>--%>
+</a>
 <div align='right'>
 <div style="display: inline-block; padding-right: 50px;">
     <div>
         <h3>${select_file_to_upload_in_server}</h3>
-        <form action="controller?command=clientPageMyProfileFileUpload" method="post" enctype="multipart/form-data">
+        <form action="controller?command=clientPageMyProfileFileUpload&userId=${user.id}" method="post" enctype="multipart/form-data">
             <input type="file" name="file" />
-            <input type="submit" value="upload" />
+            <input type="submit" value="${upload}" />
         </form>
     </div>
 </div>

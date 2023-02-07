@@ -135,7 +135,8 @@ public class MySqlAccountDAO implements AccountDAO {
             con = DBManager.getInstance().getConnection();
             stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_BY_ID);
             stmt.setDouble(1, account.getBalance());
-            stmt.setInt(2, account.getId());
+            stmt.setString(2,account.getFileName());
+            stmt.setInt(3, account.getId());
             stmt.executeUpdate();
             con.commit();
             LOG.trace("update Account to SQL seccesful--> ");
@@ -210,6 +211,7 @@ public class MySqlAccountDAO implements AccountDAO {
         PreparedStatement pstmt;
         pstmt = con.prepareStatement(Querys.SQL_INSERT_ACCOUNT);
         pstmt.setDouble(1, balance);
+        pstmt.setString(2, "Пусто");
         pstmt.executeUpdate();
         DBManager.close(pstmt);
     }
@@ -219,7 +221,7 @@ public class MySqlAccountDAO implements AccountDAO {
         Account accounts = new Account();
         accounts.setId(rs.getInt(Fields.ENTITY_ID));
         accounts.setBalance(rs.getDouble(Fields.ACCOUNTS_BALANCE));
-
+        accounts.setFileName(rs.getString(Fields.ACCOUNTS_FILE_NAME));
         return accounts;
     }
 }

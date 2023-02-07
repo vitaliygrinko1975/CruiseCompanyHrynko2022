@@ -7,6 +7,7 @@ import ua.nure.hrynko.dao.interfaces.UserDAO;
 import ua.nure.hrynko.models.Cruise;
 import ua.nure.hrynko.models.User;
 import ua.nure.hrynko.exception.AppException;
+import ua.nure.hrynko.services.EncodePassword;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class LoginCommand extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, AppException {
         LOG.debug("LoginCommand starts");
-
+        EncodePassword encodePassword = new EncodePassword();
         HttpSession session = request.getSession();
 
         // obtain login and password from a request
@@ -42,7 +43,8 @@ public class LoginCommand extends Command {
         String login = request.getParameter("login");
         LOG.trace("Request parameter: login --> " + login);
 
-        String password = request.getParameter("password");
+        String password = encodePassword.getHashPassword(request.getParameter("password"));
+        LOG.trace("Request parameter: password --> " + password);
 
 
         if (login == null || password == null || login.isEmpty() || password.isEmpty()) {

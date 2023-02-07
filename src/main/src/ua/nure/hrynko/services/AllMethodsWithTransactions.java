@@ -7,13 +7,15 @@ import ua.nure.hrynko.dao.MySqlAccountDAO;
 import ua.nure.hrynko.dao.MySqlCruiseDAO;
 import ua.nure.hrynko.dao.MySqlUserDAO;
 import ua.nure.hrynko.dao.MySqlOrderDAO;
+import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.models.*;
 import ua.nure.hrynko.exception.DBException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +27,7 @@ public class AllMethodsWithTransactions {
     private MySqlCruiseDAO cruiseDAO;
     private MySqlUserDAO userDAO;
     private MySqlAccountDAO accountDAO;
-
+    List<String> errors;
 
     public int addBasketToOrdersDbReturnDepositAmount(Integer userId, Map<Cruise, Integer> mapForBasket) throws DBException {
 
@@ -109,9 +111,77 @@ public class AllMethodsWithTransactions {
         return message;
     }
 
-    public String signUpUserAndAddNewItemToAccountDb(HttpServletRequest request, String login, String password,
-                                                     String firstName, String lastName, String email, String phone)
-            throws DBException {
+    public String signUpUserAndAddNewItemToAccountDb(HttpServletRequest request) throws AppException, ServletException, IOException {
+        SignUpValidator signUpValidator = new SignUpValidator();
+        HttpSession session = request.getSession();
+        EncodePassword encodePassword = new EncodePassword();
+        String login = request.getParameter("addLoginUser");
+        LOG.trace("Request parameter: login --> " + login);
+        String password = encodePassword.getHashPassword(request.getParameter("addPasswordUser"));
+        LOG.trace("Request parameter: password --> " + password);
+        String firstName = request.getParameter("addFirstNameUser");
+        LOG.trace("Request parameter: firstName --> " + firstName);
+        String lastName = request.getParameter("addLastNameUser");
+        LOG.trace("Request parameter: lastName --> " + lastName);
+        String email = request.getParameter("addEmailUser");
+        LOG.trace("Request parameter: email --> " + email);
+        String phone = request.getParameter("addPhoneUser");
+        LOG.trace("Request parameter: phone --> " + phone);
+
+        errors = signUpValidator.registerValidate(request);
+
+        session.setAttribute("errors", errors);
+        LOG.trace("Set session attribute: errors --> " + errors);
+        // TRANSACTION
+        Connection con = DBManager.getInstance().getConnection();
+        userDAO = MySqlUserDAO.getInstance();
+        accountDAO = MySqlAccountDAO.getInstance();
+
+        try {
+            con.setAutoCommit(false);
+            List<User> userList = userDAO.findAllUsers(con);
+            LOG.trace("find all users to userList : --> " + userList);
+            if (signUpValidator.checkForUniquenessLogin(userList, login)) {
+                String message = "Этот логин уже существует. Введите другой.";
+                session.setAttribute("message", message);
+                LOG.trace("Set session attribute: message --> " + message);
+                session.setAttribute("errors", errors);
+                return Path.PAGE_ERROR_PAGE;
+            }
+            if (signUpValidator.checkForUniquenessEmail(userList, email)) {
+                String message = "Пользователь с таким адресом электронной почты уже существует. Введите другой адрес.";
+                session.setAttribute("message", message);
+                LOG.trace("Set session attribute: message --> " + message);
+                session.setAttribute("errors", errors);
+                LOG.trace("Set session attribute: errors --> " + errors);
+                return Path.PAGE_ERROR_PAGE;
+            }
+            accountDAO.addAccountsDb(con, 0);
+            List<Account> listAccounts = accountDAO.findAllAccounts(con);
+            LOG.trace("Add new account on DB: --> ");
+            int accountId = listAccounts.stream().map(Entity::getId).max(Integer::compare).get();
+            LOG.trace("Last generated Id table Accounts DB: --> " + accountId);
+            userDAO.addToUsersDb(con, login, password, firstName, lastName, email, phone, 2, accountId);
+            LOG.trace("add user : --> ");
+
+            LOG.debug("SignUpCommand finished");
+
+            con.commit();
+
+            return "login.jsp";
+
+        } catch (Exception ex) {
+            DBManager.rollback(con);
+        } finally {
+            DBManager.close(con);
+        }//END TRANSACTION
+
+        return Path.PAGE_ERROR_PAGE;
+    }
+
+    public String adminAddNewUserAndAddNewItemToAccountDb(HttpServletRequest request, String login, String password,
+                                 String firstName, String lastName, String email, String phone) throws DBException {
+
         HttpSession session = request.getSession();
         // TRANSACTION
         Connection con = DBManager.getInstance().getConnection();
@@ -145,7 +215,7 @@ public class AllMethodsWithTransactions {
 
             con.commit();
 
-            return "login.jsp";
+            return Path.PAGE_WELCOME_REGISTERED_USER;
 
         } catch (Exception ex) {
             DBManager.rollback(con);

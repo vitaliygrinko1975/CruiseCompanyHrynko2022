@@ -32,7 +32,7 @@
 <body>
 <ul>
     <li><a href="controller?command=pageAdminShips">${ships}</a></li>
-    <li><a href="controller?command=adminPage">${users}</a></li>
+    <li><a href="controller?command=adminPage&page=1">${users}</a></li>
     <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
@@ -90,6 +90,11 @@
             <button class="btn btn-primary btn-block btn-large">${add_cruise}</button>
         </a>
     </div>
+</div>
+<div class="pagination">
+    <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
+        <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>
+    </c:forEach>
 </div>
 </body>
 </html>

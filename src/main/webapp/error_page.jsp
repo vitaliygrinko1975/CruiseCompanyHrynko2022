@@ -24,7 +24,7 @@
     </ul>
     <c:if test="${userRole.name eq 'client'}">
         <ul>
-            <li><a href="controller?command=ClientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+            <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}&accountsId=${user.accountsId}">${my_profile}</a></li>
             <li><a href="controller?command=clientPage">${cruises}</a>
             <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>
         </ul>
@@ -36,17 +36,17 @@
             <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
         </ul>
         </c:if>
-    <div class='mydiv'>
-        <h1 align='center'>${messageAboutPay} </h1>
-        <h1 align='center'>${message} ${userRole.name} ${user.firstName} ${user.lastName}</h1>
+    <div align='center'>
+
+        ${messageAboutPay}<br>
+        ${message}<br>
+
+    <c:forEach  items = "${errors}" var = "i">
+        ${i}<br>
+    </c:forEach>
     </div>
         <tr>
             <td class="content">
-
-                <%--				<h2 class="error">--%>
-                <%--					The following error occurred--%>
-                <%--				</h2>--%>
-
                 <%-- this way we obtain an information about an exception (if it has been occurred) --%>
                 <c:set var="code" value="${requestScope['javax.servlet.error.status_code']}"/>
                 <c:set var="message" value="${requestScope['javax.servlet.error.message']}"/>

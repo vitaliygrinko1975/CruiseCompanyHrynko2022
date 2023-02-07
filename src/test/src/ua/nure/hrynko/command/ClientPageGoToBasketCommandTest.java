@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import ua.nure.hrynko.Path;
+import ua.nure.hrynko.command.client.ClientPageGoToBasketCommand;
 import ua.nure.hrynko.exception.AppException;
 
 import javax.servlet.ServletException;

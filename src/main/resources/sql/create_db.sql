@@ -21,7 +21,8 @@ CREATE TABLE roles
 CREATE TABLE accounts
 (
     id      INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    balance DOUBLE  NOT NULL
+    balance DOUBLE  NOT NULL,
+    file_name  VARCHAR(255) NOT NULL
 );
 
 
@@ -95,9 +96,9 @@ CREATE VIEW orders_view AS SELECT o.id AS id,
                                   c.description AS description,
                                   c.status AS status_of_cruises,
                                   o.status AS status
-                                  FROM orders AS o
-                                  JOIN users AS u ON o.users_id = u.id
-                                  JOIN cruises AS c ON o.cruises_id = c.id;
+                           FROM orders AS o
+                                    JOIN users AS u ON o.users_id = u.id
+                                    JOIN cruises AS c ON o.cruises_id = c.id;
 
 CREATE TABLE cruises_has_ships
 (
@@ -116,17 +117,17 @@ VALUES ('admin');
 INSERT INTO roles (name)
 VALUES ('client');
 
-INSERT INTO accounts (balance)
-VALUES (0);
-INSERT INTO accounts (balance)
-VALUES (0);
+INSERT INTO accounts (balance, file_name)
+VALUES (0, 'Пусто');
+INSERT INTO accounts (balance, file_name)
+VALUES (0,'Пусто');
 
 INSERT INTO users (login, password, first_name, last_name, email, phone, roles_id, accounts_id)
-VALUES ('admin', 'admin', ' Ivan ', 'Ivanov', 'admin@gmail.com',
+VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', ' Ivan ', 'Ivanov', 'admin@gmail.com',
         '+380992589898', 1, 1);
 
 INSERT INTO users (login, password, first_name, last_name, email, phone, roles_id, accounts_id)
-VALUES ('client', 'client', ' Petr ', 'Petrov', 'client@gmail.com',
+VALUES ('client', '62608e08adc29a8d6dbc9754e659f125', ' Petr ', 'Petrov', 'client@gmail.com',
         '+380992589896', 2, 2);
 
 
@@ -141,10 +142,10 @@ VALUES ('Минерва', 'Океанический пассажирский',20
 
 INSERT INTO cruises (name, description, price,capacity, start_of_cruise, duration,status)
 VALUES ('Малое путишествие', 'Одесса-Стамбул-Одесса', '2000', 1600,
-        20230123120000, 10,'Не начался');
+        20230223120000, 10,'Не начался');
 INSERT INTO cruises (name, description, price, capacity, start_of_cruise, duration,status)
 VALUES ('Среднее путишествие', 'Одесса-Стамбул-Лисабон-Одесса', '5000', 1600,
-        20230128120000, 15,'Не начался');
+        20230228120000, 15,'Не начался');
 INSERT INTO cruises (name, description, price, capacity, start_of_cruise, duration,status)
 VALUES ('Большое путишествие', 'Одесса-Стамбул-Палермо-Барселона-Лиссабон-Одесса', '10000',
         2000,20230130120000, 25,'Не начался');

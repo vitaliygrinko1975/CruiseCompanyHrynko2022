@@ -8,6 +8,7 @@
 <head>
     <link href="./style/style2.css" rel="stylesheet" type="text/css">
 </head>
+
 <fmt:setLocale value="${local}"/>
 <fmt:setBundle basename="localization.local" var="loc"/>
 <fmt:message bundle="${loc}" key="local.logout" var="logout"/>
@@ -35,8 +36,8 @@
     <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
-    <li style="float:right"><a href="controller?command=adminPage&local=en">${en}</a></li>
-    <li style="float:right"><a href="controller?command=adminPage&local=ru">${ru}</a></li>
+    <li style="float:right"><a href="controller?command=adminPage&page=1&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=adminPage&page=1&local=ru">${ru}</a></li>
 </ul>
 <div align='right'>
     <%--===========================================================================
@@ -67,7 +68,8 @@
             <td>${role}</td>
         </tr>
         <c:set var="k" value="0"/>
-        <c:forEach var="user" items="${userList}">
+        <%--@elvariable id="allItemOfUserWithLimit" type="java.util.List"--%>
+        <c:forEach var="user" items="${allItemOfUserWithLimit}">
             <tr>
                 <td>${user.id}</td>
                 <td>${user.firstName}</td>
@@ -102,6 +104,14 @@
             <button class="btn btn-primary btn-block btn-large">${add_new_user}</button>
         </a>
     </div>
+</div>
+<div align='center'>
+<div class="pagination">
+    <%--@elvariable id="countAllUsers" type="java"--%>
+    <c:forEach begin="1" end="${Math.ceil(countAllUsers*1.0/2)}" var="i">
+        <a href="controller?command=adminPage&page=${i}">${i}</a>
+    </c:forEach>
+</div>
 </div>
 </body>
 </html>

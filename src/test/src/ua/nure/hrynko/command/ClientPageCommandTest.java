@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import ua.nure.hrynko.Path;
+import ua.nure.hrynko.command.client.ClientPageCommand;
 import ua.nure.hrynko.dao.MySqlCruiseDAO;
-import ua.nure.hrynko.dao.MySqlUserDAO;
 import ua.nure.hrynko.exception.AppException;
 
 import javax.servlet.ServletException;

@@ -33,6 +33,7 @@ public final class Fields {
     public static final String CRUISE_STATUS = "status";
     //accounts
     public static final String ACCOUNTS_BALANCE = "balance";
+    public static final String ACCOUNTS_FILE_NAME = "file_name";
 
     // orders
     public static final String USERS_ID = "users_id";

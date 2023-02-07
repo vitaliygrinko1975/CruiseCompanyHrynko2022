@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*" %>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="mytaglib" prefix="mt" %>
 <html>
 <head>
     <link href='style/style2.css' rel='stylesheet' type='text/css'>
@@ -36,15 +38,17 @@
 <fmt:message bundle="${loc}" key="local.my_profile" var="my_profile"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
 <fmt:message bundle="${loc}" key="local.ru" var="ru"/>
-
 <body>
 <ul>
-    <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}">${my_profile}</a></li>
+    <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}&accountsId=${user.accountsId}">${my_profile}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=clientPageMyOrders&page=1&userIdForOrder=${user.id}&local=en">${en}</a></li>
     <li style="float:right"><a href="controller?command=clientPageMyOrders&page=1&userIdForOrder=${user.id}&local=ru">${ru}</a></li>
 </ul>
+<div align='left'>
+    <mt:myTag/>
+</div>
 <h1 align='center'>${client_page}</h1>
 
     <div align='center'>
@@ -74,8 +78,8 @@
             </c:forEach>
         </table>
         <div class="pagination">
-            <%--@elvariable id="countAllCruises" type="java"--%>
-            <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
+            <%--@elvariable id="countAllOrders" type="java"--%>
+            <c:forEach begin="1" end="${Math.ceil(countAllOrders*1.0/5)}" var="i">
                 <a href="controller?command=clientPageMyOrders&userId=${user.id}&page=${i}">${i}</a>
             </c:forEach>
         </div>
