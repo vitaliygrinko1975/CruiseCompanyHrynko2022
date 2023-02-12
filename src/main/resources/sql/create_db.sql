@@ -88,17 +88,7 @@ CREATE TABLE orders
 
 );
 
-CREATE VIEW orders_view AS SELECT o.id AS id,
-                                  u.first_name AS first_name,
-                                  u.last_name AS last_name,
-                                  u.email AS email,
-                                  u.id AS users_id,
-                                  c.description AS description,
-                                  c.status AS status_of_cruises,
-                                  o.status AS status
-                           FROM orders AS o
-                                    JOIN users AS u ON o.users_id = u.id
-                                    JOIN cruises AS c ON o.cruises_id = c.id;
+
 
 CREATE TABLE cruises_has_ships
 (
@@ -111,6 +101,27 @@ CREATE TABLE cruises_has_ships
     FOREIGN KEY (cruises_id) REFERENCES cruises (Id) ON DELETE CASCADE,
     FOREIGN KEY (ships_id)   REFERENCES ships (Id) ON DELETE CASCADE
 );
+
+CREATE VIEW orders_view AS SELECT o.id AS id,
+                                  u.first_name AS first_name,
+                                  u.last_name AS last_name,
+                                  u.email AS email,
+                                  u.id AS users_id,
+                                  c.description AS description,
+                                  c.status AS status_of_cruises,
+                                  o.status AS status
+                           FROM orders AS o
+                                    JOIN users AS u ON o.users_id = u.id
+                                    JOIN cruises AS c ON o.cruises_id = c.id;
+
+CREATE VIEW ships_view AS SELECT  s.id AS id,
+                                  s.name AS name,
+                                  s.description AS description,
+                                  s.capacity AS  capacity,
+                                  chs.start_of_contract AS start_of_contract,
+                                  chs.end_of_contract AS end_of_contract
+                           FROM ships AS s
+                                    JOIN cruises_has_ships AS chs ON chs.ships_id = s.id;
 
 INSERT INTO roles (name)
 VALUES ('admin');
@@ -137,6 +148,12 @@ INSERT INTO ships (name, description,capacity)
 VALUES ('Исследователь морей', 'Океанический пассажирский',2000);
 INSERT INTO ships (name, description,capacity)
 VALUES ('Минерва', 'Океанический пассажирский',2000);
+INSERT INTO ships (name, description,capacity)
+VALUES ('Титаник', 'Океанический пассажирский',2000);
+INSERT INTO ships (name, description,capacity)
+VALUES ('Титаник новый', 'Океанический пассажирский',2000);
+INSERT INTO ships (name, description,capacity)
+VALUES ('Титаник быстротонущий', 'Океанический пассажирский',2000);
 
 
 
@@ -160,6 +177,25 @@ INSERT INTO cruises (name, description, price,capacity, start_of_cruise, duratio
 VALUES ('Большое путишествие', 'Одесса-Стамбул-Палермо-Барселона-Лиссабон-Одесса', '10000',
         2000,20221224120000, 15,'Не начался');
 
+
+INSERT INTO cruises_has_ships (cruises_id, ships_id, start_of_contract,end_of_contract,status)
+VALUES (1, 1, '20230223120000', 20230305120000,
+        'Пусто');
+INSERT INTO cruises_has_ships (cruises_id, ships_id, start_of_contract,end_of_contract,status)
+VALUES (2, 2, '20230228120000', 20230315120000,
+        'Пусто');
+INSERT INTO cruises_has_ships (cruises_id, ships_id, start_of_contract,end_of_contract,status)
+VALUES (3, 3, '20230130120000', 20230225120000,
+        'Пусто');
+INSERT INTO cruises_has_ships (cruises_id, ships_id, start_of_contract,end_of_contract,status)
+VALUES (4, 4, '20221223120000', 20221228120000,
+        'Пусто');
+INSERT INTO cruises_has_ships (cruises_id, ships_id, start_of_contract,end_of_contract,status)
+VALUES (5, 5, '20221228120000', 20230108120000,
+        'Пусто');
+INSERT INTO cruises_has_ships (cruises_id, ships_id, start_of_contract,end_of_contract,status)
+VALUES (6, 6, '20230101120000', 20230116120000,
+        'Пусто');
 
 
 SELECT *

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 /**
  * Main interface for the Command pattern implementation.
@@ -18,7 +19,7 @@ public abstract class Command implements Serializable {
 
     public abstract String execute(HttpServletRequest request,
                                    HttpServletResponse response) throws IOException, ServletException,
-            AppException, SQLException;
+            AppException, SQLException, ParseException;
 
     @Override
     public final String toString() {

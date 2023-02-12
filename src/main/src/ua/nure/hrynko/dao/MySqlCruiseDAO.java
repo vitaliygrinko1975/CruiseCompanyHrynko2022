@@ -8,7 +8,6 @@ import ua.nure.hrynko.dao.interfaces.CruiseDAO;
 import ua.nure.hrynko.models.Cruise;
 import ua.nure.hrynko.exception.DBException;
 import ua.nure.hrynko.exception.Messages;
-
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -157,8 +156,53 @@ public class MySqlCruiseDAO implements CruiseDAO {
         return allCruisesList;
     }
 
-
-
+    @Override
+    public List<Cruise> findAllItemOfCruisesWithLimit(int start, int total) throws DBException {
+        List<Cruise> listAllIItemOfCruisesWithLimit = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_FIND_ALL_ITEM_ON_CRUISES_WITH_LIMIT);
+            pstmt.setInt(1, start);
+            pstmt.setInt(2, total);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                listAllIItemOfCruisesWithLimit.add(extractCruises(rs));
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            LOG.error("cannot select all items cruises with limit ", ex);
+            throw new DBException("cannot select all items cruises with limit", ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return listAllIItemOfCruisesWithLimit;
+    }
+    @Override
+    public int countingTheNumberOfRecordsToCruisesDb() throws DBException {
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        int result;
+        try {
+            con = DBManager.getInstance().getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(Querys.SQL_COUNT_ITEMS_IN_CRUISES);
+            rs.next();
+            result = rs.getInt(1);
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            LOG.error("cannot select count all items cruises", ex);
+            throw new DBException("cannot select count all items cruises", ex);
+        } finally {
+            DBManager.close(con, stmt, rs);
+        }
+        return result;
+    }
 
     @Override
     public void updateCruisesDb(Connection con, Cruise cruise) throws SQLException {

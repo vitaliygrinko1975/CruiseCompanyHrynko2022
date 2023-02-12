@@ -5,12 +5,8 @@ import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.Fields;
 import ua.nure.hrynko.Querys;
 import ua.nure.hrynko.dao.interfaces.CruiseHasShipDAO;
-import ua.nure.hrynko.dao.interfaces.OrderDAO;
 import ua.nure.hrynko.exception.DBException;
-import ua.nure.hrynko.exception.Messages;
-import ua.nure.hrynko.models.CruiseHasShip;
-import ua.nure.hrynko.models.Order;
-
+import ua.nure.hrynko.models.CruiseHasShip;;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,21 +49,21 @@ public class MySqlCruiseHasShipDAO implements CruiseHasShipDAO {
     }
 
     @Override
-    public void addItemToCruiseHasShipDb(int cruiseId,int shipId, String startOfContract,
+    public void addItemToCruiseHasShipDb(int cruiseId, int shipId, String startOfContract,
                                          String endOfContract, String status) throws DBException {
-        PreparedStatement pstmt=null;
+        PreparedStatement pstmt = null;
         ResultSet rs = null;
         Connection con = null;
         try {
             con = DBManager.getInstance().getConnection();
-        pstmt = con.prepareStatement(Querys.SQL_INSERT_TO_CRUISES_HAS_SHIPS);
-        pstmt.setInt(1, cruiseId);
-        pstmt.setInt(2, cruiseId);
-        pstmt.setString(3, startOfContract);
-        pstmt.setString(4, endOfContract);
-        pstmt.setString(5, status);
-        pstmt.executeUpdate();
-        con.commit();
+            pstmt = con.prepareStatement(Querys.SQL_INSERT_TO_CRUISES_HAS_SHIPS);
+            pstmt.setInt(1, cruiseId);
+            pstmt.setInt(2, shipId);
+            pstmt.setString(3, startOfContract);
+            pstmt.setString(4, endOfContract);
+            pstmt.setString(5, status);
+            pstmt.executeUpdate();
+            con.commit();
         } catch (SQLException ex) {
             DBManager.rollback(con);
             LOG.error("cannot add items to cruise_Has_Ship  DB", ex);
@@ -101,6 +97,54 @@ public class MySqlCruiseHasShipDAO implements CruiseHasShipDAO {
         }
         return allItemOfCruiseHasShipList;
     }
+
+    @Override
+    public int countingTheNumberOfRecordsToCruiseHasShipDb(String startOfContract) throws DBException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        int result;
+        try {
+            con = DBManager.getInstance().getConnection();
+            pstmt = con.prepareStatement(Querys.SQL_COUNT_ITEMS_IN_CRUISE_HAS_SHIPS_BY_START_OF_CONTRACT);
+            pstmt.setString(1, startOfContract);
+            rs = pstmt.executeQuery();
+            rs.next();
+            result = rs.getInt(1);
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            LOG.error("cannot select count all items cruises_has_ships", ex);
+            throw new DBException("cannot select count all items cruises_has_ships", ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return result;
+    }
+
+    @Override
+    public void updateCruiseHasShipDb(Connection con, CruiseHasShip cruiseHasShip) throws SQLException {
+        PreparedStatement pstmt;
+        ResultSet rs = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+        String stringStartOfContract = formatter.format(cruiseHasShip.getStartOfContract());
+        String stringEndOfContract = formatter.format(cruiseHasShip.getEndOfContract());
+
+        pstmt = con.prepareStatement(Querys.SQL_UPDATE_CRUISE_HAS_SHIP_BY_ID);
+        pstmt.setInt(1, cruiseHasShip.getCruiseId());
+        pstmt.setInt(2, cruiseHasShip.getShipId());
+        pstmt.setString(3, stringStartOfContract);
+        pstmt.setString(4, stringEndOfContract);
+        pstmt.setString(5, cruiseHasShip.getStatus());
+        pstmt.setInt(6, cruiseHasShip.getId());
+
+        pstmt.executeUpdate();
+
+        DBManager.close(rs, pstmt);
+
+    }
+
+
 //
 //    @Override
 //    public List<Order> findAllItemOfOrder(Connection con) throws DBException, SQLException {

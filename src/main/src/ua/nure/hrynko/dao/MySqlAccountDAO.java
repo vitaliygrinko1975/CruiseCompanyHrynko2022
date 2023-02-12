@@ -153,7 +153,7 @@ public class MySqlAccountDAO implements AccountDAO {
     public void updateAccountToDb(Connection con, Account account) throws SQLException {
         PreparedStatement stmt;
         ResultSet rs = null;
-        stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_BY_ID);
+        stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_TWO_BY_ID);
         stmt.setDouble(1, account.getBalance());
         stmt.setInt(2, account.getId());
         stmt.executeUpdate();
@@ -167,9 +167,10 @@ public class MySqlAccountDAO implements AccountDAO {
     public void updateAccountToDb(Connection con, int accountId, double balance) throws SQLException {
         PreparedStatement stmt;
         ResultSet rs = null;
-        stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_BY_ID);
+        stmt = con.prepareStatement(Querys.SQL_UPDATE_ACCOUNT_TWO_BY_ID);
         stmt.setDouble(1, balance);
         stmt.setInt(2, accountId);
+
         stmt.executeUpdate();
         con.commit();
         LOG.trace("update Account to SQL seccesful--> ");
@@ -187,7 +188,7 @@ public class MySqlAccountDAO implements AccountDAO {
             con = DBManager.getInstance().getConnection();
             stmt = con.prepareStatement(Querys.SQL_INSERT_ACCOUNT);
             stmt.setDouble(1, balance);
-
+            stmt.setString(2, "Пусто");
             stmt.executeUpdate();
 
 

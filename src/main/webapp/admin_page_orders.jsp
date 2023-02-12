@@ -32,6 +32,7 @@
 <fmt:message bundle="${loc}" key="local.first_name" var="first_name"/>
 <fmt:message bundle="${loc}" key="local.last_name" var="last_name"/>
 <fmt:message bundle="${loc}" key="local.email" var="email"/>
+<fmt:message bundle="${loc}" key="local.contracts_rent_ships" var="contracts_rent_ships"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
 <fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
@@ -39,7 +40,8 @@
 <body>
 <ul>
     <li><a href="controller?command=adminPage&page=1">${users}</a></li>
-    <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
+    <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
+    <li><a href="controller?command=adminGoToPageCruiseHasShip&page=1">${contracts_rent_ships}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=pageAdminOrders&page=1&local=en">${en}</a></li>
@@ -94,8 +96,6 @@
                     </c:forEach>
                 </div>
             </div>
-            <script>
 
-            </script>
 </body>
 </html>

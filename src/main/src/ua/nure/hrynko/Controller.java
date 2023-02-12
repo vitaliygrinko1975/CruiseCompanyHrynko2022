@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 
 public class Controller extends HttpServlet {
@@ -41,7 +42,7 @@ public class Controller extends HttpServlet {
         String forward = Path.PAGE_ERROR_PAGE;
         try {
             forward = command.execute(request, response);
-        } catch (AppException | SQLException ex) {
+        } catch (AppException | SQLException | ParseException ex) {
             request.setAttribute("errorMessage", ex.getMessage());
         }
         LOG.trace("Forward address --> " + forward);
@@ -71,7 +72,7 @@ public class Controller extends HttpServlet {
 
         try {
             sendRedirect = command.execute(request, response);
-        } catch (AppException | SQLException ex) {
+        } catch (AppException | SQLException | ParseException ex) {
 
             session.setAttribute("errorMessageFromSession", ex.getMessage());
         }

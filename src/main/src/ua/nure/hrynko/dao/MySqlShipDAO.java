@@ -28,7 +28,7 @@ public class MySqlShipDAO implements ShipDAO {
 
     @Override
     public List<Ship> findAllShips() throws DBException {
-        List<Ship> allServicesList = new ArrayList<>();
+        List<Ship> shipList = new ArrayList<>();
         Statement stmt = null;
         ResultSet rs = null;
         Connection con = null;
@@ -37,7 +37,7 @@ public class MySqlShipDAO implements ShipDAO {
             stmt = con.createStatement();
             rs = stmt.executeQuery(Querys.SQL_FIND_ALL_SHIPS);
             while (rs.next()) {
-                allServicesList.add(extractShip(rs));
+                shipList.add(extractShipView(rs));
             }
             con.commit();
         } catch (SQLException ex) {
@@ -47,8 +47,9 @@ public class MySqlShipDAO implements ShipDAO {
         } finally {
             DBManager.close(con, stmt, rs);
         }
-        return allServicesList;
+        return shipList;
     }
+
 
     @Override
     public Ship findShipById(int id) throws DBException {
@@ -62,7 +63,7 @@ public class MySqlShipDAO implements ShipDAO {
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                ship = extractShip(rs);
+                ship = extractShipView(rs);
             }
             con.commit();
         } catch (SQLException ex) {
@@ -142,7 +143,7 @@ public class MySqlShipDAO implements ShipDAO {
     }
 
     @Override
-    public Ship extractShip(ResultSet rs) throws SQLException {
+    public Ship extractShipView(ResultSet rs) throws SQLException {
 
         Ship ship = new Ship();
         ship.setId(rs.getInt(Fields.ENTITY_ID));

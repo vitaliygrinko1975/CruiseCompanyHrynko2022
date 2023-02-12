@@ -25,14 +25,14 @@
     <c:if test="${userRole.name eq 'client'}">
         <ul>
             <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}&accountsId=${user.accountsId}">${my_profile}</a></li>
-            <li><a href="controller?command=clientPage">${cruises}</a>
+            <li><a href="controller?command=clientPage&page=1">${cruises}</a>
             <li style="float:right"><a href="controller?command=goToBasket">${basket}</a></li>
         </ul>
         </c:if>
         <c:if test="${userRole.name eq 'admin'}">
         <ul>
-            <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
-            <li><a href="controller?command=adminPage">${users}</a></li>
+            <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
+            <li><a href="controller?command=adminPage&page=1">${users}</a></li>
             <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
         </ul>
         </c:if>

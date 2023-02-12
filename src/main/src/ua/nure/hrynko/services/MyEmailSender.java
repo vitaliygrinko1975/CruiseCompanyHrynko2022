@@ -56,7 +56,6 @@ public class MyEmailSender {
             } catch (MessagingException ex) {
                 ex.printStackTrace();
             }
-
             // Send message
             try {
                 Transport.send(message);

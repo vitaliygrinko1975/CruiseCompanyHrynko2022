@@ -3,10 +3,8 @@ package ua.nure.hrynko.command.client;
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.command.Command;
-import ua.nure.hrynko.models.Cruise;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +34,7 @@ public class ClientBasketConfirmOrderOfSelectedUnitsCommand extends Command {
         LOG.trace("Request parameter: userId --> " + userId);
 
 
-        HashMap<Cruise, Integer> mapForBasket = (HashMap<Cruise, Integer>) session.getAttribute("mapForBasket");
+        HashMap<Integer, Integer> mapForBasket = (HashMap<Integer, Integer>) session.getAttribute("mapForBasket");
 
         int depositAmount = allMethodsWithTransactions.addBasketToOrdersDbReturnDepositAmount(userId, mapForBasket);
 

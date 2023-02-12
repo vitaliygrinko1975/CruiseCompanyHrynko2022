@@ -40,10 +40,11 @@
 
 <body>
 <ul>
-    <li><a href="controller?command=adminPage">${users}</a></li>
-    <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
+    <li><a href="controller?command=adminPage&page=1">${users}</a></li>
+    <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+
 </ul>
 <h1 align='center'>${admin_page}</h1>
 
@@ -69,22 +70,22 @@
                 <td>${itemCruisesHasShip.endOfContract}</td>
                 <td>${itemCruisesHasShip.status}</td>
                 <td>
-<%--                        <form method="post" action="controller">--%>
-<%--                            <input type="hidden" name="command" value="pageAdminChangeStatusWithWithdrawalFromDeposit"/>--%>
-<%--                            <input type="hidden" name="status" value="${ordersView.status}"/>--%>
-<%--                            <button type="submit" name="ordersViewIdForUpdateButt" value="${ordersView.id}"--%>
-<%--                                    class="btn btn-primary btn-block btn-large">${pay_from_balance}</button>--%>
-<%--                        </form>--%>
+                    <form method="post" action="controller">
+                        <input type="hidden" name="command" value="pageAdminRemoveContract"/>
+                        <button type="submit" name="cruiseIdForRemoveCruiseButt" value="${itemCruisesHasShip.id}"
+                                class="btn btn-primary btn-block btn-large">${remove}</button>
+                    </form>
+                    </form>
                 </td>
             </tr>
         </c:forEach>
     </table>
-<%--    <div class="pagination">--%>
-<%--        <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">--%>
-<%--            <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>--%>
-<%--        </c:forEach>--%>
-<%--    </div>--%>
-<%--</div>--%>
+    <%--    <div class="pagination">--%>
+    <%--        <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">--%>
+    <%--            <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>--%>
+    <%--        </c:forEach>--%>
+    <%--    </div>--%>
+    <%--</div>--%>
 
 </body>
 </html>

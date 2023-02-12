@@ -18,6 +18,8 @@ public class Messages {
 
 	public static final String ERR_CANNOT_OBTAIN_SHIP_BY_ID = "Cannot obtain a ship by its id";
 
+	public static final String ERR_CANNOT_OBTAIN_FREE_SHIP = "Cannot obtain a free ship";
+
 	public static final String ERR_CANNOT_OBTAIN_ORDER_BY_ID = "Cannot obtain a order by its id";
 
 	public static final String ERR_CANNOT_OBTAIN_CRUISE_BY_START_OF_CRUISE = "Cannot obtain a cruise by its start of cruise";

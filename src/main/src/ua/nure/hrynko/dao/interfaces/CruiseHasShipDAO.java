@@ -2,8 +2,6 @@ package ua.nure.hrynko.dao.interfaces;
 
 import ua.nure.hrynko.exception.DBException;
 import ua.nure.hrynko.models.CruiseHasShip;
-import ua.nure.hrynko.models.Order;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +16,10 @@ public interface CruiseHasShipDAO {
                                   String endOfContract, String status) throws SQLException, DBException;
 
     List<CruiseHasShip> findAllItemsOfCruiseHasShip() throws DBException;
+
+    int countingTheNumberOfRecordsToCruiseHasShipDb(String startOfContract) throws DBException;
+
+    void updateCruiseHasShipDb(Connection con, CruiseHasShip cruiseHasShip) throws SQLException;
 
     CruiseHasShip extractOrder(ResultSet rs) throws SQLException;
 }

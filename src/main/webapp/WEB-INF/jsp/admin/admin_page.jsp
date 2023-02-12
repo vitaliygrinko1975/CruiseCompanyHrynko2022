@@ -27,13 +27,15 @@
 <fmt:message bundle="${loc}" key="local.phone" var="phone"/>
 <fmt:message bundle="${loc}" key="local.role" var="role"/>
 <fmt:message bundle="${loc}" key="local.accounts_id" var="accounts_id"/>
+<fmt:message bundle="${loc}" key="local.contracts_rent_ships" var="contracts_rent_ships"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
 <fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
 <body>
 <ul>
-    <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
+    <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
     <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
+    <li><a href="controller?command=adminGoToPageCruiseHasShip&page=1">${contracts_rent_ships}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=adminPage&page=1&local=en">${en}</a></li>

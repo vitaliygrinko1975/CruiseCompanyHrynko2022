@@ -19,7 +19,7 @@ public interface ShipDAO {
     void updateShipDb(int id, String name, String description, int capacity) throws DBException;
 
     void removeShipFromDb(int id) throws DBException;
-    Ship extractShip(ResultSet rs) throws SQLException;
+    Ship extractShipView(ResultSet rs) throws SQLException;
 
 
 

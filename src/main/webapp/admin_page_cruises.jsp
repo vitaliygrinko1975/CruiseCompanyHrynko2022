@@ -26,6 +26,8 @@
 <fmt:message bundle="${loc}" key="local.add_cruise" var="add_cruise"/>
 <fmt:message bundle="${loc}" key="local.ships" var="ships"/>
 <fmt:message bundle="${loc}" key="local.status" var="status"/>
+<fmt:message bundle="${loc}" key="local.rent_ship" var="rent_ship"/>
+<fmt:message bundle="${loc}" key="local.contracts_rent_ships" var="contracts_rent_ships"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
 <fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
@@ -34,6 +36,7 @@
     <li><a href="controller?command=pageAdminShips">${ships}</a></li>
     <li><a href="controller?command=adminPage&page=1">${users}</a></li>
     <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
+    <li><a href="controller?command=adminGoToPageCruiseHasShip&page=1">${contracts_rent_ships}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=pageAdminCruises&local=en">${en}</a></li>
@@ -55,12 +58,13 @@
             <td>${cruise_duration}</td>
             <td>${status}</td>
         </tr>
-        <c:set var="k" value="0"/>
-        <%--@elvariable id="allCruises" type="java.util.List"--%>
-        <c:forEach var="cruise" items="${allCruises}">
-            <c:set var="k" value="${k+1}"/>
+<%--        <c:set var="k" value="0"/>--%>
+        <%--@elvariable id="allItemOfCruisesWithLimit" type="java.util.List"--%>
+        <c:forEach var="cruise" items="${allItemOfCruisesWithLimit}">
+<%--            <c:set var="k" value="${k+1}"/>--%>
             <tr>
-                <td><c:out value="${k}"/></td>
+<%--                <td><c:out value="${k}"/></td>--%>
+                <td>${cruise.id}</td>
                 <td>${cruise.name}</td>
                 <td>${cruise.description}</td>
                 <td>${cruise.price}</td>
@@ -82,6 +86,21 @@
                                 class="btn btn-primary btn-block btn-large">${update}</button>
                     </form>
                 </td>
+                <td>
+                        <%--@elvariable id="mapWhereKeyIdCruise" type="java.util.Map"--%>
+                <c:if test="${cruise.status eq 'Не начался' and mapWhereKeyIdCruise ne null}">
+                    <c:if test="${!mapWhereKeyIdCruise.containsKey(cruise.id)}">
+                    <form method="get" action="controller">
+                        <input type="hidden" name="command" value="adminGoToPageForRentShip"/>
+                        <input type="hidden" name="capacityOfCruiseForRent" value="${cruise.capacity}"/>
+                        <input type="hidden" name="startOfCruiseForRent" value="${cruise.startOfCruise}"/>
+                        <input type="hidden" name="durationOfCruiseForRent" value="${cruise.duration}"/>
+                        <button type="submit" name="cruiseIdForRent" value="${cruise.id}"
+                        class="btn btn-primary btn-block btn-large">${rent_ship}</button>
+                    </form>
+                    </c:if>
+                </c:if>
+                </td>
             </tr>
         </c:forEach>
     </table>
@@ -91,10 +110,12 @@
         </a>
     </div>
 </div>
-<div class="pagination">
-    <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
-        <a href="controller?command=pageAdminOrders&page=${i}">${i}</a>
-    </c:forEach>
+<div align='center'>
+    <div class="pagination">
+        <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
+            <a href="controller?command=pageAdminCruises&page=${i}">${i}</a>
+        </c:forEach>
+    </div
 </div>
 </body>
 </html>

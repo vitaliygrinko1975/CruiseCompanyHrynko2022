@@ -31,12 +31,14 @@
 <fmt:message bundle="${loc}" key="local.price" var="price"/>
 <fmt:message bundle="${loc}" key="local.availability" var="availability"/>
 <fmt:message bundle="${loc}" key="local.status" var="status"/>
+<fmt:message bundle="${loc}" key="local.contracts_rent_ships" var="contracts_rent_ships"/>
 <body>
 <div align='center'>
     <ul>
-        <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
-        <li><a href="controller?command=adminPage">${users}</a></li>
+        <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
+        <li><a href="controller?command=adminPage&page=1">${users}</a></li>
         <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
+        <li><a href="controller?command=adminGoToPageCruiseHasShip&page=1">${contracts_rent_ships}</a></li>
 
         <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     </ul>

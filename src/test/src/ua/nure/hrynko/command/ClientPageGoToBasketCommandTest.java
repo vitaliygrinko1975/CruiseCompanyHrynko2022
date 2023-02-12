@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.command.client.ClientPageGoToBasketCommand;
+import ua.nure.hrynko.dao.MySqlCruiseDAO;
+import ua.nure.hrynko.dao.interfaces.CruiseDAO;
 import ua.nure.hrynko.exception.AppException;
 
 import javax.servlet.ServletException;
@@ -23,17 +25,21 @@ class ClientPageGoToBasketCommandTest {
     @Mock
     HttpServletResponse httpServletResponse;
 
+    @Mock
+    MySqlCruiseDAO mySqlCruiseMock;
+
     @BeforeEach
     public void setUp() {
         httpServletRequest = mock(HttpServletRequest.class);
         httpServletResponse = mock(HttpServletResponse.class);
+        mySqlCruiseMock = mock(MySqlCruiseDAO.class);
 
     }
 
     @Test
     void execute() throws ServletException, AppException, IOException {
         ClientPageGoToBasketCommand clientPageGoToBasketCommand =
-                new ClientPageGoToBasketCommand();
+                new ClientPageGoToBasketCommand(mySqlCruiseMock);
         String pagePath = clientPageGoToBasketCommand.execute(httpServletRequest, httpServletResponse);
         assertEquals(Path.BASKET, pagePath);
     }

@@ -4,7 +4,10 @@ import org.apache.log4j.Logger;
 import org.quartz.*;
 import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.dao.MySqlCruiseDAO;
+import ua.nure.hrynko.dao.MySqlCruiseHasShipDAO;
 import ua.nure.hrynko.models.Cruise;
+import ua.nure.hrynko.models.CruiseHasShip;
+
 import java.sql.Connection;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,12 +24,15 @@ public class MyJobProducesCruiseStatusChange implements Job {
 
         //START TRANSACTION
         MySqlCruiseDAO mySqlCruiseDAO = MySqlCruiseDAO.getInstance();
+        MySqlCruiseHasShipDAO mySqlCruiseHasShipDAO = MySqlCruiseHasShipDAO.getInstance();
         Connection con = null;
         try {
             con = DBManager.getInstance().getConnection();
-
             con.setAutoCommit(false);
+
             List<Cruise> listAllCruise = mySqlCruiseDAO.findAllCruises();
+            List<CruiseHasShip> listCruiseHasShip = mySqlCruiseHasShipDAO.findAllItemsOfCruiseHasShip();
+
             Calendar calendar = Calendar.getInstance();
             Date currentDate = calendar.getTime();
             long currentDateInMilliseconds = currentDate.getTime();
@@ -45,19 +51,34 @@ public class MyJobProducesCruiseStatusChange implements Job {
                 if (currentDateInMilliseconds <= cruiseStartInMilliseconds) {
                     itemCruise.setStatus("Не начался");
                     mySqlCruiseDAO.updateCruisesDb(con, itemCruise);
-                    LOG.trace("Change status on--> " + "Не начался");
+                    LOG.trace("Change status item on cruise DB--> " + "Не начался");
                 }
                 if (currentDateInMilliseconds >= cruiseStartInMilliseconds &&
                         currentDateInMilliseconds < cruiseFinishInMilliseconds) {
                     itemCruise.setStatus("Начался");
                     mySqlCruiseDAO.updateCruisesDb(con, itemCruise);
-                    LOG.trace("Change status on--> " + "Начался");
+                    LOG.trace("Change status item on cruise DB--> " + "Начался");
                 }
                 if (currentDateInMilliseconds >= cruiseFinishInMilliseconds) {
                     itemCruise.setStatus("Закончился");
                     mySqlCruiseDAO.updateCruisesDb(con, itemCruise);
-                    LOG.trace("Change status on--> " + "Закончился");
+                    LOG.trace("Change status item on cruise DB--> " + "Закончился");
                 }
+            }
+            for (CruiseHasShip itemCruiseHasShip : listCruiseHasShip) {
+                long contractEndInMilliseconds = itemCruiseHasShip.getEndOfContract().getTime();
+                LOG.trace("End contract data--> " + itemCruiseHasShip.getEndOfContract());
+                if(currentDateInMilliseconds >= contractEndInMilliseconds){
+                    itemCruiseHasShip.setStatus("Закончился");
+                    mySqlCruiseHasShipDAO.updateCruiseHasShipDb(con, itemCruiseHasShip);
+                    LOG.trace("Change status item on cruise_has_ship DB --> " + "Закончился");
+                }
+                if(currentDateInMilliseconds < contractEndInMilliseconds){
+                    itemCruiseHasShip.setStatus("Действующий");
+                    mySqlCruiseHasShipDAO.updateCruiseHasShipDb(con, itemCruiseHasShip);
+                    LOG.trace("Change status item on cruise_has_ship DB --> " + "Действующий");
+                }
+
             }
             con.commit();
             LOG.debug("MyJobProducesCruiseStatusChange finished");

@@ -27,19 +27,21 @@
 <fmt:message bundle="${loc}" key="local.ships" var="ships"/>
 <fmt:message bundle="${loc}" key="local.add_ship" var="add_ship"/>
 <fmt:message bundle="${loc}" key="local.capacity" var="capacity"/>
-<fmt:message bundle="${loc}" key="local.rent" var="rent"/>
 <fmt:message bundle="${loc}" key="local.start_date" var="start_date"/>
 <fmt:message bundle="${loc}" key="local.end_date" var="end_date"/>
 <fmt:message bundle="${loc}" key="local.find_free_ships" var="find_free_ships"/>
+<fmt:message bundle="${loc}" key="local.rent_ship" var="rent_ship"/>
+<fmt:message bundle="${loc}" key="local.contracts_rent_ships" var="contracts_rent_ships"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
 <fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
 
 <body>
 <ul>
-    <li><a href="controller?command=pageAdminCruises">${cruises}</a></li>
+    <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
     <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
     <li><a href="controller?command=adminPage&page=1">${users}</a></li>
+    <li><a href="controller?command=adminGoToPageCruiseHasShip&page=1">${contracts_rent_ships}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
     <li style="float:right"><a href="controller?command=pageAdminShips&local=en">${en}</a></li>
@@ -80,13 +82,13 @@
                     </form>
                 </td>
                 <td>
-                    <c:if test="${freeShipsFromRange ne null}">
-                    <form method="get" action="controller">
-                        <input type="hidden" name="command" value="adminGoToPageForRentShip"/>
-                        <button type="submit" name="shipIdForRentButt" value="${ship.id}"
-                                class="btn btn-primary btn-block btn-large">${rent}</button>
-                    </form>
-                    </c:if>
+<%--                    <c:if test="${freeShipsFromRange ne null}">--%>
+<%--                    <form method="get" action="controller">--%>
+<%--                        <input type="hidden" name="command" value="adminGoToPageForRentShip"/>--%>
+<%--                        <button type="submit" name="shipIdForRentButt" value="${ship.id}"--%>
+<%--                                class="btn btn-primary btn-block btn-large">${rent_ship}</button>--%>
+<%--                    </form>--%>
+<%--                    </c:if>--%>
                 </td>
             </tr>
         </c:forEach>

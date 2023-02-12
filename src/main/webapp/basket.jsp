@@ -53,64 +53,77 @@
         <c:out value="(${userRole.name})"/>
     </c:if>
 </div>
-    <h1 align='center'>${basket}</h1>
-    <div align='center'>
-        <table border='1'>
-            <tr>
-                <td>№</td>
-                <td>${cruise_name}</td>
-                <td>${description}</td>
-                <td>${total}</td>
-                <td>${start_of_cruise}</td>
-                <td>${cruise_duration}</td>
-                <td>${order_quantity}</td>
-            </tr>
-            <c:set var="k" value="0"/>
-            <%--@elvariable id="mapForBasket" type="java.util.Map"--%>
-            <c:forEach var="cruise" items="${mapForBasket}">
-                <c:set var="k" value="${k+1}"/>
-                <tr>
-                    <td>${k}</td>
-                    <td>${cruise.key.name}</td>
-                    <td>${cruise.key.description}</td>
-                    <td>${cruise.key.price * cruise.value}</td>
-                    <td>${cruise.key.startOfCruise}</td>
-                    <td>${cruise.key.duration}</td>
-                    <td>${cruise.value}</td>
-                    <td>
-                        <c:if test="${cruise.value > 0}">
-                            <form method="get" action="controller">
-                                <input type="hidden" name="command" value="removeOneUnitFromBasket"/>
-                                <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt"
-                                        value="${cruise.key.id}" class="btn btn-primary btn-block btn-large"> - </form>
-                        </c:if>
-                    </td>
-                    <td>
-                        <form method="get" action="controller">
-                            <input type="hidden" name="command" value="addOneUnitInBasket"/>
-                            <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.key.id}"
-                                    class="btn btn-primary btn-block btn-large"> + </form>
-                    </td>
-                    <td>
-                        <form method="get" action="controller">
-                            <input type="hidden" name="command" value="removeOnePositionFromBasket"/>
-                            <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.key.id}"
-                                    class="btn btn-primary btn-block btn-large"> x
-                        </form>
-
-                    </td>
-                </tr>
+<h1 align='center'>${basket}</h1>
+<div align='center'>
+    <table border='1'>
+        <tr>
+            <td>№</td>
+            <td>${cruise_name}</td>
+            <td>${description}</td>
+            <td>${total}</td>
+            <td>${start_of_cruise}</td>
+            <td>${cruise_duration}</td>
+            <td>${order_quantity}</td>
+        </tr>
+        <c:set var="k" value="0"/>
+        <%--@elvariable id="mapForBasket" type="java.util.Map"--%>
+        <c:forEach var="itemFromBasket" items="${mapForBasket}">
+            <c:set var="k" value="${k+1}"/>
+            <%--@elvariable id="allCruises" type="java.util.List"--%>
+            <c:forEach var="cruise" items="${allCruises}">
+                <c:if test="${itemFromBasket.key eq cruise.id}">
+                    <tr>
+                        <td>${k}</td>
+                        <td>${cruise.name}</td>
+                        <td>${cruise.description}</td>
+                        <td>${cruise.price * itemFromBasket.value}</td>
+                        <td>${cruise.startOfCruise}</td>
+                        <td>${cruise.duration}</td>
+                        <td>${itemFromBasket.value}</td>
+                        <td>
+                            <c:if test="${itemFromBasket.value > 0}">
+                                <form method="post" action="controller">
+                                    <input type="hidden" name="command" value="removeOneUnitFromBasket"/>
+                                    <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt"
+                                            value="${itemFromBasket.key}" class="btn btn-primary btn-block btn-large"> -
+                                </form>
+                            </c:if>
+                        </td>
+                        <td>
+                            <form method="post" action="controller">
+                                <input type="hidden" name="command" value="addOneUnitInBasket"/>
+                                <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${itemFromBasket.key}"
+                                        class="btn btn-primary btn-block btn-large"> +
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="controller">
+                                <input type="hidden" name="command" value="removeOnePositionFromBasket"/>
+                                <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${itemFromBasket.key}"
+                                        class="btn btn-primary btn-block btn-large"> x
+                            </form>
+                        </td>
+                    </tr>
+                </c:if>
             </c:forEach>
-        </table>
+        </c:forEach>
+    </table>
+</div>
+<div align='center'>
+    <div style="display: inline-block; padding-right: 50px;">
+<c:forEach var="itemFromBasket" items="${mapForBasket}">
+<c:if test="${mapForBasket.value > 0}">
+    <c:set var="k" value="${k+1}"/>
+</c:if>
+</c:forEach>
+<c:if test="${k > 0}">
+        <form method="post" action="controller">
+            <input type="hidden" name="command" value="clientBasketConfirmOrderOfSelectedUnits"/>
+            <input type="hidden" name="userIdForBasketUsersHasCruisesButt" value=${user.id}>
+            <button type="submit"
+                    class="btn btn-primary btn-block btn-large">${confirm_the_order}</button>
+        </form>
+</c:if>
     </div>
-    <div align='center'>
-        <div style="display: inline-block; padding-right: 50px;">
-            <form method="post" action="controller">
-                <input type="hidden" name="command" value="clientBasketConfirmOrderOfSelectedUnits"/>
-                <input type="hidden" name="userIdForBasketUsersHasCruisesButt" value=${user.id}>
-                <button type="submit" name="cruiseIdForBasketUsersHasCruisesButt" value="${cruise.key.id}"
-                        class="btn btn-primary btn-block btn-large">${confirm_the_order}</button>
-            </form>
-        </div>
 </body>
 </html>

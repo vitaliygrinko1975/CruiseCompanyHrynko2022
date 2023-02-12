@@ -45,6 +45,7 @@ public class AdminRentingPageAddShipToCruiseHasShipCommand extends Command {
         LOG.trace("Request parameter: endOfContract --> " + endOfContract);
         String status = "Действующий";
         LOG.trace("Status --> " + status);
+
         cruiseHasShipDAO.addItemToCruiseHasShipDb(cruiseId, shipId, startOfContract, endOfContract, status);
 
         List<CruiseHasShip> allCruisesHasShipList = cruiseHasShipDAO.findAllItemsOfCruiseHasShip();

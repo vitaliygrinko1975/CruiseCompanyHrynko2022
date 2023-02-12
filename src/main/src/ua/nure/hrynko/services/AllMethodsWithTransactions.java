@@ -29,7 +29,7 @@ public class AllMethodsWithTransactions {
     private MySqlAccountDAO accountDAO;
     List<String> errors;
 
-    public int addBasketToOrdersDbReturnDepositAmount(Integer userId, Map<Cruise, Integer> mapForBasket) throws DBException {
+    public int addBasketToOrdersDbReturnDepositAmount(Integer userId, Map<Integer, Integer> mapForBasket) throws DBException {
 
         orderDAO = MySqlOrderDAO.getInstance();
         cruiseDAO = MySqlCruiseDAO.getInstance();
@@ -40,11 +40,11 @@ public class AllMethodsWithTransactions {
         try {
             con.setAutoCommit(false);
 
-            for (Map.Entry<Cruise, Integer> item : mapForBasket.entrySet()) {
-                depositAmount += item.getKey().getPrice() * item.getValue();
+            for (Map.Entry<Integer, Integer> item : mapForBasket.entrySet()) {
+               Cruise currentCruise = cruiseDAO.findCruiseById(con,item.getKey());
+                depositAmount += currentCruise.getPrice() * item.getValue();
                 for (int i = 0; i < item.getValue(); i++) {
-                    int cruiseId = item.getKey().getId();
-                    Cruise currentCruise = cruiseDAO.findCruiseById(con, cruiseId);
+                    int cruiseId = item.getKey();
                     int newCapacity = currentCruise.getCapacity() - 1;
                     if (newCapacity >= 0) {
                         orderDAO.addItemToOrdersDb(con, userId, cruiseId, "В обработке");
@@ -111,7 +111,7 @@ public class AllMethodsWithTransactions {
         return message;
     }
 
-    public String signUpUserAndAddNewItemToAccountDb(HttpServletRequest request) throws AppException, ServletException, IOException {
+    public String signUpUserAndAddNewItemToAccountDb(HttpServletRequest request) throws AppException{
         SignUpValidator signUpValidator = new SignUpValidator();
         HttpSession session = request.getSession();
         EncodePassword encodePassword = new EncodePassword();

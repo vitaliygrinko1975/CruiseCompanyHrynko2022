@@ -32,7 +32,7 @@ public class CommandContainer {
 		// client commands
 		commands.put("clientPage", new ClientPageCommand(new MySqlCruiseDAO()));
 		commands.put("addToBasket", new ClientPageAddToBasketCommand(new MySqlCruiseDAO()));
-		commands.put("goToBasket", new ClientPageGoToBasketCommand());
+		commands.put("goToBasket", new ClientPageGoToBasketCommand(new MySqlCruiseDAO()));
 		commands.put("removeOneUnitFromBasket", new ClientBasketRemoveOneUnitCommand(new MySqlCruiseDAO()));
 		commands.put("addOneUnitInBasket", new ClientBasketAddOneUnitCommand(new MySqlCruiseDAO()));
 		commands.put("removeOnePositionFromBasket",
@@ -52,7 +52,7 @@ public class CommandContainer {
 
 		// admin commands
 		commands.put("adminPage", new AdminPageCommand(new MySqlUserDAO()));
-		commands.put("pageAdminCruises", new AdminPageCruisesCommand(new MySqlCruiseDAO()));
+		commands.put("pageAdminCruises", new AdminPageCruisesCommand(new MySqlCruiseDAO(),new MySqlCruiseHasShipDAO()));
 		commands.put("pageAdminOrders", new AdminPageOrderCommand(new MySqlOrderViewDAO()));
 		commands.put("pageAdminChangeStatusWithWithdrawalFromDeposit",
 				new AdminPageChangeStatusWithWithdrawalFromDepositCommand(new AllMethodsWithTransactions(),
@@ -65,7 +65,7 @@ public class CommandContainer {
 		commands.put("adminGoToPageForAddingCruise", new AdminGoToPageForAddingCruiseCommand());
 		commands.put("adminAddingPageAddCruise", new AdminAddingPageAddCruiseCommand(new MySqlCruiseDAO()));
 		commands.put("adminPageRemoveUser", new AdminPageRemoveUserCommand(new MySqlUserDAO(),
-				MySqlAccountDAO.getInstance()));
+				new MySqlAccountDAO()));
 		commands.put("adminGoToUpdatingPage", new AdminGoToUpdatingPageUserCommand(new MySqlUserDAO()));
 		commands.put("adminUpdatingPageUpdateUser", new AdminUpdatingPageUpdateUserCommand(new MySqlUserDAO()));
 		commands.put("adminGoToPageAddingUser", new AdminGoToPageForAddingUserCommand());
@@ -73,7 +73,7 @@ public class CommandContainer {
 				new AdminAddingPageAddUserCommand(new  AllMethodsWithTransactions()));
 
 		commands.put("pageAdminShips", new AdminPageShipsCommand(new MySqlShipDAO()));
-		commands.put("adminGoToPageForRentShip", new AdminGoToPageForRentShipCommand());
+		commands.put("adminGoToPageForRentShip", new AdminGoToPageForRentShipCommand(new MySqlShipViewDAO()));
 		commands.put("adminRentingPageAddShipToCruiseHasShip",
 				new AdminRentingPageAddShipToCruiseHasShipCommand(new MySqlCruiseHasShipDAO()));
 		commands.put("adminPageShipsRemoveShip", new AdminPageShipsRemoveShipCommand(new MySqlShipDAO()));
@@ -81,7 +81,7 @@ public class CommandContainer {
 		commands.put("adminAddingPageAddShip", new AdminAddingPageAddShipCommand(new MySqlShipDAO()));
 		commands.put("adminGoToPageForUpdatingShip", new AdminGoToPageForUpdatingShipCommand(new MySqlShipDAO()));
 		commands.put("adminUpdatingPageUpdateShip", new AdminUpdatingPageUpdateShipCommand(new MySqlShipDAO()));
-
+		commands.put("adminGoToPageCruiseHasShip", new AdminGoToPageCruiseHasShipCommand(new MySqlCruiseHasShipDAO()));
 		LOG.debug("Command container was successfully initialized");
 		LOG.trace("Number of commands --> " + commands.size());
 	}

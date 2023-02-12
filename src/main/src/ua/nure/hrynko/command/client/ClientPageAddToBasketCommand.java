@@ -36,12 +36,10 @@ public class ClientPageAddToBasketCommand extends Command {
         int cruiseId = Integer.parseInt(request.getParameter("cruiseIdForBasketUsersHasCruisesButt"));
         LOG.trace("Request parameter: cruiseId --> " + cruiseId);
 
-        HashMap<Cruise, Integer> mapForBasket = (HashMap<Cruise, Integer>) session.getAttribute("mapForBasket");
+        HashMap<Integer, Integer> mapForBasket = (HashMap<Integer, Integer>) session.getAttribute("mapForBasket");
 
-        Cruise currentСruise = cruiseDAO.findCruiseById(cruiseId);
-
-        if (mapForBasket.size() < 1 || !mapForBasket.containsKey(currentСruise)) {
-            mapForBasket.put(currentСruise, 1);
+        if (mapForBasket.size() < 1 || !mapForBasket.containsKey(cruiseId)) {
+            mapForBasket.put(cruiseId, 1);
             session.setAttribute("mapForBasket", mapForBasket);
             LOG.trace("Set the session attribute: mapForBasket --> " + mapForBasket);
             // get cruises items list
@@ -53,10 +51,10 @@ public class ClientPageAddToBasketCommand extends Command {
             LOG.debug("ClientPageAddToBasketCommand finished");
             return Path.PAGE_CLIENT;
         }
-        if (mapForBasket.containsKey(currentСruise)) {
-            int tempCount = mapForBasket.get(currentСruise);
+        if (mapForBasket.containsKey(cruiseId)) {
+            int tempCount = mapForBasket.get(cruiseId);
             tempCount++;
-            mapForBasket.put(currentСruise, tempCount);
+            mapForBasket.put(cruiseId, tempCount);
             session.setAttribute("mapForBasket", mapForBasket);
             LOG.trace("Set the session attribute: mapForBasket --> " + mapForBasket);
             // get cruises items list

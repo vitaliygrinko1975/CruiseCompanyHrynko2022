@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Lists cruises items.
@@ -36,15 +37,19 @@ public class ClientBasketAddOneUnitCommand extends Command {
         int cruiseId = Integer.parseInt(request.getParameter("cruiseIdForBasketUsersHasCruisesButt"));
         LOG.trace("Request parameter: cruiseId --> " + cruiseId);
 
-        HashMap<Cruise, Integer> mapForBasket = (HashMap<Cruise, Integer>) session.getAttribute("mapForBasket");
+        HashMap<Integer, Integer> mapForBasket = (HashMap<Integer, Integer>) session.getAttribute("mapForBasket");
 
-        Cruise currentСruise = cruiseDAO.findCruiseById(cruiseId);
+        int tempCount = mapForBasket.get(cruiseId);
 
-        int tempCount = mapForBasket.get(currentСruise);
-
-        mapForBasket.put(currentСruise, tempCount + 1);
+        mapForBasket.put(cruiseId, tempCount + 1);
         session.setAttribute("mapForBasket", mapForBasket);
         LOG.trace("Set the session attribute: mapForBasket --> " + mapForBasket);
+        List<Cruise> allCruises = cruiseDAO.findAllCruises();
+        LOG.trace("Found in DB: allCruises --> " + allCruises);
+        // put cruises items list to the session
+        session.setAttribute("allCruises", allCruises);
+        LOG.trace("Set the request attribute: allCruises --> " + allCruises);
+
         LOG.debug("ClientBasketRemoveOneUnitCommand finished");
 
         return Path.BASKET;
