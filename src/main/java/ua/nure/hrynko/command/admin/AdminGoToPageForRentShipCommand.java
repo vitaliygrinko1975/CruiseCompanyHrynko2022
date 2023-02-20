@@ -53,7 +53,8 @@ public class AdminGoToPageForRentShipCommand extends Command {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
         String startOfCruiseInTheRightFormat = formatter.format(startOfCruiseDate);
         LOG.trace("startOfCruise in the right format --> " + startOfCruiseInTheRightFormat);
-        String endOfCruise = formatter.format(endOfCruiseDate);
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-mm-dd");
+        String endOfCruise = formatter1.format(endOfCruiseDate);
         LOG.trace("Converting Data endOfCruiseDate in String --> " + endOfCruise);
 
         List<ShipView> allFreeShips = shipsViewDAO.findAllFreeShip(startOfCruiseInTheRightFormat,endOfCruise);

@@ -1,19 +1,14 @@
 package ua.nure.hrynko.command;
 
 import org.apache.log4j.Logger;
-import ua.nure.hrynko.Path;
 import ua.nure.hrynko.exception.AppException;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
-import ua.nure.hrynko.services.EncodePassword;
-import ua.nure.hrynko.services.SignUpValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class SignUpCommand extends Command {
 

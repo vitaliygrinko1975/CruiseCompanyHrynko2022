@@ -102,6 +102,8 @@ public class Querys {
 
     public static final String SQL_DELETE_CRUISE_BY_ID = "DELETE FROM cruises WHERE id = ?";
 
+    public static final String SQL_DELETE_CRUISES_HAS_SHIPS_BY_ID = "DELETE FROM cruises_has_ships WHERE id = ?";
+
     public static final String SQL_DELETE_SHIP_BY_ID = "DELETE FROM ships WHERE id = ?";
 
     //insert

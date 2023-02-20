@@ -1,6 +1,5 @@
 package ua.nure.hrynko.services;
 
-import ua.nure.hrynko.dao.MySqlUserDAO;
 import ua.nure.hrynko.models.User;
 
 import javax.servlet.http.HttpServletRequest;

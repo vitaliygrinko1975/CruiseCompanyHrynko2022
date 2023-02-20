@@ -82,6 +82,7 @@ public class CommandContainer {
 		commands.put("adminGoToPageForUpdatingShip", new AdminGoToPageForUpdatingShipCommand(new MySqlShipDAO()));
 		commands.put("adminUpdatingPageUpdateShip", new AdminUpdatingPageUpdateShipCommand(new MySqlShipDAO()));
 		commands.put("adminGoToPageCruiseHasShip", new AdminGoToPageCruiseHasShipCommand(new MySqlCruiseHasShipDAO()));
+		commands.put("pageAdminRemoveContract", new AdminPageRemoveContractCommand(new MySqlCruiseHasShipDAO()));
 		LOG.debug("Command container was successfully initialized");
 		LOG.trace("Number of commands --> " + commands.size());
 	}

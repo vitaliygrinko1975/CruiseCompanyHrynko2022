@@ -66,7 +66,7 @@
         adminGoToPageForAddingCruise adminAddingPageAddCruise adminGoToUpdatingPage adminGoToPageAddingUser
         adminUpdatingPageUpdateUser adminGoToPageAddingUser adminAddingPageAddUser pageAdminShips adminGoToPageForRentShip
         adminRentingPageAddShipToCruiseHasShip adminPageShipsRemoveShip adminGoToPageForAddingShip adminAddingPageAddShip
-        adminGoToPageForUpdatingShip adminUpdatingPageUpdateShip adminGoToPageCruiseHasShip
+        adminGoToPageForUpdatingShip adminUpdatingPageUpdateShip adminGoToPageCruiseHasShip pageAdminRemoveContract
       </param-value>
     </init-param>
     <init-param>

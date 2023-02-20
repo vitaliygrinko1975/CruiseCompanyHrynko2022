@@ -21,5 +21,7 @@ public interface CruiseHasShipDAO {
 
     void updateCruiseHasShipDb(Connection con, CruiseHasShip cruiseHasShip) throws SQLException;
 
+    void removeCruiseHasShipFromDb(int id) throws DBException;
+
     CruiseHasShip extractOrder(ResultSet rs) throws SQLException;
 }

@@ -1,23 +1,22 @@
 package ua.nure.hrynko.command.client;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.command.Command;
 import ua.nure.hrynko.dao.interfaces.AccountDAO;
 import ua.nure.hrynko.exception.AppException;
+import ua.nure.hrynko.models.Account;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import ua.nure.hrynko.models.Account;
 
 public class ClientPageMyProfileFileUploadCommand extends Command {
 

@@ -41,8 +41,7 @@ public class AdminPageShipsCommand extends Command {
 		// put all ships items list to the request
 		request.setAttribute("allShips", allShips);
 		LOG.trace("Set the request attribute: allShips --> " + allShips);
-//		session.setAttribute("freeShipsFromRange", null);
-//		LOG.trace("Set the session attribute: freeShipsFromRange --> " + null);
+
 
 		LOG.debug("AdminPageShipsCommand finished");
 

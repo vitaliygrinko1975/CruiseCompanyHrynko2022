@@ -37,14 +37,7 @@ public class AdminPageOrderCommand extends Command {
         LOG.debug("AdminPageOrderCommand starts");
         Paginations paginations = new Paginations();
         HttpSession session = request.getSession();
-
-        //get all item orders_view from DB to calculate the number of pagination pages
-//        List<OrderView> allOrdersViewList = orderViewDAO.findAllItemOfOrdersView();
-//        int countAllOrders = allOrdersViewList.size();
-
         int countAllOrders = orderViewDAO.countingTheNumberOfRecordsToOrderViewDb();
-
-
         int numberPage = Integer.parseInt(request.getParameter("page"));
         LOG.trace("Request parameter: numberPage --> " + numberPage);
 

@@ -37,6 +37,8 @@
 <fmt:message bundle="${loc}" key="local.ships_id" var="ships_id"/>
 <fmt:message bundle="${loc}" key="local.cruises_id" var="cruises_id"/>
 <fmt:message bundle="${loc}" key="local.contracts" var="contracts"/>
+<fmt:message bundle="${loc}" key="local.en" var="en"/>
+<fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
 <body>
 <ul>
@@ -44,6 +46,8 @@
     <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+    <li style="float:right"><a href="controller?command=adminGoToPageCruiseHasShip&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=adminGoToPageCruiseHasShip&local=ru">${ru}</a></li>
 
 </ul>
 <h1 align='center'>${admin_page}</h1>
@@ -72,7 +76,7 @@
                 <td>
                     <form method="post" action="controller">
                         <input type="hidden" name="command" value="pageAdminRemoveContract"/>
-                        <button type="submit" name="cruiseIdForRemoveCruiseButt" value="${itemCruisesHasShip.id}"
+                        <button type="submit" name="cruisesHasShipIdForRemoveCruisesHasShipButt" value="${itemCruisesHasShip.id}"
                                 class="btn btn-primary btn-block btn-large">${remove}</button>
                     </form>
                     </form>

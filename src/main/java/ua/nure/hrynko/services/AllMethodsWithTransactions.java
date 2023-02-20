@@ -5,16 +5,14 @@ import ua.nure.hrynko.DBManager;
 import ua.nure.hrynko.Path;
 import ua.nure.hrynko.dao.MySqlAccountDAO;
 import ua.nure.hrynko.dao.MySqlCruiseDAO;
-import ua.nure.hrynko.dao.MySqlUserDAO;
 import ua.nure.hrynko.dao.MySqlOrderDAO;
+import ua.nure.hrynko.dao.MySqlUserDAO;
 import ua.nure.hrynko.exception.AppException;
-import ua.nure.hrynko.models.*;
 import ua.nure.hrynko.exception.DBException;
+import ua.nure.hrynko.models.*;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
