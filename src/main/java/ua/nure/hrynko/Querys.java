@@ -119,3 +119,5 @@ public class Querys {
             "INSERT INTO cruises_has_ships (cruises_id,ships_id,start_of_contract,end_of_contract,status)  VALUE (?,?,?,?,?)";
     public static final String SQL_INSERT_ACCOUNT = "INSERT INTO accounts (balance,file_name) VALUE (?,?)";
 }
+
+//SELECT LAST_INSERT_ID();

@@ -81,6 +81,7 @@
                                         <input type="hidden" name="command"
                                                value="pageAdminChangeStatusWithWithdrawalFromDeposit"/>
                                         <input type="hidden" name="status" value="${ordersView.status}"/>
+                                        <input type="hidden" name="usersEmail" value="${ordersView.usersEmail}"/>
                                         <button type="submit" name="ordersViewIdForUpdateButt" value="${ordersView.id}"
                                                 class="btn btn-primary btn-block btn-large">${pay_from_balance}</button>
                                     </form>

@@ -79,6 +79,10 @@
       </param-value>
     </init-param>
     <init-param>
+      <param-name>employee</param-name>
+      <param-value>employeePage</param-value>
+    </init-param>
+    <init-param>
       <param-name>common</param-name>
       <param-value>logout noCommand viewSettings goToWelcomeRegisteredUser</param-value>
     </init-param>

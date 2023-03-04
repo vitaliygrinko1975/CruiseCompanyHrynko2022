@@ -8,8 +8,7 @@ import ua.nure.hrynko.models.User;
  */
 
 public enum RoleEnum {
-	ADMIN, CLIENT;
-	
+	ADMIN, CLIENT, EMPLOYEE;
 	public static RoleEnum getRole(User user) {
 		int roleId = user.getRoleId();
 		return RoleEnum.values()[roleId - 1];

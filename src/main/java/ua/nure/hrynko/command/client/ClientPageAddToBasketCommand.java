@@ -30,9 +30,6 @@ public class ClientPageAddToBasketCommand extends Command {
                           HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("ClientPageAddToBasketCommand starts");
         HttpSession session = request.getSession();
-
-        int userId = Integer.parseInt(request.getParameter("userIdForBasketUsersHasCruisesButt"));
-        LOG.trace("Request parameter: userId --> " + userId);
         int cruiseId = Integer.parseInt(request.getParameter("cruiseIdForBasketUsersHasCruisesButt"));
         LOG.trace("Request parameter: cruiseId --> " + cruiseId);
 

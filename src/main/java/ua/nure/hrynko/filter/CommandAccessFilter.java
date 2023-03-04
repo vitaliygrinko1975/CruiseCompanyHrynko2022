@@ -94,6 +94,7 @@ public class CommandAccessFilter implements Filter {
         // roles
         accessMap.put(RoleEnum.ADMIN, asList(fConfig.getInitParameter("admin")));
         accessMap.put(RoleEnum.CLIENT, asList(fConfig.getInitParameter("client")));
+        accessMap.put(RoleEnum.EMPLOYEE, asList(fConfig.getInitParameter("employee")));
         LOG.trace("Access map --> " + accessMap);
 
         // commons

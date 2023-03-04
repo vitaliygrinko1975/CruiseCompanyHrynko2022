@@ -49,6 +49,8 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
         LOG.trace("Request parameter: ordersViewIdForUpdateButt --> " + orderIdForUpdate);
         String status = request.getParameter("status");
         LOG.trace("Request parameter: status --> " + status);
+        String usersEmail = request.getParameter("usersEmail");
+        LOG.trace("Request parameter: usersEmail --> " + usersEmail);
         int numberPage = (int) session.getAttribute("numberPage");
         LOG.trace("Get session attribute: numberPage --> " + numberPage);
 
@@ -68,8 +70,8 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
         session.setAttribute("allItemOfOrdersViewWithLimit",allItemOfOrdersViewWithLimit);
         LOG.trace("Set the session attribute: allItemOfOrdersViewWithLimit --> " + allItemOfOrdersViewWithLimit);
         MyEmailSender myEmailSender = new MyEmailSender();
-        myEmailSender.generateReport("Денег добавь", "client@gmail.com");
-        LOG.trace("Send email with text --> " + "Денег добавь");
+        myEmailSender.generateReport("Недостаточно средств для оплаты круиза", usersEmail);
+        LOG.trace("Send email with text --> " + "Недостаточно средств для оплаты круиза");
 
         LOG.debug("AdminPageChangeStatusWithWithdrawalFromDepositCommand finished");
 

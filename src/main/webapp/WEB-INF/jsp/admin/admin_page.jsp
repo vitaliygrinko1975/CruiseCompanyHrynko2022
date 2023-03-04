@@ -84,6 +84,9 @@
                 <c:if test="${user.roleId eq '2'}">
                     <td>client</td>
                 </c:if>
+                <c:if test="${user.roleId eq '3'}">
+                    <td>employee</td>
+                </c:if>
                 <td>
                     <form method="post" action="controller">
                         <input type="hidden" name="command" value="adminPageRemoveUser"/>

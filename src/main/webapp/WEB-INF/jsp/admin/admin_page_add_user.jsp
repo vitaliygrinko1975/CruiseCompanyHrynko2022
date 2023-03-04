@@ -31,7 +31,7 @@
 <ul>
     <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
     <li><a href="controller?command=adminPage&page=1">${users}</a></li>
-    <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li
+    <li><a href="controller?command=pageAdminOrders&page=1">${orders}</a></li>
     <li><a href="controller?command=adminGoToPageCruiseHasShip&page=1">${contracts_rent_ships}</a></li>
 
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>

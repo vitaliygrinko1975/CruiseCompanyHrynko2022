@@ -3,6 +3,7 @@ package ua.nure.hrynko.command;
 import org.apache.log4j.Logger;
 import ua.nure.hrynko.command.admin.*;
 import ua.nure.hrynko.command.client.*;
+import ua.nure.hrynko.command.employee.*;
 import ua.nure.hrynko.dao.*;
 import ua.nure.hrynko.services.AllMethodsWithTransactions;
 import java.util.Map;
@@ -28,6 +29,9 @@ public class CommandContainer {
 		commands.put("noCommand", new NoCommand());
 		commands.put("signUpUser", new SignUpCommand(new AllMethodsWithTransactions()));
 		commands.put("goToWelcomeRegisteredUser", new GoToWelcomeRegisteredUserCommand());
+
+        // employee commands
+		commands.put("employeePage", new EmployeePageCommand(new MySqlCruiseHasShipDAO()));
 
 		// client commands
 		commands.put("clientPage", new ClientPageCommand(new MySqlCruiseDAO()));

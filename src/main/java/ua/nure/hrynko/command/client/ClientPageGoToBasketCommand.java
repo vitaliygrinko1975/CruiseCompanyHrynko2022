@@ -27,7 +27,6 @@ public class ClientPageGoToBasketCommand extends Command {
         this.cruiseDAO = cruiseDAO;
     }
 
-
     @Override
     public String execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException, ServletException, AppException {

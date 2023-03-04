@@ -207,7 +207,7 @@ public class AllMethodsWithTransactions {
             LOG.trace("Add new account on DB: --> ");
             int accountId = listAccounts.stream().map(Entity::getId).max(Integer::compare).get();
             LOG.trace("Last generated Id table Accounts DB: --> " + accountId);
-            userDAO.addToUsersDb(con, login, password, firstName, lastName, email, phone, 2, accountId);
+            userDAO.addToUsersDb(con, login, password, firstName, lastName, email, phone, 3, accountId);
             LOG.trace("add user : --> ");
             LOG.debug("SignUpCommand finished");
 

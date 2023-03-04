@@ -127,9 +127,13 @@ INSERT INTO roles (name)
 VALUES ('admin');
 INSERT INTO roles (name)
 VALUES ('client');
+INSERT INTO roles (name)
+VALUES ('employee');
 
 INSERT INTO accounts (balance, file_name)
 VALUES (0, 'Пусто');
+INSERT INTO accounts (balance, file_name)
+VALUES (0,'Пусто');
 INSERT INTO accounts (balance, file_name)
 VALUES (0,'Пусто');
 
@@ -141,6 +145,9 @@ INSERT INTO users (login, password, first_name, last_name, email, phone, roles_i
 VALUES ('client', '62608e08adc29a8d6dbc9754e659f125', ' Petr ', 'Petrov', 'client@gmail.com',
         '+380992589896', 2, 2);
 
+INSERT INTO users (login, password, first_name, last_name, email, phone, roles_id, accounts_id)
+VALUES ('employee', 'fa5473530e4d1a5a1e1eb53d2fedb10c', 'Sidor', 'Sidorov', 'employee@gmail.com',
+        '+380992589896', 3, 3);
 
 INSERT INTO ships (name, description,capacity)
 VALUES ('Ориана', 'Океанический пассажирский',2000);

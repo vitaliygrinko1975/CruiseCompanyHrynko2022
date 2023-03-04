@@ -26,10 +26,38 @@
 <fmt:message bundle="${loc}" key="local.orders" var="orders"/>
 <fmt:message bundle="${loc}" key="local.ships" var="ships"/>
 <fmt:message bundle="${loc}" key="local.contracts_rent_ships" var="contracts_rent_ships"/>
+<fmt:message bundle="${loc}" key="local.choose_ship" var="choose_ship"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
 <fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
 <body>
+<c:if test="${userRole.name eq 'employee'}">
+    <ul>
+    <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
+        <li><a href="controller?command=employeePage">${choose_ship}</a></li>
+    <li style="float:right"><a href="controller?command=goToWelcomeRegisteredUser&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=goToWelcomeRegisteredUser&local=ru">${ru}</a></li>
+    </ul>
+    <div align='center'>
+    <%--===========================================================================
+    Type user name if the user object is presented in the current session.
+    ===========================================================================--%>
+    <c:out value="${user.firstName} ${user.lastName}"/>
+    <%--===========================================================================
+    Type user role name if the user object is presented in the current session.
+    ===========================================================================--%>
+    <c:if test="${not empty userRole}">
+        <c:out value="(${userRole.name})"/>
+    </c:if>
+    </div>
+    <div align='center'>
+    <mt:myTag/>
+    </div>
+    <div class='mydiv'>
+    <h1 align='center'>${messageAboutPay} </h1>
+    <h1 align='center'>${messageAboutUpdate} </h1>
+    </div>
+</c:if>
 <c:if test="${userRole.name eq 'client'}">
     <ul>
         <li><a href="controller?command=clientPageGoToMyProfile&userId=${user.id}&accountsId=${user.accountsId}">${my_profile}</a></li>

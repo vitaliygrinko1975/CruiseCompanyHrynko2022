@@ -37,25 +37,25 @@
 <fmt:message bundle="${loc}" key="local.ships_id" var="ships_id"/>
 <fmt:message bundle="${loc}" key="local.cruises_id" var="cruises_id"/>
 <fmt:message bundle="${loc}" key="local.contracts" var="contracts"/>
+<fmt:message bundle="${loc}" key="local.home" var="home"/>
+<fmt:message bundle="${loc}" key="local.employee_page" var="employee_page"/>
+<fmt:message bundle="${loc}" key="local.get_on_ship" var="get_on_ship"/>
 <fmt:message bundle="${loc}" key="local.en" var="en"/>
 <fmt:message bundle="${loc}" key="local.ru" var="ru"/>
 
 <body>
 <ul>
-    <li><a href="controller?command=adminPage&page=1">${users}</a></li>
-    <li><a href="controller?command=pageAdminCruises&page=1">${cruises}</a></li>
-
+    <li><a href="controller?command=goToWelcomePage">${home}</a>
     <li style="float:right"><a href="controller?command=logout">${logout}</a></li>
-    <li style="float:right"><a href="controller?command=adminGoToPageCruiseHasShip&local=en">${en}</a></li>
-    <li style="float:right"><a href="controller?command=adminGoToPageCruiseHasShip&local=ru">${ru}</a></li>
+    <li style="float:right"><a href="controller?command=employeePage&local=en">${en}</a></li>
+    <li style="float:right"><a href="controller?command=employeePage&local=ru">${ru}</a></li>
 
 </ul>
-<h1 align='center'>${admin_page}</h1>
+<h1 align='center'>${employee_page}</h1>
 
 <div align='center'>
 
     <table border='1'>
-        <caption><h2>${contracts}</h2></caption>
         <tr>
             <td>№</td>
             <td>${cruises_id}</td>
@@ -74,11 +74,13 @@
                 <td>${itemCruisesHasShip.endOfContract}</td>
                 <td>${itemCruisesHasShip.status}</td>
                 <td>
+                    <c:if test="${itemCruisesHasShip.status eq 'Не начался'}">
                     <form method="post" action="controller">
                         <input type="hidden" name="command" value="pageAdminRemoveContract"/>
                         <button type="submit" name="cruisesHasShipIdForRemoveCruisesHasShipButt" value="${itemCruisesHasShip.id}"
-                                class="btn btn-primary btn-block btn-large">${remove}</button>
+                                class="btn btn-primary btn-block btn-large">${get_on_ship}</button>
                     </form>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>
