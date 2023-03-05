@@ -47,10 +47,14 @@ class CommandAccessFilterTest {
     private static final String CLIENT_ALLOWED_COMMANDS = "clientPage AddToBasket goToBasket RemoveOneUnitFromBasket " +
             "AddOneUnitInBasket RemoveOnePositionFromBasket clientBasketConfirmOrderOfSelectedUnits" +
             " cruiseFindByStartDate cruiseFindByDuration ClientPageGoToTopUpYourAccount clientPageGoToUpdatingAccountPage";
+    private static final String EMPLOYEE_ALLOWED_COMMANDS = "employeePage";
+
     private static final String COMMON_ALLOWED_COMMANDS = "noCommand";
     private static final String OUT_OF_CONTROL_COMMANDS = "login logout welcome signUpPage signUpUser";
     private static final String ADMIN = "admin";
     private static final String CLIENT = "client";
+
+    private static final String EMPLOYEE = "employee";
     private static final String COMMON = "common";
     private static final String OUT_OF_CONTROL = "out-of-control";
     private static final String COMMAND = "command";
@@ -66,6 +70,7 @@ class CommandAccessFilterTest {
 
         when(filterConfig.getInitParameter(ADMIN)).thenReturn(ADMIN_ALLOWED_COMMANDS);
         when(filterConfig.getInitParameter(CLIENT)).thenReturn(CLIENT_ALLOWED_COMMANDS);
+        when(filterConfig.getInitParameter(EMPLOYEE)).thenReturn(EMPLOYEE_ALLOWED_COMMANDS);
         when(filterConfig.getInitParameter(COMMON)).thenReturn(COMMON_ALLOWED_COMMANDS);
         when(filterConfig.getInitParameter(OUT_OF_CONTROL)).thenReturn(OUT_OF_CONTROL_COMMANDS);
 
@@ -125,6 +130,22 @@ class CommandAccessFilterTest {
         verify(requestDispatcher, times(1)).forward(httpServletRequest, httpServletResponse);
 
     }
+    @ParameterizedTest
+    @MethodSource("provideStringsEmployeeAllowedCommands")
+    void shouldJumpToJspForEmployeeIfCommandIsInEmployeeList(String command) throws Exception {
+        //given
+        when(httpServletRequest.getParameter(COMMAND))
+                .thenReturn(command);
+
+        CommandAccessFilter employeeFilter = new CommandAccessFilter();
+        employeeFilter.init(filterConfig);
+        //when
+        employeeFilter.doFilter(httpServletRequest, httpServletResponse, filterChain);
+        //then
+        verify(requestDispatcher, times(1)).forward(httpServletRequest, httpServletResponse);
+
+    }
+
 
     @ParameterizedTest
     @MethodSource("provideStringsCommonAllowedCommands")
@@ -171,7 +192,9 @@ class CommandAccessFilterTest {
     private static Stream<String> provideStringsClientAllowedCommands() {
         return Arrays.stream(StringUtils.split(CLIENT_ALLOWED_COMMANDS, StringUtils.SPACE));
     }
-
+    private static Stream<String> provideStringsEmployeeAllowedCommands() {
+        return Arrays.stream(StringUtils.split(EMPLOYEE_ALLOWED_COMMANDS, StringUtils.SPACE));
+    }
     private static Stream<String> provideStringsCommonAllowedCommands() {
         return Arrays.stream(StringUtils.split(COMMON_ALLOWED_COMMANDS, StringUtils.SPACE));
     }
