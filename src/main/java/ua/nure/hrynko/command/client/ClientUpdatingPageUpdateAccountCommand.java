@@ -53,13 +53,11 @@ public class ClientUpdatingPageUpdateAccountCommand extends Command {
 
         LOG.trace("update account by ID: --> " + account.getId());
 
-
         String message = "Транзакции прошли успешно" ;
 
         request.getSession().setAttribute("messageAboutPay", message);
 
         LOG.debug("ClientUpdatingPageUpdateAccountCommand finished");
-
 
         return Path.PAGE_ERROR_PAGE;
 

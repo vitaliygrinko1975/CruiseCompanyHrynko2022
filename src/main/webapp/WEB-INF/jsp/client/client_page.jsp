@@ -107,6 +107,13 @@
         </c:forEach>
     </table>
 </div>
+    <div align='center'>
+        <div class="pagination">
+            <c:forEach begin="1" end="${Math.ceil(countAllCruises*1.0/5)}" var="i">
+                <a href="controller?command=pageAdminCruises&page=${i}">${i}</a>
+            </c:forEach>
+        </div
+    </div>
 <form class="form-inline" action="controller" method="get">
     <input type="hidden" name="command" value="cruiseFindByStartDate">
     <div class="form-group" style="display: inline-block; margin-right: 25px;">

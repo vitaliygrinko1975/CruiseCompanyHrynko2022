@@ -57,11 +57,11 @@ public class AdminPageChangeStatusWithWithdrawalFromDepositCommand extends Comma
         allMethodsWithTransactions.changeStatusWithWithdrawalFromDeposit(orderIdForUpdate,status);
 
         //get all item orders_view from DB to calculate the number of pagination pages
-        int countAllCruises = orderViewDAO.countingTheNumberOfRecordsToOrderViewDb();
+        int countAllOrders = orderViewDAO.countingTheNumberOfRecordsToOrderViewDb();
 
     // put count of cruises  to the  session
-        session.setAttribute("countAllCruises",countAllCruises);
-        LOG.trace("Set the session attribute: countAllCruises --> "+ countAllCruises);
+        session.setAttribute("countAllOrders",countAllOrders);
+        LOG.trace("Set the session attribute: countAllOrders --> "+ countAllOrders);
 
         //get list with limit
         List<OrderView> allItemOfOrdersViewWithLimit = paginations.makePaginationForOrders(numberPage);

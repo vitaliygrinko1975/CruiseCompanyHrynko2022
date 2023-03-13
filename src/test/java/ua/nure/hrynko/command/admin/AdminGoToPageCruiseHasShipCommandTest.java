@@ -4,16 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import ua.nure.hrynko.Path;
-import ua.nure.hrynko.dao.MySqlCruiseDAO;
 import ua.nure.hrynko.dao.MySqlCruiseHasShipDAO;
 import ua.nure.hrynko.exception.DBException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.text.ParseException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 class AdminGoToPageCruiseHasShipCommandTest {
